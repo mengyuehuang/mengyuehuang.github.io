@@ -5,7 +5,7 @@
 # NOTE: it looks like you need to rebuild + repush everytime you update this _config.yml file
 
 ### Site Settings ###
-title               : Jill Naiman 
+title               : Mengyue Huang 
 description         : >-
                       I am definitely not a corgi!
 baseurl             : ""   # Change to empty quotes if you are hosting your site at <your-username>.github.io directly,
