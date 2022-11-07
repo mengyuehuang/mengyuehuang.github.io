@@ -1,0 +1,32 @@
+<div class="col-lg">
+
+  <h2 class="mb-3">{{ include.title }}</h2>
+
+  {% for skill in include.source %}
+
+  <div class="row justify-content-between align-items-center">
+    <div class="col-8">
+      <p class="mb-1">{{ skill.name }}</p>
+    </div>
+<!--   <div class="col-2 text-right"> <!-- could work as a last resort --> 
+      &nbsp; &nbsp; &nbsp; < <div class="text-muted">{{skill.level}}</div><div class="col-1 text-right"></div><!-- could work as a last resort -->
+      <!--< {{skill.level}}-->
+      <!--<p class="mb-1 text-muted">{{ skill.level }}</p>-->
+      <!--<div class="mb-1 text-muted text-left">{{ skill.level }}</div>-->
+    <!--</div>-->
+  </div>
+
+  <div class="progress mb-4 bg-themed" style="height: 8px;">
+    <div class="progress-bar bg-{{ skill.color | default: "primary" }} wow animated slideInLeft"
+      data-wow-delay="{{ forloop.index | divided_by: 20.0 }}"
+      role="progressbar"
+      style="width: {{ skill.percentage }}%;"
+      aria-valuenow="{{ skill.percentage }}"
+      aria-valuemin="0"
+	 aria-valuemax="100">
+    </div>
+  </div>
+
+  {% endfor %}
+
+</div>

@@ -1,0 +1,1 @@
+Sitemap: http://localhost:4008/online_cv_public/sitemap.xml
