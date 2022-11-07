@@ -1,0 +1,42 @@
+html {
+  padding-left: calc(100vw - 100%);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.badge {
+  font-weight: 500;
+}
+
+.bg-light,
+.badge-light {
+  &,
+  * {
+    color: $text-black !important;
+  }
+}
+
+.bg-dark,
+.badge-dark {
+  &,
+  * {
+    color: $text-white !important;
+  }
+}
+
+.left, .right {
+  width: 50%; /* Floated elements technically need a width specified. */
+}
+
+.left {
+  float: left;
+  text-align: left;
+}
+
+.right {
+    float: right;
+    text-align: right;
+
+}
