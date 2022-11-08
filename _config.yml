@@ -7,7 +7,7 @@
 ### Site Settings ###
 title               : Mengyue Huang 
 description         : >-
-                      Hope you have a lovely day of yours:)
+                      Hope you have a lovely day of yours :)
 baseurl             : ""   # Change to empty quotes if you are hosting your site at <your-username>.github.io directly,
 #                                             otherwise will be hosted at <your-username>.github.io/{{base_url}}
 repository          : mengyuehuang               # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
@@ -35,7 +35,7 @@ nav_exclude:                                            # The following paths ar
 ### Author Info ###
 author:
   name              : Mengyue Huang
-  image             : https://drive.google.com/drive/u/0/my-drive
+  image             : https://drive.google.com/file/d/1pHfTqJotk_IdXiGPQYaIGYnqkY9ZahQ1/view
 #  behance           : your_username
 # dribbble          : your_username
   email             : mengyuehuang4@illinois.edu / myhuang1000@163.com
