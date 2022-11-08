@@ -7,10 +7,10 @@
 ### Site Settings ###
 title               : Mengyue Huang 
 description         : >-
-                      I hope this work (:#<)
+                      Hope you have a lovely day of yours:)
 baseurl             : ""   # Change to empty quotes if you are hosting your site at <your-username>.github.io directly,
 #                                             otherwise will be hosted at <your-username>.github.io/{{base_url}}
-repository          : mengyuehuang/mengyuehuang.github.io               # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
+repository          : mengyuehuang               # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
 open_new_tab        : false                             # Opens external URLs in new tab (works for posts, projects and navbar only)
 
 
@@ -34,26 +34,26 @@ nav_exclude:                                            # The following paths ar
 
 ### Author Info ###
 author:
-  name              : A. P. Corgi
-  image             : https://dogtime.com/assets/uploads/gallery/pembroke-welsh-corgi-dog-breed-pictures/prance-8.jpg
+  name              : Mengyue Huang
+  image             : https://drive.google.com/drive/u/0/my-drive
 #  behance           : your_username
 # dribbble          : your_username
-  email             : username@domain.com
+  email             : mengyuehuang4@illinois.edu / myhuang1000@163.com
 #  facebook          : your_username
-  github            : jnaiman # JPN
+  github            : mengyuehuang # JPN
 # gitlab            : your_username
 # instagram         : your_username
 # kaggle            : your_username
-#  linkedin          : your_username
+  linkedin          : mengyue-huang-luna
 #  medium            : your_username
 # soundcloud        : your_username
 # spotify           : your_username
 # stackoverflow     : your_user_id
 # tumblr            : your_username.tumblr.com
 #  twitch            : your_username
-  twitter           : your_username
+#  twitter           : your_username
 #  vimeo             : your_username
-  youtube           : your_channel_name
+# youtube           : your_channel_name
 # keybase           : your_username
 
 
