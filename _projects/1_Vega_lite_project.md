@@ -13,14 +13,12 @@ custom_js:
 
 # IS 445, HW 10
 
-
-Dataset: https://raw.githubusercontent.com/UIUC-iSchool-DataViz/is445_bcubcg_fall2022/main/data/building_inventory.csv
-
 ## Plot1:
 
 <vegachart schema-url="{{ site.baseurl }}/assets/json/plot1.json" style="width: 100%"></vegachart>
 
 ### Discussion:
+I use the Square Footage as the horizontal axis and Senator Full Name as vertical axis for this illustration of bar plot. I want to see the distribution of total building Square Footage for senators. I also put in the factors of 'building status' and 'County' to make the plot more informative.
 
 
 ## Plot2:
@@ -44,6 +42,8 @@ Below is where we can put some links to both the data and the analysis code as b
 </div>
 ```
 
+Cover Image Credit: https://wall.alphacoders.com/big.php?i=277023
+
 <!-- these are written in a combo of html and liquid --> 
 
 <div class="left">
@@ -51,6 +51,6 @@ Below is where we can put some links to both the data and the analysis code as b
 </div>
 
 <div class="right">
-{% include elements/button.html link="https://github.com/jnaiman/online_cv_public/blob/main/python_notebooks/test_generate_plots.ipynb" text="The Analysis" %}
+{% include elements/button.html link="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/HW10.ipynb" text="The Analysis" %}
 </div>
 
