@@ -21,12 +21,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Vega Lite Example Project">
-  <meta property="og:description" content="This is a "showcase" project that uses vega-lite for interactive viz!">
-  <meta property="og:image" content="assets/pngs/cars.png">
+  <meta property="og:title" content="IS 445 HW 10">
+  <meta property="og:description" content="This is a "showcase" of my HW10!">
+  <meta property="og:image" content="assets/pngs/cuteotters.jpg">
 
-  <title>Vega Lite Example Project</title>
-  <meta name="description" content="This is a "showcase" project that uses vega-lite for interactive viz!">
+  <title>IS 445 HW 10</title>
+  <meta name="description" content="This is a "showcase" of my HW10!">
 
   <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
 
@@ -73,18 +73,21 @@
 
 </nav>
     <div class="col-lg-10 mx-auto mt-5 markdown-body">
-  <h1 id="example-including-vega-lite">Example including vega-lite</h1>
+  <h1 id="is-445-hw-10">IS 445, HW 10</h1>
 
-<p>Example comes from this <a href="https://blog.4dcu.be/programming/2021/05/03/Interactive-Visualizations.html">great blog post right here</a> that was also used in <a href="https://github.com/UIUC-iSchool-DataViz/is445_bcubcg_fall2022/blob/main/week01/test_imports_week01.ipynb">our test import script</a>.</p>
+<p>Dataset: https://raw.githubusercontent.com/UIUC-iSchool-DataViz/is445_bcubcg_fall2022/main/data/building_inventory.csv</p>
 
-<p>We can use a vegachart HTML tag like so:</p>
+<h2 id="plot1">Plot1:</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;vegachart schema-url="/assets/json/cars.json" style="width: 100%"&gt;&lt;/vegachart&gt;
-</code></pre></div></div>
+<vegachart schema-url="/assets/json/plot1.json" style="width: 100%"></vegachart>
 
-<vegachart schema-url="/assets/json/cars.json" style="width: 100%"></vegachart>
+<h3 id="discussion">Discussion:</h3>
 
-<p>In theory, you can also use <a href="https://jekyllrb.com/docs/plugins/hooks/">Jekyll hooks</a> to do it, but I haven’t figured out a way that looks nice yet.</p>
+<h2 id="plot2">Plot2:</h2>
+
+<vegachart schema-url="/assets/json/plot2.json" style="width: 100%"></vegachart>
+
+<h3 id="discussion-1">Discussion:</h3>
 
 <h2 id="search-the-data--methods">Search The Data &amp; Methods</h2>
 
@@ -106,7 +109,7 @@
 <!-- these are written in a combo of html and liquid -->
 
 <div class="left">
-<a class="m-1 btn btn-outline-primary btn-2 " href="https://github.com/vega/vega/blob/main/docs/data/cars.json">
+<a class="m-1 btn btn-outline-primary btn-2 " href="https://raw.githubusercontent.com/UIUC-iSchool-DataViz/is445_bcubcg_fall2022/main/data/building_inventory.csv">
   The Data
 </a>
 </div>
