@@ -10,14 +10,15 @@ custom_js:
   - justcharts
 ---
 
-### Final Project Group 1 Member
+# Family Factors and Grades on Students’ Alcohol Consumption and Health Status
+
+
+## Final Project Group 1 Member
 
 Mingrui Xu
 
 Mengyue Huang
 
-
-# IS 445, Final Project Part 3
 
 ## Intro:
 For our project here with the dataset of Student Alcohol Consumption with their Math (main data-frame) and Portuguese (contextual data-frame) grades shown, our group want to dive into the data to see if there are some relationships or links between some features in the columns and students' Health Status (1-very bad to 5-very good)) ('health') and Weekend Alcohol Consumption (1-very low to 5-very high) ('Walc'). In the figures below, chosen features include students' Father's Job ('Fjob'), Mother's Job ('Mjob'), Portuguese Final Grade (0-20) ('G3' from por_df) and Math Final Grade (0-20) ('G3' from math_df). The main purpose of this project to show potential trend between these factors and try to derive real-life inspirations for future students' health status.
@@ -48,7 +49,7 @@ It seems like that neither kinds of these w subjects' grades have a deep impact 
 <vegachart schema-url="{{ site.baseurl }}/assets/json/heat2_por.json" style="width: 100%"></vegachart>
 
 ### Discussion:
-Browsing the plot, it seems that when the family consists of < 3 person and the family relationship is not very good, the students would be more likely to suffer from health conditions. Also, there are more cases of high health status (health > 4) in the category of family size > 3. Generally, in both family size groups, the higher the family relationship rating is, or in other words the more harmonious the family atmosphere is, the higher the students' health rating.
+Browsing the plot, it seems that when the family consists of < 3 person, the mroe students would drink during the weenkends. Generally, the larger the family size is, the less , the less harmonious the family atmosphere is, the less amount of alcohol students would consume on weekends.
 
 ## Citation & References
 
@@ -64,3 +65,13 @@ https://altair-viz.github.io/user_guide/generated/core/altair.Scale.html
 ```
 Cover Image Credit: me
 ```
+
+<!-- these are written in a combo of html and liquid --> 
+
+<div class="left">
+{% include elements/button.html link="https://data.world/data-society/student-alcohol-consumption" text="The Data" %}
+</div>
+
+<div class="right">
+{% include elements/button.html link="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/final_part3.ipynb" text="The Analysis" %}
+</div>
