@@ -1,9 +1,9 @@
-- name: Adobe Photoshop
-  percentage: 30
-  level: Beginner
+- name: Chinese
+  percentage: 100
+  level: Native
   color: info
 
-- name: Adobe Illustrator
-  percentage: 30
-  level: Beginner
+- name: English
+  percentage: 80
+  level: Fluent
   color: success
