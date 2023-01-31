@@ -13,13 +13,6 @@ custom_js:
 # Family Factors and Grades on Students’ Alcohol Consumption and Health Status
 
 
-## Group Member
-
-Mingrui Xu
-
-Mengyue Huang
-
-
 ## Intro:
 For our project here with the dataset of Student Alcohol Consumption with their Math (main data-frame) and Portuguese (contextual data-frame) grades shown, our group want to dive into the data to see if there are some relationships or links between some features in the columns and students' Health Status (1-very bad to 5-very good)) ('health') and Weekend Alcohol Consumption (1-very low to 5-very high) ('Walc'). In the figures below, chosen features include students' Father's Job ('Fjob'), Mother's Job ('Mjob'), Portuguese Final Grade (0-20) ('G3' from por_df) and Math Final Grade (0-20) ('G3' from math_df). The main purpose of this project to show potential trend between these factors and try to derive real-life inspirations for future students' health status.
 
@@ -73,5 +66,5 @@ Cover Image Credit: me
 </div>
 
 <div class="right">
-{% include elements/button.html link="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/final_part3.ipynb" text="The Analysis" %}
+{% include elements/button.html link="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/atudents%E2%80%99-alcohol-aonsumption-analysis.ipynb" text="The Analysis" %}
 </div>
