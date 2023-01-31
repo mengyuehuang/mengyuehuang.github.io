@@ -1,8 +1,8 @@
 ---
-name: IS 445 HW 10
+name: Building Analysis
 tools: [Python, Altair, vega-lite, jekyll, HTML]
 image: assets/pngs/cuteotters.jpg
-description: This is a "showcase" of my HW10!
+description: This is a "showcase" of building analysis!
 custom_js:
   - vega.min
   - vega-lite.min
@@ -11,7 +11,7 @@ custom_js:
 ---
 
 
-# IS 445, HW 10
+# Building Analysis
 
 ## Plot1:
 
