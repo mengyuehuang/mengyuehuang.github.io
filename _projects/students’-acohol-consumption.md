@@ -1,8 +1,8 @@
 ---
-name: IS 445 Final Project Part 3
+name: Students’ Alcohol Consumption Analysis
 tools: [Python, Altair, vega-lite, jekyll, HTML]
 image: assets/pngs/gummy.jpg
-description: This is a "showcase" of my Final Project Part 3!
+description: This is a "showcase" of my Students’ Alcohol Consumption analysis!
 custom_js:
   - vega.min
   - vega-lite.min
@@ -13,7 +13,7 @@ custom_js:
 # Family Factors and Grades on Students’ Alcohol Consumption and Health Status
 
 
-## Final Project Group 1 Member
+## Group Member
 
 Mingrui Xu
 

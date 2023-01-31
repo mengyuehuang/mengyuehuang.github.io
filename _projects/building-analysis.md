@@ -51,6 +51,6 @@ Cover Image Credit: https://wall.alphacoders.com/big.php?i=277023
 </div>
 
 <div class="right">
-{% include elements/button.html link="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/HW10.ipynb" text="The Analysis" %}
+{% include elements/button.html link="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/building-analysis.ipynb" text="The Analysis" %}
 </div>
 
