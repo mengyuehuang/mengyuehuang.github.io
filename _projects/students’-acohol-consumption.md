@@ -66,5 +66,5 @@ Cover Image Credit: me
 </div>
 
 <div class="right">
-{% include elements/button.html link="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/atudents%E2%80%99-alcohol-aonsumption-analysis.ipynb" text="The Analysis" %}
+{% include elements/button.html link="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/students%E2%80%99-alcohol-consumption-analysis.ipynb" text="The Analysis" %}
 </div>
