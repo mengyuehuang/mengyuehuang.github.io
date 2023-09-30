@@ -1,13 +1,35 @@
-- title: Vise President, iSchool Data Science Club
+- title: Vice President, iSchool Data Science Club
   from: Sep 2022
+  to: June 2023
+  description: ⚫ Assist and participating in teaching materials with over 50 members each weekly meeting
+ Topics: Matplotlib, Imbalanced Learning, Feature Engineering
+ https://github.com/illiniDSC/FA22-iDSC-Safe-Driver-Prediction
+⚫ Design weekly meeting materials and Python notebooks
+ Machine Learning Python project: 
+ https://github.com/mengyuehuang/python-project-Showcase/blob/main/ML.ipynb
+
+- title: Undergraduate Research Assistant, Mobility and Fall Prevention Research Laboratory (MFPRL)
+  from: Aug 2023
   to: present
-  description: Design and deliver weekly workshop materials, assist speaker session invitation and implementation, 
-               Designed Machine Leanring Python notebook - https://github.com/mengyuehuang/python-project-Showcase/blob/main/ML.ipynb
+  description: ⚫ Form and tune Energy-Regulation Models to Predict and Classify on Accelerometer Sensor Data
+⚫ Create Interactive Plot on 3-axis Accelerometer Sensor Data with ipywidgets
+⚫ Conduct Literature Reviews on Noise Reduction of Motion Data
 
 - title: Undergraduate Course Assistant, Stat 207 Data Science Exploration
-  from: Mar 2023
+  from: Feb 2023
   to: present
-  description: Assisting course lab sessions, solving questions from studens
+  description: ⚫ Weekly Office Hours:
+Answer and Students Confusions of Course Content
+ Collect Concerns and Feedback on Students Academic Performances
+⚫ Deliver Lab Materials:
+Keep Track of Students Performance on Homework and Exams
+ Search for Common Confusions from Course Contents
+
+- title: Algorithm Internship, Feisuan Software Technology Shenzhen, China
+  from: June 2023
+  to: July 2023
+  description: ⚫ Assist and Develop Classification Model with XG-Boost and Bayes Optimization on Personal Loan Data
+⚫ Formulate Reports and Interpretation on Model Performance
 
 - title: Undergraduate Research Assistant, Center for Health Informatics Mobilizing Experts in Illinois
   from: Sep 2022

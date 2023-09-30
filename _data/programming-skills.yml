@@ -3,6 +3,11 @@
   level: Expert
   color: secondary
 
+- name: R
+  percentage: 80
+  level: Expert
+  color: warning
+
 - name: SQL
   percentage: 60
   level: Mediate
