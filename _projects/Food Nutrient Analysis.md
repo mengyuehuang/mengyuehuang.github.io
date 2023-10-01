@@ -2,7 +2,7 @@
 name: Food Nutrient Analysis
 tools: [Python]
 image: assets/pngs/meme.jpeg
-description: : Explore Food Categories and Nutrient Concentration Similarities.
+description: Explore Food Categories and Nutrient Concentration Similarities.
 custom_js:
   - vega.min
   - vega-lite.min
