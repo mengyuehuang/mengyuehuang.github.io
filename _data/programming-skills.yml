@@ -1,24 +1,24 @@
 - name: Python
   percentage: 90
   level: Expert
-  color: secondary-color
+  color: secondary
 
 - name: R
   percentage: 80
   level: Expert
-  color: warning-color
+  color: warning
 
 - name: SQL
   percentage: 60
   level: Intermediate
-  color: info-color
+  color: info
 
 - name: HTML5
   percentage: 30
   level: Beginner
-  color: danger-color
+  color: danger
 
 - name: Java
   percentage: 5
   level: Beginner
-  color: primary-color
+  color: primary
