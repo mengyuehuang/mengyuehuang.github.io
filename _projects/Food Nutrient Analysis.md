@@ -10,7 +10,7 @@ custom_js:
   - justcharts
 ---
 
-# Avocados and Predictions on their Average Prices and Type
+# Food Nutrient Analysis
 
 
 ## Introduction and Research Goals
