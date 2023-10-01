@@ -2,7 +2,7 @@
 name: Avocados and Predictions on their Average Prices and Type
 tools: [Python]
 image: assets/pngs/avocado.jpg
-description: Explore relationship between Body Features, Age, and Gender for physically active people in California
+description: How does Year and Region affect avocado price and its Organicity?
 custom_js:
   - vega.min
   - vega-lite.min

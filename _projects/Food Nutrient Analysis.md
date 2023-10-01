@@ -2,7 +2,7 @@
 name: Food Nutrient Analysis
 tools: [Python]
 image: assets/pngs/meme.jpeg
-description: Explore relationship between Body Features, Age, and Gender for physically active people in California
+description: : Explore Food Categories and Nutrient Concentration Similarities.
 custom_js:
   - vega.min
   - vega-lite.min
@@ -58,7 +58,7 @@ Yes, there is some overlap between the clusters, particularly in the right and m
 Since we observed an overlapped and pretty mixed cluster structure in the TSNE plot, we think a Soft-Assignment Algorithms such as Fuzzy C-Means and Gaussian Mixture Models may work better here.
 For GMM, it is a relatively flexible clustering algorithm that allows for overlapping clusters and diverse shapes and does not require prior knowledge of the fuzziness of clusters, it also can generate new observations based on current cluster structure, leaving a potential door for new food product development.
 
-## GMM Reslts
+## GMM Results
 It looks like GMM divided the middle bottom cluster into 3 parts and integrated it with other clusters around it (top-left, top-middle, top-relatively-right), and these integrated Clusters (Cluster 1, 5 and 6) are not dense in shape and spread a relatively long distance in the 2-d graph, which is actually not surprising since our original TSNE plot suggested an overlapping structure of the true Food Class Labels.
 
 ## Similarity Score for Labels and Groups
