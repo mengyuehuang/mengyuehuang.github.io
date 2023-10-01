@@ -1,7 +1,7 @@
 ---
 name: Students’ Alcohol Consumption Analysis
 tools: [Python, Altair, vega-lite, jekyll, HTML]
-image: assets/pngs/gummy.jpg
+image: assets/pngs/dim.jpg
 description: This is a "showcase" of my Students’ Alcohol Consumption analysis!
 custom_js:
   - vega.min
@@ -52,15 +52,15 @@ Heinz, G., Peterson, L. J., Johnson, R. W., &amp; Kerk, C. J. (2017). Exploring 
 
 
 ```
-Cover Image Credit: me
+Cover Image Credit: https://propercloth.com/reference/body-measurements-vs-shirt-dimensions/
 ```
 
 <!-- these are written in a combo of html and liquid --> 
 
 <div class="left">
-{% include elements/button.html link="https://data.world/data-society/student-alcohol-consumption" text="The Data" %}
+{% include elements/button.html link="https://www.openintro.org/book/statdata/?data=bdims" text="The Data" %}
 </div>
 
 <div class="right">
-{% include elements/button.html link="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/students%E2%80%99-alcohol-consumption-analysis.ipynb" text="The Analysis" %}
+{% include elements/button.html link="https://github.com/mengyuehuang/Python-Projects/blob/main/Body%20Dimensions.ipynb" text="The Analysis" %}
 </div>
