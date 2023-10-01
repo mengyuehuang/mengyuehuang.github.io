@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<!--
+  portfolYOU Jekyll theme by Youssef Raafat
+  Free for personal and commercial use under the MIT license
+  https://github.com/YoussefRaafatNasry/portfolYOU
+-->
+
+<html lang="en" class="h-100">
+
+<head>
+
+  
+  
+  
+
+  
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Body Dimensions Aanalysis">
+  <meta property="og:description" content="Explore relationship between Body Features, Age, and Gender for physically active people in California">
+  <meta property="og:image" content="assets/pngs/dim.jpg">
+
+  <title>Body Dimensions Aanalysis</title>
+  <meta name="description" content="Explore relationship between Body Features, Age, and Gender for physically active people in California">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Theme style -->
+  <script src="/assets/js/theme.js"></script>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
+  <!-- Animate CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+<body class="h-100 d-flex flex-column">
+
+  <main class="flex-shrink-0 container mt-5">
+    <nav class="navbar navbar-expand-lg navbar-themed">
+
+  <a class="navbar-brand" href="/"><h5><b>Mengyue Huang</b></h5></a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-1x fa-bars text-themed"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto"><a class="nav-item nav-link active" href="/projects/">Projects</a>
+
+      <a class="nav-item nav-link " href="/blog/">Blog</a>
+
+      <a class="nav-item nav-link " href="/about/">About</a>
+
+      
+
+      <span id="theme-toggler" class="nav-item nav-link" role="button" onclick="toggleTheme()"></span>
+    </div>
+  </div>
+
+</nav>
+    <div class="col-lg-10 mx-auto mt-5 markdown-body">
+  <h1 id="body-dimensions-aanalysis">Body Dimensions Aanalysis</h1>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>Some people are tall, some are short, some are fat, and some are thin. There are a lot of differences between our bodies and investigating these differences sometimes is very interesting. We were thinking if there would be some kind of associations between the figures of girths and diameters of different body parts of males and females. Therefore, we choose this data set that has data on different body parts, which can help us investigate the correspondence between body build and girths in men and women of different ages.</p>
+
+<h2 id="dataset-brief">Dataset Brief</h2>
+
+<p>This dataset consists of data from 247 males and 260 females, all taken in California. All the participants are physically active and do exercise several hours per week, in which most of them are in their twenties and early thirties, with a small group of older men and women. Thus, concluding from the statement above, the population of our dataset is physically active people in California.</p>
+
+<p>The author also stated that “the dataset does not constitute a random sample from a well-defined population” (Heinz et al., 2017), which means the dataset is not random.</p>
+
+<p>See the “Variables” part for the detail of the data.</p>
+
+<h2 id="variables">Variables</h2>
+
+<p>Please note: We modified the variable names of the original dataset, by changing all the dots (“.”) to underscores (“_”). For example, bia.di is replaced by bia_di. We made the change because some Python functions do not recognize the variable name with a dot in it.</p>
+
+<ul>
+  <li><strong>bia_di</strong>: A numerical vector, respondent’s biacromial diameter in centimeters.</li>
+  <li><strong>bii_di</strong>: A numerical vector, respondent’s biiliac diameter (pelvic breadth) in centimeters.</li>
+  <li><strong>bit_di</strong>: A numerical vector, respondent’s bitrochanteric diameter in centimeters.</li>
+  <li><strong>che_de</strong>: A numerical vector, respondent’s chest depth in centimeters, measured between spine and sternum at nipple level, mid-expiration.</li>
+  <li><strong>che_di</strong>: A numerical vector, respondent’s chest diameter in centimeters, measured at nipple level, mid-expiration.</li>
+  <li><strong>elb_di</strong>: A numerical vector, respondent’s elbow diameter in centimeters, measured as sum of two elbows.</li>
+  <li><strong>wri_di</strong>: A numerical vector, respondent’s wrist diameter in centimeters, measured as sum of two wrists.</li>
+  <li><strong>kne_di</strong>: A numerical vector, respondent’s knee diameter in centimeters, measured as sum of two knees.</li>
+  <li><strong>ank_di</strong>: A numerical vector, respondent’s ankle diameter in centimeters, measured as sum of two ankles.</li>
+  <li><strong>sho_gi</strong>: A numerical vector, respondent’s shoulder girth in centimeters, measured over deltoid muscles.</li>
+  <li><strong>che_gi</strong>: A numerical vector, respondent’s chest girth in centimeters, measured at nipple line in males and just above breast tissue in females, mid-expiration.</li>
+  <li><strong>wai_gi</strong>: A numerical vector, respondent’s waist girth in centimeters, measured at the narrowest part of torso below the rib cage as average of contracted and relaxed position.</li>
+  <li><strong>nav_gi</strong>: A numerical vector, respondent’s navel (abdominal) girth in centimeters, measured at umbilicus and iliac crest using iliac crest as a landmark.</li>
+  <li><strong>hip_gi</strong>: A numerical vector, respondent’s hip girth in centimeters, measured at at level of bitrochanteric diameter.</li>
+  <li><strong>thi_gi</strong>: A numerical vector, respondent’s thigh girth in centimeters, measured below gluteal fold as the average of right and left girths.</li>
+  <li><strong>bic_gi</strong>: A numerical vector, respondent’s bicep girth in centimeters, measured when flexed as the average of right and left girths.</li>
+  <li><strong>for_gi</strong>: A numerical vector, respondent’s forearm girth in centimeters, measured when extended, palm up as the average of right and left girths.</li>
+  <li><strong>kne_gi</strong>: A numerical vector, respondent’s knee diameter in centimeters, measured as sum of two knees.</li>
+  <li><strong>cal_gi</strong>: A numerical vector, respondent’s calf maximum girth in centimeters, measured as average of right and left girths.</li>
+  <li><strong>ank_gi</strong>: A numerical vector, respondent’s ankle minimum girth in centimeters, measured as average of right and left girths.</li>
+  <li><strong>wri_gi</strong>: A numerical vector, respondent’s wrist minimum girth in centimeters, measured as average of right and left girths.</li>
+  <li><strong>age</strong>: A numerical vector, respondent’s age in years.</li>
+  <li><strong>wgt</strong>: A numerical vector, respondent’s weight in kilograms.</li>
+  <li><strong>hgt</strong>: A numerical vector, respondent’s height in centimeters.</li>
+  <li><strong>sex</strong>: A categorical vector, 1 if the respondent is male, 0 if female.</li>
+</ul>
+
+<h2 id="research-questions">Research Questions</h2>
+
+<p><strong>Descriptive Analytics Research Question</strong> - What is the tendency between Wrist Diameter and Ankle Diameter under the influence of Gender?</p>
+
+<p><strong>Inference Research Question</strong> - What is the association between the mean wrist diameter for males and females?</p>
+
+<p><strong>Linear Regression Research Question</strong> - Is there a linear relationship between Wrist Diameter and Gender, Age, Thigh Girth, and Chest Diameter in the sample? What about in the population?</p>
+
+<p><strong>Logistic Regression Research Question</strong> - Is there a linear relationship between the log-odds of the of Gender and Wrist Diameter, Age, Thigh Girth, and Chest Diameter in the sample? What about in the population? What explanatory variables should we include in the model to build a parsimonious model?</p>
+
+<h3 id="discussion">Discussion:</h3>
+<p>I add in an extra algorithm choice of Neural Network to avoid the potential problem of Extrapolation in Random Forest and I am quite curious how it would perform here.
+Random Forest is a powerful algorithm for most of the times and it can help people see the how an instance is perceived by the model with a tree visualization. However, the issue of Extrapolation can be a threat for this model when encountering new extreme input data since all the predicted output for each leaf in Random Forest is an average of all the instances in that leaf, which prevents the model to give output laying outside the range of its original input data, and I think this can be a weakness and also a strength depending on the situation, while Neural Network can be a solution for this problem. However, on the other hand, people will no longer be able to see how each instance is predicted by the model with the Black Box Nature in Neural Network algorithm.</p>
+
+<h3 id="research-questions-1">Research Questions:</h3>
+<ol>
+  <li>For this first regression task on average prices, how does Linear Regression, Random Forest Regression, and Neural Network compare to each other in terms of the chosen measuring metric of R^2? What are the figures of mean and standard deviation of such R^2 for training data and testing data? Do the figures imply anything about this model?</li>
+  <li>For this second classification task on the avocado’s organicity, would the year or original region of such avocado observation help such identification? In other words, is there a relationship between them? Would including the variable year and region improve our model’s accuracy?</li>
+</ol>
+
+<h3 id="hypothesis">Hypothesis:</h3>
+<ol>
+  <li>For the first regression problem on average prices, Random Forest Regression and Neural Network would perform better than Linear Regression.</li>
+  <li>For the second classification problem on organicity, including year and origin region would help the model classify training data better.</li>
+</ol>
+
+<h3 id="methods">Methods:</h3>
+<p>Before starting the modeling process with various algorithms, I first pay attention to some Feature Engineering steps. I convert the ‘organic’ and ‘conventional’ in the ‘type’ feature to 1 and 0, and transform the 54 different original regions of an avocado instance to 1 to 55 with pd.factorize() + 1. For the ‘date’ column about an instance, I keep its month number and ignore its specific date and year information with df[‘Date’].apply(pd.to_datetime, errors = ‘coerce’).dt.month since I think that with the ‘year’ column already in the original data-frame, having a too specific data about a observation’s date would be an unnecessity and even a burden for the model.
+For all of the following trials on these 2 modeling questions, I apply a pipeline model with Standardization and also a K-Fold Cross Validation to them. I transform the difference regional data with 54 levels into a range of numbers from 1 to 55, and I think that the magnitude of these numbers should not carry information to my model. So I scale all of my features to the same level. K-Fold Cross Validation enables me to build a better model with a relatively small dataset.
+To be more specific, for the first regression problem of predicting average prices, I use three distinct algorithms: Linear Regression, Random Forest Regressor, and MLPRegressor from Neural Network, and Random Forest Regressor stands out to be the best model with a highest R^2 number floating around 0.9 with a max_depth = 30. The scores for Linear model and Neural Network are not very promising as 0.4386 and 0.6354.
+For the second classification problem on organicity, the Kappa score for a model without ‘year’ nor ‘region’ is 0.9420. Including neither ‘year’ nor ‘region’ barely contribute to improving the model’s performance (0.9423 and 0.9468), while having both of them in the model gives a Kappa of 0.9462, also not much of an improvement.</p>
+
+<h3 id="results">Results:</h3>
+<ol>
+  <li>None of the results seemed to be overfitting with a low Standard Deviation for both train and test group. The output R^2 seemed to imply that Random Forest work the best here while Linear Regression and Neural Network were not the desired choice of algorithm.</li>
+  <li>Including neither one of the ‘year’ or ‘region’ features helped the model to perform better with a pretty steady Cohen Kappa Score around 0.94 all the time.</li>
+</ol>
+
+<h3 id="gain-and-learn">Gain and Learn:</h3>
+<p>On task one, for Linear model and Neural Network the R^2 scores are 0.4386 and 0.6354. I guess the reason why Neural Network does not perform well here is that this task here is actually a pretty simple and straightforward one, and the dataset is quite small.
+On task two, much to my surprise, neither of the two variables of ‘year’ and ‘region’ seems to help. I guess this is because I do something wrong in the Feature Engineering step in the beginning of the project because I expected the ‘region’ feature would have a huge impact on an avocado’s organicity. Maybe there are better skills in transforming string region data to numbers.
+Another thing that I feet surprised is the sensitivity of Random Forest about overfitting (max_depth). I first set my max_depth = 5, and the R^2 is around 0.6. However, when I try different depth with a step of 5 from 15 to 35, the R^2 score increased effectively to almost 0.9 and decreased, which proves that tree-based algorithms are very susceptible to overfitting.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cover Image Credit: https://propercloth.com/reference/body-measurements-vs-shirt-dimensions/
+</code></pre></div></div>
+
+<!-- these are written in a combo of html and liquid -->
+
+<div class="left">
+<a class="m-1 btn btn-outline-primary btn-2 " href="https://www.kaggle.com/datasets/neuromusic/avocado-prices">
+  The Data
+</a>
+</div>
+
+<div class="right">
+<a class="m-1 btn btn-outline-primary btn-2 " href="https://github.com/mengyuehuang/Python-Projects/blob/main/avocado%20price-ML.ipynb">
+  The Analysis
+</a>
+</div>
+
+</div>
+  </main>
+  <footer class="mt-auto py-3 text-center">
+
+  <small class="text-muted mb-2">
+    <i class="fas fa-code"></i> with <i class="fas fa-heart"></i>
+    by <strong>Mengyue Huang</strong>
+  </small>
+
+  <div class="container-fluid justify-content-center"><a class="social mx-1"  href="mailto:mengyuehuang4@illinois.edu"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#db4437'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fas fa-envelope fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.github.com/mengyuehuang"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#333333'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-github fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.linkedin.com/in/mengyue-huang-luna"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#007bb5'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-linkedin-in fa-1x"></i>
+    </a>
+
+</div><small id="attribution">
+    theme <a href="https://github.com/YoussefRaafatNasry/portfolYOU">portfolYOU</a>
+  </small>
+
+</footer>
+
+
+<!-- Custom page specific js files -->
+  
+    <script src='/assets/js/vega.min.js' type="text/javascript"></script>
+  
+    <script src='/assets/js/vega-lite.min.js' type="text/javascript"></script>
+  
+    <script src='/assets/js/vega-embed.min.js' type="text/javascript"></script>
+  
+    <script src='/assets/js/justcharts.js' type="text/javascript"></script>
+  
+
+
+
+  
+  <!-- GitHub Buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS CDN -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- wow.js CDN & Activation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+<script> new WOW().init(); </script>
+
+<!-- Initialize all tooltips -->
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+</body>
+
+</html>
