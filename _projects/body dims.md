@@ -1,6 +1,6 @@
 ---
 name: Students’ Alcohol Consumption Analysis
-tools: [Python, Altair, vega-lite, jekyll, HTML]
+tools: [Python]
 image: assets/pngs/dim.jpg
 description: This is a "showcase" of my Students’ Alcohol Consumption analysis!
 custom_js:
