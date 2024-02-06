@@ -2,18 +2,18 @@
   from: Aug 2023
   to: present
   description: |
-              Built and tuned energy-regulation models to analysis accelerometer sensor data from healthy elderly adults.
-              Created interactive plot on 3-axis accelerometer sensor data with ipywidgets.
-              Conducted literature reviews on noise reduction of motion data.
+  Built and tuned energy-regulation models to analysis accelerometer sensor data from healthy elderly adults.
+  Created interactive plot on 3-axis accelerometer sensor data with ipywidgets.
+  Conducted literature reviews on noise reduction of motion data.
 
 
 - title: Short-term Load Forecasting Method and System Based on ST Transformers (Remote)
   from: Apr 2023
   to: Aug 2023
   description: |
-              Conducted dataset pre-processing with label encoding and unit conversion.
-              Undertook dataset exploration on Outliers and hidden correlations between Columns.
-              Built LSTM Model on time series data with PyTorch to predict peak load of power plant.
+Conducted dataset pre-processing with label encoding and unit conversion.
+Undertook dataset exploration on Outliers and hidden correlations between Columns.
+Built LSTM Model on time series data with PyTorch to predict peak load of power plant.
 
 
 - title: Algorithm Intern, Feisuan Software Technology Shenzhen, China
