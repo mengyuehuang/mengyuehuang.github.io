@@ -1,48 +1,68 @@
-- title: Vice President, Data Science Club
-  from: Sep 2022
-  to: June 2023
-  description: Assist and participate in teaching materials with over 50 members at each weekly meeting
-    	       Topics - Matplotlib, Imbalanced Learning, Feature Engineering
-    	       [GitHub Repository](https://github.com/illiniDSC/FA22-iDSC-Safe-Driver-Prediction)
-    	       Design weekly meeting materials and Python notebooks
-               Machine Learning Python project - [GitHub Repository](https://github.com/mengyuehuang/python-project-Showcase/blob/main/ML.ipynb)
-
 - title: Undergraduate Research Assistant, Mobility and Fall Prevention Research Laboratory (MFPRL)
   from: Aug 2023
   to: present
-  description: Form and tune Energy-Regulation Models to Predict and Classify Accelerometer Sensor Data
-               Create Interactive Plots on 3-axis Accelerometer Sensor Data with ipywidgets
-               Conduct Literature Reviews on Noise Reduction of Motion Data
+  description: |
+              Built and tuned energy-regulation models to analysis accelerometer sensor data from healthy elderly adults.
+              Created interactive plot on 3-axis accelerometer sensor data with ipywidgets.
+              Conducted literature reviews on noise reduction of motion data.
 
-- title: Undergraduate Course Assistant, Stat 207 Data Science Exploration
-  from: Feb 2023
-  to: present
-  description: Weekly Office Hours -
-                 Answer students' questions regarding course content
-                 Collect concerns and feedback on students' academic performances
-               Deliver Lab Materials -
-                 Keep track of students' performance on homework and exams
-                 Search for common confusions from course contents
 
-- title: Algorithm Internship, Feisuan Software Technology Shenzhen, China
+- title: Short-term Load Forecasting Method and System Based on ST Transformers (Remote)
+  from: Apr 2023
+  to: Aug 2023
+  description: |
+              Conducted dataset pre-processing with label encoding and unit conversion.
+              Undertook dataset exploration on Outliers and hidden correlations between Columns.
+              Built LSTM Model on time series data with PyTorch to predict peak load of power plant.
+
+
+- title: Algorithm Intern, Feisuan Software Technology Shenzhen, China
   from: June 2023
   to: July 2023
-  description: Assist and Develop Classification Models with XG-Boost and Bayes Optimization on Personal Loan Data
-               Formulate Reports and Interpretations on Model Performance
+  description: |
+              Developed classification model with XG-Boost and Bayes Optimization on payment difficulties.
+              Evaluated model performance with performance metrices ROC&AUC, precision, and recall.
+
+
 
 - title: Undergraduate Research Assistant, Center for Health Informatics Mobilizing Experts in Illinois
   from: Sep 2022
   to: Feb 2023
-  description: Used Matplotlib to assist visualizations on ICD-10 mortality dataset
-               Format and present project reports
+  description: |
+              Explored Dataset with Matplotlib histograms for NaN values.	 
+              Built visualizations on Matplotlib on ICD-10 mortality dataset for trends with gender, nationality, age, and year.
+              Formulated final reports on mortality tendencies observed.
+
+
+
+- title: Undergraduate Course Assistant, Stat 207 Data Science Exploration
+  from: Feb 2023
+  to: present
+  description: |
+                Weekly Office Hours -
+                 Answer students' questions regarding course content
+                 Collect concerns and feedback on students' academic performances
+                Deliver Lab Materials -
+                 Keep track of students' performance on homework and exams
+                 Search for common confusions from course contents
+
+
+- title: Vice President, Data Science Club
+  from: Sep 2022
+  to: June 2023
+  description: |
+              Assisted in tutorial sessions with over 50 members at each weekly meeting, topics covering Matplotlib, Imbalanced Learning, Feature Engineering, Machine Learning.
+              https://github.com/mengyuehuang/python-project-Showcase/blob/main/ML.ipynb
+
 
 - title: University of Illinois at Urbana Champion, Information Sciences + Data Science
   from: Aug 2020
   to: May 2024
-  description: iSchool Dean’s List - Fall 2020 ~ Spring 2023
-               GPA - 3.95/4.0
+  description: |
+              iSchool Dean's List - Fall 2020 ~ Spring 2023
+              GPA - 3.90/4.0
+
 
 - title: Summer School, University of California, LA
   from: Aug 2019
   to: Sep 2019
-  description:
