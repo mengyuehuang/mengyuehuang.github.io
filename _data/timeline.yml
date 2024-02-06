@@ -11,9 +11,9 @@
   from: Apr 2023
   to: Aug 2023
   description: |
-  Conducted dataset pre-processing with label encoding and unit conversion.
-  Undertook dataset exploration on Outliers and hidden correlations between Columns.
-  Built LSTM Model on time series data with PyTorch to predict peak load of power plant.
+    Conducted dataset pre-processing with label encoding and unit conversion.
+    Undertook dataset exploration on Outliers and hidden correlations between Columns.
+    Built LSTM Model on time series data with PyTorch to predict peak load of power plant.
 
 
 - title: Algorithm Intern, Feisuan Software Technology Shenzhen, China
