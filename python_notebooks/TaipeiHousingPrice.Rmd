@@ -1,6 +1,5 @@
 ---
 title: "Predicting Housing Price in Taipei"
-author: "Hongkai Ding, Tiffany Fu, Mengyue Huang"
 date: "4/28/2025"
 output: pdf_document
 ---

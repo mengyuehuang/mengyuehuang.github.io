@@ -105,7 +105,6 @@ Across multiple models (Logistic Regression, Random Forest, and XGBoost), we obs
 These findings suggest that cancellation behavior is heavily influenced by booking commitment (deposit policy), historical customer behavior, and engagement indicators such as special requests.
 
 Feature importance consistency across models strengthens the interpretability and business reliability of the results.  
-:contentReference[oaicite:0]{index=0}
 
 ### Model Performance Trade-offs
 While Logistic Regression provides a strong interpretable baseline, ensemble models achieved substantially better predictive power:
@@ -157,7 +156,6 @@ Despite strong results, several limitations remain:
    Deep learning approaches or sequential customer-behavior models may capture richer booking trajectories.
 
 Future extensions include incorporating real-time booking changes and expanding toward fully integrated ADR regression forecasting.  
-:contentReference[oaicite:1]{index=1}
 
 ---
 
