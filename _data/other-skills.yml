@@ -7,3 +7,8 @@
   percentage: 90
   level: Fluent
   color: success
+
+- name: French
+  percentage: 5
+  level: Duolingo help me
+  color: satire

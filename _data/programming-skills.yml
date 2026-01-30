@@ -9,8 +9,8 @@
   color: warning
 
 - name: SQL
-  percentage: 60
-  level: Intermediate
+  percentage: 90
+  level: Expert
   color: info
 
 - name: HTML5

@@ -7,7 +7,7 @@
 ### Site Settings ###
 title               : Mengyue Huang 
 description         : >-
-                      Have a lovely day of yours :)
+                      Have a lovely day of yours and touch some grass
 baseurl             : ""   # Change to empty quotes if you are hosting your site at <your-username>.github.io directly,
 #                                             otherwise will be hosted at <your-username>.github.io/{{base_url}}
 repository          : mengyuehuang               # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
@@ -38,16 +38,16 @@ author:
   image             : assets/pngs/cover.jpg
 #  behance           : your_username
 # dribbble          : your_username
-  email             : mengyuehuang4@illinois.edu
-#  facebook          : your_username
+  email             : myhuang1000@163.com
+  facebook          : lunahuang0218
   github            : mengyuehuang # JPN
 # gitlab            : your_username
-# instagram         : your_username
+  instagram         : lunahuang66_
 # kaggle            : your_username
   linkedin          : mengyue-huang-luna
 #  medium            : your_username
 # soundcloud        : your_username
-# spotify           : your_username
+  spotify           : 31dsb2x6rmdihpxr5trkcyrwxiyu
 # stackoverflow     : your_user_id
 # tumblr            : your_username.tumblr.com
 #  twitch            : your_username
@@ -55,6 +55,7 @@ author:
 #  vimeo             : your_username
 # youtube           : your_channel_name
 # keybase           : your_username
+  steam           : lunahuang66
 
 
 ### Posts ###

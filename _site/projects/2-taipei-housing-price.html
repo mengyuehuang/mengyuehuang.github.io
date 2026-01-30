@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<!--
+  portfolYOU Jekyll theme by Youssef Raafat
+  Free for personal and commercial use under the MIT license
+  https://github.com/YoussefRaafatNasry/portfolYOU
+-->
+
+<html lang="en" class="h-100">
+
+<head>
+
+  
+  
+  
+
+  
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Predicting Housing Price in Taipei">
+  <meta property="og:description" content="Built predictive models for Taipei housing prices using linear regression, LASSO, neural networks, and random forests, achieving best RMSE ≈ 5.83 and identif...">
+  <meta property="og:image" content="assets/pngs/snow.jpg">
+
+  <title>Predicting Housing Price in Taipei</title>
+  <meta name="description" content="Built predictive models for Taipei housing prices using linear regression, LASSO, neural networks, and random forests, achieving best RMSE ≈ 5.83 and identif...">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Theme style -->
+  <script src="/assets/js/theme.js"></script>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
+  <!-- Animate CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+<body class="h-100 d-flex flex-column">
+
+  <main class="flex-shrink-0 container mt-5">
+    <nav class="navbar navbar-expand-lg navbar-themed">
+
+  <a class="navbar-brand" href="/"><h5><b>Mengyue Huang</b></h5></a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-1x fa-bars text-themed"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto"><a class="nav-item nav-link active" href="/projects/">Projects</a>
+
+      <a class="nav-item nav-link " href="/blog/">Blog</a>
+
+      <a class="nav-item nav-link " href="/about/">About</a>
+
+      
+
+      <span id="theme-toggler" class="nav-item nav-link" role="button" onclick="toggleTheme()"></span>
+    </div>
+  </div>
+
+</nav>
+    <div class="col-lg-10 mx-auto mt-5 markdown-body">
+  <h2 id="overview">Overview</h2>
+<p>Housing price prediction is critical for buyers, sellers, lenders, and urban planners.<br />
+In this project, we developed multiple predictive models to estimate <strong>housing price per unit area</strong> in Taipei City, Taiwan.</p>
+
+<p>The goal was not only to maximize prediction accuracy, but also to interpret which urban features most strongly influence real estate valuation.</p>
+
+<hr />
+
+<h2 id="dataset">Dataset</h2>
+<p>We used a publicly available dataset collected by Cheng Yeh (2018), containing:</p>
+
+<ul>
+  <li><strong>414 housing transactions</strong> in Taipei City</li>
+  <li>Response variable: price per unit area (10,000 NTD per ping)</li>
+  <li>Key predictors:
+    <ul>
+      <li>house age</li>
+      <li>distance to nearest MRT station</li>
+      <li>number of nearby convenience stores</li>
+      <li>transaction date</li>
+      <li>latitude / longitude</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</h3>
+
+<p>The report includes distribution plots for all major predictors (age, MRT distance, store count, latitude/longitude, price).</p>
+
+<h2><img src="/assets/pngs/taipei/eda_distributions.png" alt="EDA Feature Distributions" /></h2>
+
+<h2 id="modeling-approaches">Modeling Approaches</h2>
+<p>We implemented and compared four regression models:</p>
+
+<h3 id="1-baseline-linear-regression">1. Baseline Linear Regression</h3>
+<p>A multiple linear regression explained ~62.5% of price variance.</p>
+
+<ul>
+  <li>Test RMSE ≈ <strong>7.75</strong></li>
+</ul>
+
+<hr />
+
+<h3 id="2-relaxed-lasso-regression">2. Relaxed LASSO Regression</h3>
+<p>LASSO selected four key predictors:</p>
+
+<ul>
+  <li>age</li>
+  <li>distance to MRT</li>
+  <li>store count</li>
+  <li>latitude</li>
+</ul>
+
+<p>Performance remained similar to baseline:</p>
+
+<ul>
+  <li>Test RMSE ≈ <strong>7.78</strong></li>
+</ul>
+
+<hr />
+
+<h3 id="3-neural-network-nonlinear-model">3. Neural Network (Nonlinear Model)</h3>
+<p>To capture nonlinear interactions, we trained a feedforward neural network:</p>
+
+<ul>
+  <li>two hidden layers (64 → 32 units)</li>
+  <li>dropout + early stopping</li>
+</ul>
+
+<p>This improved prediction accuracy substantially:</p>
+
+<ul>
+  <li>Test RMSE ≈ <strong>6.36</strong></li>
+  <li>~20% reduction in error compared to linear models</li>
+</ul>
+
+<p><img src="/assets/pngs/taipei/nn_train_val_loss.png" alt="NN Training vs Validation Loss" /></p>
+
+<hr />
+
+<h3 id="4-random-forest-best-model">4. Random Forest (Best Model)</h3>
+<p>A tuned random forest achieved the strongest predictive performance:</p>
+
+<ul>
+  <li>Test RMSE ≈ <strong>5.83</strong> (best overall)</li>
+</ul>
+
+<p><img src="/assets/pngs/taipei/rf_feature_importance.png" alt="Random Forest Feature Importance" /></p>
+
+<hr />
+
+<h2 id="key-findings">Key Findings</h2>
+<p>Across all nonlinear models, the most important driver of housing price was:</p>
+
+<h3 id="distance-to-mrt-station-dominant-factor">Distance to MRT station (dominant factor)</h3>
+
+<p>Both neural network permutation importance and random forest feature rankings consistently placed MRT proximity as the strongest predictor.</p>
+
+<p>Other influential features included:</p>
+
+<ul>
+  <li>house age</li>
+  <li>latitude</li>
+  <li>transaction timing</li>
+</ul>
+
+<p><img src="/assets/pngs/taipei/nn_permutation_importance.png" alt="NN Permutation Importance" /></p>
+
+<hr />
+
+<h2 id="discussion">Discussion</h2>
+
+<p>This project demonstrates that housing prices in Taipei are shaped primarily by <strong>transport accessibility and spatial structure</strong>, rather than only property-level attributes.</p>
+
+<h3 id="why-nonlinear-models-outperformed-linear-regression">Why Nonlinear Models Outperformed Linear Regression</h3>
+<p>Baseline linear regression achieved an RMSE of ~7.75, explaining about 62.5% of price variance. However, both neural networks and random forests significantly improved performance:</p>
+
+<ul>
+  <li>Neural Network RMSE ≈ <strong>6.36</strong></li>
+  <li>Random Forest RMSE ≈ <strong>5.83</strong> (best)</li>
+</ul>
+
+<p>This suggests nonlinear interactions play an important role in real-world housing valuation.</p>
+
+<h3 id="mrt-proximity-as-the-dominant-driver">MRT Proximity as the Dominant Driver</h3>
+<p>Across both permutation importance (neural network) and feature importance rankings (random forest), the most influential factor was consistently:</p>
+
+<p><strong>Distance to the nearest MRT station</strong></p>
+
+<p>This aligns with Taipei’s metro-centered urban structure, where transit accessibility strongly drives neighborhood desirability.</p>
+
+<h3 id="practical-implications">Practical Implications</h3>
+<p>The results suggest housing valuation models should emphasize:</p>
+
+<ul>
+  <li>transit-oriented development factors</li>
+  <li>spatial location features</li>
+  <li>nonlinear modeling techniques for pricing systems</li>
+</ul>
+
+<p>Such predictive frameworks can support:</p>
+
+<ul>
+  <li>buyers and sellers in pricing decisions</li>
+  <li>lenders in risk evaluation</li>
+  <li>policymakers in infrastructure planning</li>
+</ul>
+
+<hr />
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We successfully built a comparative regression pipeline for Taipei housing price prediction, evaluating:</p>
+
+<ul>
+  <li>Linear Regression</li>
+  <li>Relaxed LASSO</li>
+  <li>Neural Networks</li>
+  <li>Random Forests</li>
+</ul>
+
+<p>The tuned random forest achieved the strongest performance:</p>
+
+<ul>
+  <li><strong>Test RMSE ≈ 5.83</strong>, reducing error to ~15% of mean housing price</li>
+</ul>
+
+<p>Most importantly, we identified MRT accessibility as the key structural driver of real estate valuation in Taipei.</p>
+
+<p><img src="/assets/pngs/taipei/model_comparison_table.png" alt="Model Comparison Table" /></p>
+
+<hr />
+
+<h2 id="limitations--future-work">Limitations &amp; Future Work</h2>
+
+<p>Despite strong predictive results, limitations remain:</p>
+
+<ul>
+  <li>The dataset contains only 6 predictors, missing socioeconomic and neighborhood-level variables</li>
+  <li>Results may not generalize beyond Taipei or beyond the sampled time period</li>
+  <li>Future work could incorporate richer geospatial modeling and larger transaction datasets</li>
+</ul>
+
+<p>Potential extensions include:</p>
+
+<ul>
+  <li>incorporating income, school quality, zoning indicators</li>
+  <li>applying gradient boosting or spatial regression models</li>
+  <li>scaling to broader housing markets</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cover Image Credit: me, bewildered about where to go next on the snow trail
+</code></pre></div></div>
+
+<!-- these are written in a combo of html and liquid -->
+
+<div class="left">
+<a class="m-1 btn btn-outline-primary btn-2 " href="https://www.kaggle.com/datasets/hastingssibanda/taipei-housing-dataset-uci">
+  The Data
+</a>
+</div>
+
+<div class="right">
+<a class="m-1 btn btn-outline-primary btn-2 " href="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/TaipeiHousingPrice.Rmd">
+  The Analysis
+</a>
+</div>
+
+</div>
+  </main>
+  <footer class="mt-auto py-3 text-center">
+
+  <small class="text-muted mb-2">
+    <i class="fas fa-code"></i> with <i class="fas fa-heart"></i>
+    by <strong>Mengyue Huang</strong>
+  </small>
+
+  <div class="container-fluid justify-content-center"><a class="social mx-1"  href="mailto:myhuang1000@163.com"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#db4437'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fas fa-envelope fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.facebook.com/lunahuang0218"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#3b5998'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-facebook fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.github.com/mengyuehuang"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#333333'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-github fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.instagram.com/lunahuang66_"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#405de6'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-instagram fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.linkedin.com/in/mengyue-huang-luna"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#007bb5'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-linkedin-in fa-1x"></i>
+    </a><a class="social mx-1"  href="https://open.spotify.com/user/31dsb2x6rmdihpxr5trkcyrwxiyu"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#1db954'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-spotify fa-1x"></i>
+    </a><a class="social mx-1"  href="https://steamcommunity.com/id/lunahuang66"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#171a21'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-steam fa-1x"></i>
+    </a>
+
+</div><small id="attribution">
+    theme <a href="https://github.com/YoussefRaafatNasry/portfolYOU">portfolYOU</a>
+  </small>
+
+</footer>
+
+
+<!-- Custom page specific js files -->
+  
+
+
+
+  
+  <!-- GitHub Buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS CDN -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- wow.js CDN & Activation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+<script> new WOW().init(); </script>
+
+<!-- Initialize all tooltips -->
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+</body>
+
+</html>

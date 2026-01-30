@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<!--
+  portfolYOU Jekyll theme by Youssef Raafat
+  Free for personal and commercial use under the MIT license
+  https://github.com/YoussefRaafatNasry/portfolYOU
+-->
+
+<html lang="en" class="h-100">
+
+<head>
+
+  
+  
+  
+
+  
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hotel Bookings Pattern Discovery">
+  <meta property="og:description" content="Predicted hotel booking cancellations (Random Forest: Acc=0.867, AUC=0.925) and analyzed ADR seasonality patterns to support overbooking and revenue decisions.">
+  <meta property="og:image" content="/assets/pngs/charlie.jpg">
+
+  <title>Hotel Bookings Pattern Discovery</title>
+  <meta name="description" content="Predicted hotel booking cancellations (Random Forest: Acc=0.867, AUC=0.925) and analyzed ADR seasonality patterns to support overbooking and revenue decisions.">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Theme style -->
+  <script src="/assets/js/theme.js"></script>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
+  <!-- Animate CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+<body class="h-100 d-flex flex-column">
+
+  <main class="flex-shrink-0 container mt-5">
+    <nav class="navbar navbar-expand-lg navbar-themed">
+
+  <a class="navbar-brand" href="/"><h5><b>Mengyue Huang</b></h5></a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-1x fa-bars text-themed"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto"><a class="nav-item nav-link active" href="/projects/">Projects</a>
+
+      <a class="nav-item nav-link " href="/blog/">Blog</a>
+
+      <a class="nav-item nav-link " href="/about/">About</a>
+
+      
+
+      <span id="theme-toggler" class="nav-item nav-link" role="button" onclick="toggleTheme()"></span>
+    </div>
+  </div>
+
+</nav>
+    <div class="col-lg-10 mx-auto mt-5 markdown-body">
+  <h2 id="overview">Overview</h2>
+<p>This project analyzes hotel booking records to uncover drivers of cancellations and pricing (ADR) patterns, and builds predictive models to support operational decisions (e.g., overbooking and customer targeting).</p>
+
+<hr />
+
+<h2 id="dataset--prep">Dataset &amp; Prep</h2>
+<ul>
+  <li>Scale: 119K+ bookings with 30+ features (booking lead time, market segment, deposit type, special requests, etc.)</li>
+  <li>Data cleaning:
+    <ul>
+      <li>removed extreme ADR outliers (max ADR observed = 5400)</li>
+      <li>categorical encoding + train/test split for cancellation prediction</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="exploratory-analysis-adr--pricing-patterns">Exploratory Analysis (ADR / Pricing Patterns)</h2>
+<p>ADR summary statistics (before outlier removal):</p>
+<ul>
+  <li>mean ≈ 101.97, median ≈ 94.95</li>
+</ul>
+
+<p><img src="/assets/pngs/hotel/fig_006_cell32.png" alt="ADR Distribution" /></p>
+
+<p>Seasonality (ADR by month / year):
+<img src="/assets/pngs/hotel/fig_007_cell34.png" alt="Monthly ADR by Year" /></p>
+
+<p>ADR differs by hotel type:
+<img src="/assets/pngs/hotel/fig_008_cell36.png" alt="Monthly ADR by Hotel Type" /></p>
+
+<p>Correlation overview:
+<img src="/assets/pngs/hotel/fig_009_cell38.png" alt="Correlation Heatmap" /></p>
+
+<p>ADR differs across customer types:
+<img src="/assets/pngs/hotel/fig_011_cell42.png" alt="ADR by Customer Type" /></p>
+
+<hr />
+
+<h2 id="cancellation-drivers-eda">Cancellation Drivers (EDA)</h2>
+<p>Cancellation rate increases with lead time:
+<img src="/assets/pngs/hotel/fig_010_cell40.png" alt="Cancellation by Lead Time" /></p>
+
+<p>More special requests → lower cancellation probability:
+<img src="/assets/pngs/hotel/fig_014_cell48.png" alt="Cancellation by Special Requests" /></p>
+
+<hr />
+
+<h2 id="predictive-modeling-cancellation-prediction">Predictive Modeling: Cancellation Prediction</h2>
+<p>We trained multiple classifiers and evaluated on the test set:</p>
+
+<p><strong>Test Accuracy</strong></p>
+<ul>
+  <li>Logistic Regression: 0.8088</li>
+  <li>KNN: 0.8166</li>
+  <li>XGBoost: 0.8433</li>
+  <li><strong>Random Forest: 0.8670 (best)</strong></li>
+</ul>
+
+<p><strong>ROC-AUC</strong></p>
+<ul>
+  <li>Logistic Regression: 0.8556</li>
+  <li>KNN: 0.9051</li>
+  <li>XGBoost: 0.9180</li>
+  <li><strong>Random Forest: 0.9251 (best)</strong></li>
+</ul>
+
+<p>ROC curve comparison:
+<img src="/assets/pngs/hotel/mdfig_01_cell75.png" alt="ROC Curve" /></p>
+
+<p>Confusion matrices:
+<img src="/assets/pngs/hotel/mdfig_02_cell77.png" alt="Confusion Matrices" /></p>
+
+<hr />
+
+<h2 id="explainability-top-features">Explainability (Top Features)</h2>
+<p>Across models, the strongest signals include:</p>
+<ul>
+  <li>deposit type (No Deposit)</li>
+  <li>previous cancellations</li>
+  <li>lead time</li>
+  <li>total special requests</li>
+  <li>market segment</li>
+</ul>
+
+<p>Logistic (top features):
+<img src="/assets/pngs/hotel/fig_023_cell90.png" alt="Top Features - Logistic" /></p>
+
+<p>Random Forest (top features):
+<img src="/assets/pngs/hotel/fig_025_cell102.png" alt="Top Features - RF" /></p>
+
+<hr />
+
+<h2 id="discussion">Discussion</h2>
+
+<p>This project demonstrates that hotel cancellations are not random events, but are strongly driven by a small set of behavioral and operational signals.</p>
+
+<h3 id="key-drivers-of-cancellation-risk">Key Drivers of Cancellation Risk</h3>
+<p>Across multiple models (Logistic Regression, Random Forest, and XGBoost), we observed consistent agreement on the most predictive features:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">deposit_type_No Deposit</code></li>
+  <li><code class="language-plaintext highlighter-rouge">previous_cancellations</code></li>
+  <li><code class="language-plaintext highlighter-rouge">market_segment_Online TA</code></li>
+  <li><code class="language-plaintext highlighter-rouge">total_of_special_requests</code></li>
+  <li><code class="language-plaintext highlighter-rouge">required_car_parking_spaces</code></li>
+</ul>
+
+<p>These findings suggest that cancellation behavior is heavily influenced by booking commitment (deposit policy), historical customer behavior, and engagement indicators such as special requests.</p>
+
+<p>Feature importance consistency across models strengthens the interpretability and business reliability of the results.</p>
+
+<h3 id="model-performance-trade-offs">Model Performance Trade-offs</h3>
+<p>While Logistic Regression provides a strong interpretable baseline, ensemble models achieved substantially better predictive power:</p>
+
+<ul>
+  <li>Random Forest reached the best overall performance (<strong>Accuracy = 0.867</strong>, <strong>AUC = 0.925</strong>)</li>
+  <li>XGBoost performed similarly with strong ranking capability</li>
+</ul>
+
+<p>This highlights the value of non-linear models in capturing complex booking interactions, especially under heterogeneous customer segments.</p>
+
+<h3 id="pricing-patterns-adr-insights">Pricing Patterns (ADR Insights)</h3>
+<p>In addition to cancellations, our exploratory analysis revealed clear seasonality and structural differences in ADR:</p>
+
+<ul>
+  <li>Resort hotels exhibit stronger seasonal ADR peaks than city hotels</li>
+  <li>Customer type and booking timing significantly influence pricing trends</li>
+</ul>
+
+<p>These insights can support revenue management and dynamic pricing decisions beyond cancellation prevention.</p>
+
+<hr />
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We successfully developed an end-to-end analytics pipeline for hotel booking pattern discovery, combining:</p>
+
+<ul>
+  <li>Large-scale data preprocessing and feature engineering</li>
+  <li>Statistical hypothesis-driven exploration</li>
+  <li>Predictive modeling for cancellation risk</li>
+  <li>Pricing pattern analysis through ADR trends</li>
+</ul>
+
+<p>Our best-performing model (<strong>Random Forest</strong>) achieved:</p>
+
+<ul>
+  <li><strong>Test Accuracy: 0.867</strong></li>
+  <li><strong>ROC-AUC: 0.925</strong></li>
+</ul>
+
+<p>This enables hotels to identify high-risk bookings early, improve overbooking strategies, and optimize marketing and pricing policies.</p>
+
+<hr />
+
+<h2 id="limitations--future-work">Limitations &amp; Future Work</h2>
+
+<p>Despite strong results, several limitations remain:</p>
+
+<ol>
+  <li>
+    <p><strong>Temporal feature constraints</strong><br />
+The dataset lacks booking update-time dynamics, which could further improve cancellation forecasting.</p>
+  </li>
+  <li>
+    <p><strong>Model generalization</strong><br />
+Results may vary across regions or hotel chains; future work could validate robustness on newer datasets.</p>
+  </li>
+  <li>
+    <p><strong>Advanced modeling opportunities</strong><br />
+Deep learning approaches or sequential customer-behavior models may capture richer booking trajectories.</p>
+  </li>
+</ol>
+
+<p>Future extensions include incorporating real-time booking changes and expanding toward fully integrated ADR regression forecasting.</p>
+
+<hr />
+
+<h2 id="business-value">Business Value</h2>
+<ul>
+  <li><strong>Overbooking support:</strong> prioritize high-risk cancellation bookings for intervention</li>
+  <li><strong>Policy optimization:</strong> deposit policy &amp; channel strategy based on cancellation likelihood</li>
+  <li><strong>Revenue insights:</strong> seasonal ADR patterns help pricing and inventory planning</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cover Image Credit: me, my friend Harper's dog Charlie
+</code></pre></div></div>
+
+<!-- these are written in a combo of html and liquid -->
+
+<div class="left">
+<a class="m-1 btn btn-outline-primary btn-2 " href="https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand">
+  The Data
+</a>
+</div>
+
+<div class="right">
+<a class="m-1 btn btn-outline-primary btn-2 " href="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/hotel_booking_final_report_ipynb.ipynb">
+  The Analysis
+</a>
+</div>
+
+</div>
+  </main>
+  <footer class="mt-auto py-3 text-center">
+
+  <small class="text-muted mb-2">
+    <i class="fas fa-code"></i> with <i class="fas fa-heart"></i>
+    by <strong>Mengyue Huang</strong>
+  </small>
+
+  <div class="container-fluid justify-content-center"><a class="social mx-1"  href="mailto:myhuang1000@163.com"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#db4437'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fas fa-envelope fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.facebook.com/lunahuang0218"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#3b5998'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-facebook fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.github.com/mengyuehuang"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#333333'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-github fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.instagram.com/lunahuang66_"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#405de6'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-instagram fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.linkedin.com/in/mengyue-huang-luna"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#007bb5'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-linkedin-in fa-1x"></i>
+    </a><a class="social mx-1"  href="https://open.spotify.com/user/31dsb2x6rmdihpxr5trkcyrwxiyu"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#1db954'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-spotify fa-1x"></i>
+    </a><a class="social mx-1"  href="https://steamcommunity.com/id/lunahuang66"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#171a21'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-steam fa-1x"></i>
+    </a>
+
+</div><small id="attribution">
+    theme <a href="https://github.com/YoussefRaafatNasry/portfolYOU">portfolYOU</a>
+  </small>
+
+</footer>
+
+
+<!-- Custom page specific js files -->
+  
+
+
+
+  
+  <!-- GitHub Buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS CDN -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- wow.js CDN & Activation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+<script> new WOW().init(); </script>
+
+<!-- Initialize all tooltips -->
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+</body>
+
+</html>

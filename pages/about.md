@@ -8,9 +8,9 @@ weight: 3
 # **About Me**
 
 Hi I am **{{ site.author.name }}**,<br>
-God's in his heaven. All's right in the world.
+Lunas here, go explore nature and RECYCLE! 
 
-Hope you have a lovely day. ✿
+u BETTER not buy anything u don't actually need u consumerism slave
 
 <div class="row">
 {% include about/skills.html title="Programming Skills" source=site.data.programming-skills %}
