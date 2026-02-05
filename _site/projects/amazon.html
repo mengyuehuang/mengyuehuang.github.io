@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+<!--
+  portfolYOU Jekyll theme by Youssef Raafat
+  Free for personal and commercial use under the MIT license
+  https://github.com/YoussefRaafatNasry/portfolYOU
+-->
+
+<html lang="en" class="h-100">
+
+<head>
+
+  
+  
+  
+
+  
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ReviewLens – Trustworthy Product Discovery with Reviewer Analytics">
+  <meta property="og:description" content="Built a full-stack analytics platform over 13M+ Amazon reviews enabling product discovery, reviewer credibility analysis, and graph-based recommendation with...">
+  <meta property="og:image" content="/assets/pngs/fixing.jpg">
+
+  <title>ReviewLens – Trustworthy Product Discovery with Reviewer Analytics</title>
+  <meta name="description" content="Built a full-stack analytics platform over 13M+ Amazon reviews enabling product discovery, reviewer credibility analysis, and graph-based recommendation with...">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Theme style -->
+  <script src="/assets/js/theme.js"></script>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
+  <!-- Animate CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+<body class="h-100 d-flex flex-column">
+
+  <main class="flex-shrink-0 container mt-5">
+    <nav class="navbar navbar-expand-lg navbar-themed">
+
+  <a class="navbar-brand" href="/"><h5><b>Mengyue Huang</b></h5></a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-1x fa-bars text-themed"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto"><a class="nav-item nav-link active" href="/projects/">Projects</a>
+
+      <a class="nav-item nav-link " href="/blog/">Blog</a>
+
+      <a class="nav-item nav-link " href="/about/">About</a>
+
+      
+
+      <span id="theme-toggler" class="nav-item nav-link" role="button" onclick="toggleTheme()"></span>
+    </div>
+  </div>
+
+</nav>
+    <div class="col-lg-10 mx-auto mt-5 markdown-body">
+  <h2 id="overview">Overview</h2>
+
+<p>ReviewLens is a full-stack analytics and discovery platform designed to transform large-scale Amazon review data into trustworthy, interpretable product intelligence.</p>
+
+<p>Modern e-commerce platforms contain millions of products and reviews, yet users still struggle to answer key reliability questions:</p>
+
+<ul>
+  <li>Which products are genuinely high quality?</li>
+  <li>Which reviewers provide trustworthy opinions?</li>
+  <li>How can users discover strong but overlooked products?</li>
+</ul>
+
+<p>ReviewLens integrates product metadata, review history, and reviewer behavioral analytics into a unified exploration interface that supports both search-driven and discovery-driven workflows.</p>
+
+<p>The system supports interactive product analytics, reviewer credibility modeling, and graph-based recommendation over millions of records while maintaining real-time query performance.</p>
+
+<hr />
+
+<h2 id="dataset--data-engineering">Dataset &amp; Data Engineering</h2>
+
+<h3 id="dataset-scale">Dataset Scale</h3>
+
+<p>ReviewLens integrates two public Amazon 2018 datasets:</p>
+
+<h4 id="review-dataset">Review Dataset</h4>
+<ul>
+  <li>6,739,590 records</li>
+  <li>12 attributes:
+    <ul>
+      <li>ASIN</li>
+      <li>reviewerID</li>
+      <li>review text</li>
+      <li>star rating</li>
+      <li>timestamp</li>
+      <li>helpful vote count</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="product-metadata-dataset">Product Metadata Dataset</h4>
+<ul>
+  <li>~2 million records</li>
+  <li>19 attributes:
+    <ul>
+      <li>title</li>
+      <li>brand</li>
+      <li>category hierarchy</li>
+      <li>price</li>
+      <li>product features</li>
+      <li>also-bought / also-viewed relationships</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Together, the system processes <strong>13M+ structured and semi-structured rows</strong> across multiple relational entities.</p>
+
+<hr />
+
+<h3 id="data-preparation-pipeline">Data Preparation Pipeline</h3>
+
+<p>Raw Amazon data is distributed as nested JSON.GZ files requiring substantial transformation before relational ingestion.</p>
+
+<h4 id="1-incremental-data-loading">1. Incremental Data Loading</h4>
+<ul>
+  <li>Stream-loaded compressed JSON files in chunks to avoid memory bottlenecks</li>
+  <li>Retained only analytical attributes relevant to ranking, recommendation, and reviewer modeling</li>
+</ul>
+
+<h4 id="2-type-casting-and-validation">2. Type Casting and Validation</h4>
+<ul>
+  <li>Converted rating fields into numeric types with domain constraints (1–5 scale)</li>
+  <li>Normalized helpful vote counts into integer format</li>
+  <li>Converted Unix timestamps into standardized temporal fields for time-series aggregation</li>
+</ul>
+
+<h4 id="3-text-cleaning-and-normalization">3. Text Cleaning and Normalization</h4>
+<ul>
+  <li>Removed HTML tags and malformed encoding artifacts</li>
+  <li>Standardized whitespace and entity formatting</li>
+  <li>Cleaned product feature fields for consistent indexing</li>
+</ul>
+
+<h4 id="4-nested-structure-flattening">4. Nested Structure Flattening</h4>
+<p>Amazon metadata contains multiple nested arrays that were exploded into relational tables:</p>
+
+<ul>
+  <li>also_buy relationships → recommendation graph table</li>
+  <li>also_view relationships → browsing similarity graph</li>
+  <li>category hierarchy → dimension table</li>
+  <li>image URL lists → reduced to canonical representative image</li>
+</ul>
+
+<h4 id="5-storage-optimization">5. Storage Optimization</h4>
+<ul>
+  <li>Exported cleaned data into Parquet and compressed CSV formats</li>
+  <li>Enabled fast PostgreSQL ingestion and analytical scan efficiency</li>
+</ul>
+
+<hr />
+
+<h2 id="database--schema-design">Database &amp; Schema Design</h2>
+
+<p>The relational schema models the Amazon review ecosystem as a hybrid graph-relational system.</p>
+
+<h3 id="core-tables">Core Tables</h3>
+
+<h4 id="product">Product</h4>
+<p>Stores static metadata including:</p>
+<ul>
+  <li>ASIN</li>
+  <li>title</li>
+  <li>brand</li>
+  <li>description</li>
+  <li>feature keywords</li>
+  <li>price</li>
+  <li>representative image</li>
+</ul>
+
+<h4 id="reviewer">Reviewer</h4>
+<p>Stores reviewer identity and behavior tracking.</p>
+
+<h4 id="review">Review</h4>
+<p>Composite primary key:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(asin, reviewer_id, unix_time)
+</code></pre></div></div>
+
+<p>Stores:</p>
+<ul>
+  <li>rating</li>
+  <li>review text</li>
+  <li>helpful votes</li>
+  <li>timestamp</li>
+</ul>
+
+<p>This structure ensures each review instance is uniquely traceable.</p>
+
+<h4 id="category-dimension">Category Dimension</h4>
+<p>Allows multi-category mapping for products through a bridge table.</p>
+
+<h4 id="relationship-graph-tables">Relationship Graph Tables</h4>
+<ul>
+  <li>also_buy</li>
+  <li>also_view</li>
+</ul>
+
+<p>These tables support graph traversal queries used for recommendation ranking.</p>
+
+<hr />
+
+<h3 id="design-advantages">Design Advantages</h3>
+
+<p>The schema supports:</p>
+
+<ul>
+  <li>Multi-dimensional analytical aggregation</li>
+  <li>Graph-based product discovery</li>
+  <li>Reviewer behavior statistical modeling</li>
+  <li>Efficient join-based ranking pipelines</li>
+</ul>
+
+<hr />
+
+<h2 id="platform-features">Platform Features</h2>
+
+<h3 id="1-product-search--exploration">1. Product Search &amp; Exploration</h3>
+
+<p>The Home interface serves as the global discovery entry.</p>
+
+<p>Users can:</p>
+
+<ul>
+  <li>Search by product name or ASIN</li>
+  <li>Filter results by category or rating threshold</li>
+  <li>Sort products by review volume or average rating</li>
+</ul>
+
+<p>Each product result exposes key summary metrics:</p>
+
+<ul>
+  <li>Average rating</li>
+  <li>Total number of reviews</li>
+  <li>Brand and pricing metadata</li>
+</ul>
+
+<hr />
+
+<h3 id="2-product-detail-analytics">2. Product Detail Analytics</h3>
+
+<p>The product detail modal integrates multiple analytical modules:</p>
+
+<h4 id="rating-stability-visualization">Rating Stability Visualization</h4>
+<p>Displays monthly rating trends allowing users to detect:</p>
+
+<ul>
+  <li>Sudden quality shifts</li>
+  <li>Long-term reliability patterns</li>
+  <li>Seasonal rating behavior</li>
+</ul>
+
+<h4 id="helpful-review-ranking">Helpful Review Ranking</h4>
+<p>Ranks reviews based on helpful vote count, highlighting high-signal user feedback.</p>
+
+<h4 id="graph-based-recommendation">Graph-Based Recommendation</h4>
+<p>Surfaces “customers also bought” relationships that allow navigation through product co-purchase networks.</p>
+
+<hr />
+
+<h3 id="3-category-level-product-intelligence">3. Category-Level Product Intelligence</h3>
+
+<p>Category dashboards implement multiple ranking algorithms.</p>
+
+<h4 id="top-products-ranking">Top Products Ranking</h4>
+<p>Ranks products using a composite score combining:</p>
+
+<ul>
+  <li>Average rating</li>
+  <li>Review volume</li>
+  <li>Category ranking metrics</li>
+</ul>
+
+<h4 id="hidden-gem-discovery-surprise-me">Hidden-Gem Discovery (“Surprise Me”)</h4>
+<p>Identifies long-tail products defined as:</p>
+
+<ul>
+  <li>Above-category-average rating</li>
+  <li>Low review volume quartile</li>
+</ul>
+
+<p>This feature intentionally balances popularity bias and promotes product diversity.</p>
+
+<h4 id="always-positive-products">Always-Positive Products</h4>
+<p>Identifies products with:</p>
+<ul>
+  <li>No review rating below 4 stars</li>
+  <li>Minimum review count threshold</li>
+</ul>
+
+<p>This provides high-confidence reliability signals.</p>
+
+<hr />
+
+<h3 id="4-reviewer-behavior-analytics">4. Reviewer Behavior Analytics</h3>
+
+<p>ReviewLens introduces reviewer-centric trust modeling.</p>
+
+<h4 id="top-reviewer-leaderboards">Top Reviewer Leaderboards</h4>
+<p>Two ranking dimensions:</p>
+
+<ul>
+  <li>Total review count</li>
+  <li>Total helpful votes received</li>
+</ul>
+
+<p>These metrics identify influential and active reviewers.</p>
+
+<hr />
+
+<h4 id="reviewer-rating-style-classification">Reviewer Rating Style Classification</h4>
+
+<p>Reviewers are classified based on statistical deviation from global rating distributions:</p>
+
+<ul>
+  <li>Lenient reviewers → systematically high ratings</li>
+  <li>Neutral reviewers → distribution near global mean</li>
+  <li>Strict reviewers → systematically lower ratings</li>
+</ul>
+
+<p>This allows users to contextualize subjective reviewer bias.</p>
+
+<hr />
+
+<h4 id="reviewer-profile-exploration">Reviewer Profile Exploration</h4>
+<p>For each reviewer, the platform provides:</p>
+
+<ul>
+  <li>Most recent reviews</li>
+  <li>Highest-impact reviews (by helpful votes)</li>
+  <li>Aggregated metrics:
+    <ul>
+      <li>average rating</li>
+      <li>rating standard deviation</li>
+      <li>review volume</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="recommendation-engine">Recommendation Engine</h2>
+
+<p>The recommendation module leverages Amazon co-purchase graphs.</p>
+
+<h3 id="weighted-scoring-model">Weighted Scoring Model</h3>
+
+<p>Each candidate recommendation receives a composite score:</p>
+
+<ul>
+  <li>In-degree popularity within also_buy network</li>
+  <li>Product average rating</li>
+  <li>Total review volume</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Score = w₁(popularity) + w₂(avg_rating) + w₃(review_count)
+</code></pre></div></div>
+
+<p>This hybrid scoring balances reliability and popularity while reducing noise from sparse products.</p>
+
+<hr />
+
+<h2 id="query-optimization--performance-engineering">Query Optimization &amp; Performance Engineering</h2>
+
+<p>Handling multi-million row datasets required extensive SQL optimization.</p>
+
+<h3 id="optimization-techniques">Optimization Techniques</h3>
+
+<h4 id="indexing">Indexing</h4>
+<ul>
+  <li>ASIN indexing for product joins</li>
+  <li>Reviewer indexing for behavioral aggregation</li>
+</ul>
+
+<h4 id="materialized-aggregates">Materialized Aggregates</h4>
+<p>Precomputed:</p>
+<ul>
+  <li>product rating summaries</li>
+  <li>reviewer statistics</li>
+  <li>category ranking tables</li>
+</ul>
+
+<h4 id="query-rewriting">Query Rewriting</h4>
+<ul>
+  <li>Reduced join depth</li>
+  <li>Replaced nested subqueries with CTE pipelines</li>
+  <li>Eliminated redundant aggregations</li>
+</ul>
+
+<hr />
+
+<h3 id="performance-improvements">Performance Improvements</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Query Task</th>
+      <th>Original Runtime</th>
+      <th>Optimized Runtime</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Graph-based recommendation</td>
+      <td>&gt;10 min</td>
+      <td>412 ms</td>
+    </tr>
+    <tr>
+      <td>Category ranking by rating quantiles</td>
+      <td>4m 16s</td>
+      <td>1.26 s</td>
+    </tr>
+    <tr>
+      <td>Reviewer classification</td>
+      <td>1m 35s</td>
+      <td>1.58 s</td>
+    </tr>
+    <tr>
+      <td>Hidden gem discovery</td>
+      <td>39 s</td>
+      <td>528 ms</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These optimizations enabled interactive dashboard latency.</p>
+
+<hr />
+
+<h2 id="system-architecture">System Architecture</h2>
+
+<h3 id="backend">Backend</h3>
+
+<ul>
+  <li>PostgreSQL analytical database</li>
+  <li>REST API service layer</li>
+  <li>SQL-driven ranking and aggregation pipelines</li>
+  <li>Pagination-based lazy loading for scalability</li>
+</ul>
+
+<hr />
+
+<h3 id="frontend">Frontend</h3>
+
+<p>Built using:</p>
+
+<ul>
+  <li>React</li>
+  <li>Material UI component library</li>
+  <li>Lazy-loaded data tables</li>
+  <li>Chart-based rating trend visualization</li>
+  <li>Modal-based deep-dive analytics</li>
+</ul>
+
+<p>The UI supports cross-navigation between products, reviewers, and categories.</p>
+
+<hr />
+
+<h2 id="technical-challenges">Technical Challenges</h2>
+
+<h3 id="large-scale-relational-joins">Large-Scale Relational Joins</h3>
+<p>Multi-table joins across reviews, metadata, and graph relationships required careful indexing and query decomposition.</p>
+
+<hr />
+
+<h3 id="semi-structured-data-normalization">Semi-Structured Data Normalization</h3>
+<p>Amazon metadata contained nested arrays and inconsistent formatting requiring:</p>
+
+<ul>
+  <li>schema normalization</li>
+  <li>entity explosion</li>
+  <li>text cleaning pipelines</li>
+</ul>
+
+<hr />
+
+<h3 id="balancing-discovery-vs-popularity-bias">Balancing Discovery vs Popularity Bias</h3>
+<p>Designing ranking metrics required blending statistical reliability and exploration heuristics.</p>
+
+<hr />
+
+<h2 id="business-value">Business Value</h2>
+
+<p>ReviewLens enables users to make informed purchasing decisions by providing:</p>
+
+<ul>
+  <li>Transparent reviewer credibility modeling</li>
+  <li>Product quality stability analysis</li>
+  <li>Long-tail product discovery tools</li>
+  <li>Data-driven recommendation navigation</li>
+</ul>
+
+<hr />
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>ReviewLens demonstrates how large-scale review ecosystems can be transformed into trustworthy recommendation intelligence through:</p>
+
+<ul>
+  <li>scalable data engineering</li>
+  <li>relational and graph hybrid modeling</li>
+  <li>behavioral analytics</li>
+  <li>full-stack visualization dashboards</li>
+</ul>
+
+<p>The system delivers real-time exploration over millions of records while preserving analytical interpretability.</p>
+
+<hr />
+
+<h2 id="future-work">Future Work</h2>
+
+<ul>
+  <li>Sentiment-based NLP modeling for review interpretation</li>
+  <li>Personalized recommendation using collaborative filtering</li>
+  <li>Real-time review streaming pipeline</li>
+  <li>Cross-category user preference modeling</li>
+</ul>
+
+<hr />
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cover Image Credit: me
+</code></pre></div></div>
+
+<div class="left">
+<a class="m-1 btn btn-outline-primary btn-2 " href="https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/">
+  The Data
+</a>
+</div>
+
+</div>
+  </main>
+  <footer class="mt-auto py-3 text-center">
+
+  <small class="text-muted mb-2">
+    <i class="fas fa-code"></i> with <i class="fas fa-heart"></i>
+    by <strong>Mengyue Huang</strong>
+  </small>
+
+  <div class="container-fluid justify-content-center"><a class="social mx-1"  href="mailto:myhuang1000@163.com"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#db4437'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fas fa-envelope fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.facebook.com/lunahuang0218"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#3b5998'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-facebook fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.github.com/mengyuehuang"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#333333'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-github fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.instagram.com/lunahuang66_"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#405de6'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-instagram fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.linkedin.com/in/mengyue-huang-luna"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#007bb5'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-linkedin-in fa-1x"></i>
+    </a><a class="social mx-1"  href="https://open.spotify.com/user/31dsb2x6rmdihpxr5trkcyrwxiyu"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#1db954'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-spotify fa-1x"></i>
+    </a><a class="social mx-1"  href="https://steamcommunity.com/id/lunahuang66"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#171a21'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-steam fa-1x"></i>
+    </a>
+
+</div><small id="attribution">
+    theme <a href="https://github.com/YoussefRaafatNasry/portfolYOU">portfolYOU</a>
+  </small>
+
+</footer>
+
+
+<!-- Custom page specific js files -->
+  
+
+
+
+  
+  <!-- GitHub Buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS CDN -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- wow.js CDN & Activation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+<script> new WOW().init(); </script>
+
+<!-- Initialize all tooltips -->
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+</body>
+
+</html>

@@ -472,3 +472,15 @@ body { font-family: "Poppins", sans-serif; }
 body { background: url("/assets/pngs/bg.jpg") no-repeat center center fixed; background-size: cover; }
 
 body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.55); z-index: -1; }
+
+/* Blog / Projects cards glass effect */
+.card { background: rgba(20, 25, 35, 0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
+/* About timeline glass effect */
+.timeline-body.bg-themed { background: rgba(20, 25, 35, 0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
+/* Override dark theme card background */
+[data-theme="dark"] .card { background: rgba(20, 25, 35, 0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
+/* Force blog cards transparent even if bg-* classes exist */
+.post.card[class*="bg-"] { background: rgba(20, 25, 35, 0.1) !important; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
