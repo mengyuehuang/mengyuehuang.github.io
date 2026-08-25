@@ -1,7 +1,9 @@
 ---
 name: Avocados and Predictions on their Average Prices and Type
-tools: [Python]
-image: assets/pngs/avocado.jpg
+tools: [Python, pandas, scikit-learn, Linear Regression, Random Forest, MLPRegressor, K-Fold CV, Feature Engineering]
+categories: [machine]
+code_url: https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/avocado%20price-ML.ipynb
+image: /assets/pngs/avocado.jpg
 description: How does Year and Region affect avocado price and its Organicity?
 custom_js:
   - vega.min
@@ -36,18 +38,46 @@ Random Forest is a powerful algorithm for most of the times and it can help peop
 ## Methods:
 Before starting the modeling process with various algorithms, I first pay attention to some Feature Engineering steps. I convert the ‘organic’ and ‘conventional’ in the ‘type’ feature to 1 and 0, and transform the 54 different original regions of an avocado instance to 1 to 55 with pd.factorize() + 1. For the ‘date’ column about an instance, I keep its month number and ignore its specific date and year information with df['Date'].apply(pd.to_datetime, errors = 'coerce').dt.month since I think that with the ‘year’ column already in the original data-frame, having a too specific data about a observation’s date would be an unnecessity and even a burden for the model.
 For all of the following trials on these 2 modeling questions, I apply a pipeline model with Standardization and also a K-Fold Cross Validation to them. I transform the difference regional data with 54 levels into a range of numbers from 1 to 55, and I think that the magnitude of these numbers should not carry information to my model. So I scale all of my features to the same level. K-Fold Cross Validation enables me to build a better model with a relatively small dataset.
-To be more specific, for the first regression problem of predicting average prices, I use three distinct algorithms: Linear Regression, Random Forest Regressor, and MLPRegressor from Neural Network, and Random Forest Regressor stands out to be the best model with a highest R^2 number floating around 0.9 with a max_depth = 30. The scores for Linear model and Neural Network are not very promising as 0.4386 and 0.6354.
-For the second classification problem on organicity, the Kappa score for a model without ‘year’ nor ‘region’ is 0.9420. Including neither ‘year’ nor ‘region’ barely contribute to improving the model’s performance (0.9423 and 0.9468), while having both of them in the model gives a Kappa of 0.9462, also not much of an improvement.
+To be more specific, for the first regression problem of predicting average prices, I use three distinct algorithms: Linear Regression, Random Forest Regressor, and MLPRegressor from Neural Network. Random Forest Regressor stands out as the best model with a mean test R^2 of 0.898 at `max_depth = 30`; the Linear Regression and Neural Network models reach 0.439 and 0.635 respectively.
+For the second classification problem on organicity, the mean test Cohen's Kappa is 0.943 without `year` or `region`, 0.942 with `year`, 0.958 with `region`, and 0.955 with both. The results suggest that region adds a modest amount of classification signal while year contributes little.
 
 
 ## Results:
 1. None of the results seemed to be overfitting with a low Standard Deviation for both train and test group. The output R^2 seemed to imply that Random Forest work the best here while Linear Regression and Neural Network were not the desired choice of algorithm.
-2. Including neither one of the ‘year’ or ‘region’ features helped the model to perform better with a pretty steady Cohen Kappa Score around 0.94 all the time.
+2. Region produced a modest Kappa improvement, while year alone did not improve the baseline and adding year to region did not outperform region alone.
+
+<div class="case-result-grid" aria-label="Avocado model result comparisons">
+  <figure class="case-result-card">
+    <div class="case-result-heading">
+      <h3>Price prediction</h3>
+      <span>Mean test R² · 10-fold CV</span>
+    </div>
+    <div class="case-result-bars">
+      <div class="case-result-row"><span>Linear regression</span><i style="--score:43.9%"></i><strong>0.439</strong></div>
+      <div class="case-result-row"><span>Neural network</span><i style="--score:63.5%"></i><strong>0.635</strong></div>
+      <div class="case-result-row"><span>Random forest</span><i style="--score:89.8%"></i><strong>0.898</strong></div>
+    </div>
+    <figcaption>Random Forest at <code>max_depth = 30</code> produced the strongest held-out fit.</figcaption>
+  </figure>
+  <figure class="case-result-card">
+    <div class="case-result-heading">
+      <h3>Organicity classification</h3>
+      <span>Mean test Cohen's Kappa · 10-fold CV</span>
+    </div>
+    <div class="case-result-bars">
+      <div class="case-result-row"><span>Neither</span><i style="--score:94.3%"></i><strong>0.943</strong></div>
+      <div class="case-result-row"><span>Year</span><i style="--score:94.2%"></i><strong>0.942</strong></div>
+      <div class="case-result-row"><span>Region</span><i style="--score:95.8%"></i><strong>0.958</strong></div>
+      <div class="case-result-row"><span>Year + region</span><i style="--score:95.5%"></i><strong>0.955</strong></div>
+    </div>
+    <figcaption>Region supplied a small improvement; adding year did not improve the region-only model.</figcaption>
+  </figure>
+</div>
 
 
 ## Gain and Learn (Discussion):
 On task one, for Linear model and Neural Network the R^2 scores are 0.4386 and 0.6354. I guess the reason why Neural Network does not perform well here is that this task here is actually a pretty simple and straightforward one, and the dataset is quite small.
-On task two, much to my surprise, neither of the two variables of ‘year’ and ‘region’ seems to help. I guess this is because I do something wrong in the Feature Engineering step in the beginning of the project because I expected the ‘region’ feature would have a huge impact on an avocado’s organicity. Maybe there are better skills in transforming string region data to numbers.
+On task two, region contributes a modest improvement while year does not. The relatively small gap suggests that the original factorization of region may not fully capture its categorical structure; one-hot or target-aware encoding would be a useful next experiment.
 Another thing that I feet surprised is the sensitivity of Random Forest about overfitting (max_depth). I first set my max_depth = 5, and the R^2 is around 0.6. However, when I try different depth with a step of 5 from 15 to 35, the R^2 score increased effectively to almost 0.9 and decreased, which proves that tree-based algorithms are very susceptible to overfitting.
 
 
@@ -64,5 +94,5 @@ Cover Image Credit: https://www.jellycat.com/us/amuseable-avocado-soother-as4a/
 </div>
 
 <div class="right">
-{% include elements/button.html link="https://github.com/mengyuehuang/Python-Projects/blob/main/avocado%20price-ML.ipynb" text="The Analysis" %}
+{% include elements/button.html link="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/avocado%20price-ML.ipynb" text="The Analysis" %}
 </div>

@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-
-<!--
-  portfolYOU Jekyll theme by Youssef Raafat
-  Free for personal and commercial use under the MIT license
-  https://github.com/YoussefRaafatNasry/portfolYOU
--->
-
-<html lang="en" class="h-100">
-
+<!doctype html>
+<html lang="en">
 <head>
 
   
@@ -23,7 +15,12 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Avocados and Predictions on their Average Prices and Type">
   <meta property="og:description" content="How does Year and Region affect avocado price and its Organicity?">
-  <meta property="og:image" content="assets/pngs/avocado.jpg">
+  <meta property="og:url" content="https://mengyuehuang.github.io/projects/avacado-prices">
+  <meta property="og:image" content="https://mengyuehuang.github.io/assets/pngs/avocado.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Avocados and Predictions on their Average Prices and Type">
+  <meta name="twitter:description" content="How does Year and Region affect avocado price and its Organicity?">
+  <meta name="twitter:image" content="https://mengyuehuang.github.io/assets/pngs/avocado.jpg">
 
   <title>Avocados and Predictions on their Average Prices and Type</title>
   <meta name="description" content="How does Year and Region affect avocado price and its Organicity?">
@@ -43,37 +40,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
+  
+  <link rel="stylesheet" href="/assets/css/portfolio.css">
+  
 
 </head>
 
-<body class="h-100 d-flex flex-column">
-
-  <main class="flex-shrink-0 container mt-5">
-    <nav class="navbar navbar-expand-lg navbar-themed">
-
-  <a class="navbar-brand" href="/"><h5><b>Mengyue Huang</b></h5></a>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fas fa-1x fa-bars text-themed"></i>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto"><a class="nav-item nav-link active" href="/projects/">Projects</a>
-
-      <a class="nav-item nav-link " href="/blog/">Blog</a>
-
-      <a class="nav-item nav-link " href="/about/">About</a>
-
-      
-
-      <span id="theme-toggler" class="nav-item nav-link" role="button" onclick="toggleTheme()"></span>
-    </div>
-  </div>
-
-</nav>
-    <div class="col-lg-10 mx-auto mt-5 markdown-body">
-  <h1 id="avocados-and-predictions-on-their-average-prices-and-type">Avocados and Predictions on their Average Prices and Type</h1>
+<body class="portfolio-home project-detail-page">
+  <header class="site-header scrolled">
+    <a class="wordmark" href="/" aria-label="Mengyue Huang, home">MH<span>.</span></a>
+    <nav aria-label="Project navigation"><a href="/#work">Selected work</a><a href="/projects/">Archive</a><a href="/blog/">Blog</a></nav>
+    <a class="header-cta" href="mailto:mengyueluna@outlook.com">Open to roles <span>↗</span></a>
+  </header>
+  <main>
+    <section class="project-detail-hero">
+      <div><a class="case-back" href="/projects/">← Back to project archive</a><p class="eyebrow">Data project</p><h1>Avocados and Predictions on their Average Prices and Type</h1><p>How does Year and Region affect avocado price and its Organicity?</p></div>
+      <div class="project-detail-cover"><img src="/assets/pngs/avocado.jpg" alt="" fetchpriority="high" style="object-position: center"></div>
+    </section>
+    <section class="case-shell">
+      <aside class="case-sidebar"><p class="eyebrow">Toolkit</p><div class="skill-list"><span>Python</span><span>pandas</span><span>scikit-learn</span><span>Linear Regression</span><span>Random Forest</span><span>MLPRegressor</span><span>K-Fold CV</span><span>Feature Engineering</span></div><a href="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/avocado%20price-ML.ipynb">View analysis code ↗</a><br><br><a href="/projects/">All projects ↗</a></aside>
+      <article class="case-content"><h1 id="avocados-and-predictions-on-their-average-prices-and-type">Avocados and Predictions on their Average Prices and Type</h1>
 
 <h2 id="description">Description:</h2>
 <p>The project will focus on each avocado instances’ average price and organicity, one as a regression task, and one as a classification task. 
@@ -99,18 +85,46 @@ Random Forest is a powerful algorithm for most of the times and it can help peop
 <h2 id="methods">Methods:</h2>
 <p>Before starting the modeling process with various algorithms, I first pay attention to some Feature Engineering steps. I convert the ‘organic’ and ‘conventional’ in the ‘type’ feature to 1 and 0, and transform the 54 different original regions of an avocado instance to 1 to 55 with pd.factorize() + 1. For the ‘date’ column about an instance, I keep its month number and ignore its specific date and year information with df[‘Date’].apply(pd.to_datetime, errors = ‘coerce’).dt.month since I think that with the ‘year’ column already in the original data-frame, having a too specific data about a observation’s date would be an unnecessity and even a burden for the model.
 For all of the following trials on these 2 modeling questions, I apply a pipeline model with Standardization and also a K-Fold Cross Validation to them. I transform the difference regional data with 54 levels into a range of numbers from 1 to 55, and I think that the magnitude of these numbers should not carry information to my model. So I scale all of my features to the same level. K-Fold Cross Validation enables me to build a better model with a relatively small dataset.
-To be more specific, for the first regression problem of predicting average prices, I use three distinct algorithms: Linear Regression, Random Forest Regressor, and MLPRegressor from Neural Network, and Random Forest Regressor stands out to be the best model with a highest R^2 number floating around 0.9 with a max_depth = 30. The scores for Linear model and Neural Network are not very promising as 0.4386 and 0.6354.
-For the second classification problem on organicity, the Kappa score for a model without ‘year’ nor ‘region’ is 0.9420. Including neither ‘year’ nor ‘region’ barely contribute to improving the model’s performance (0.9423 and 0.9468), while having both of them in the model gives a Kappa of 0.9462, also not much of an improvement.</p>
+To be more specific, for the first regression problem of predicting average prices, I use three distinct algorithms: Linear Regression, Random Forest Regressor, and MLPRegressor from Neural Network. Random Forest Regressor stands out as the best model with a mean test R^2 of 0.898 at <code class="language-plaintext highlighter-rouge">max_depth = 30</code>; the Linear Regression and Neural Network models reach 0.439 and 0.635 respectively.
+For the second classification problem on organicity, the mean test Cohen’s Kappa is 0.943 without <code class="language-plaintext highlighter-rouge">year</code> or <code class="language-plaintext highlighter-rouge">region</code>, 0.942 with <code class="language-plaintext highlighter-rouge">year</code>, 0.958 with <code class="language-plaintext highlighter-rouge">region</code>, and 0.955 with both. The results suggest that region adds a modest amount of classification signal while year contributes little.</p>
 
 <h2 id="results">Results:</h2>
 <ol>
   <li>None of the results seemed to be overfitting with a low Standard Deviation for both train and test group. The output R^2 seemed to imply that Random Forest work the best here while Linear Regression and Neural Network were not the desired choice of algorithm.</li>
-  <li>Including neither one of the ‘year’ or ‘region’ features helped the model to perform better with a pretty steady Cohen Kappa Score around 0.94 all the time.</li>
+  <li>Region produced a modest Kappa improvement, while year alone did not improve the baseline and adding year to region did not outperform region alone.</li>
 </ol>
+
+<div class="case-result-grid" aria-label="Avocado model result comparisons">
+  <figure class="case-result-card">
+    <div class="case-result-heading">
+      <h3>Price prediction</h3>
+      <span>Mean test R² · 10-fold CV</span>
+    </div>
+    <div class="case-result-bars">
+      <div class="case-result-row"><span>Linear regression</span><i style="--score:43.9%"></i><strong>0.439</strong></div>
+      <div class="case-result-row"><span>Neural network</span><i style="--score:63.5%"></i><strong>0.635</strong></div>
+      <div class="case-result-row"><span>Random forest</span><i style="--score:89.8%"></i><strong>0.898</strong></div>
+    </div>
+    <figcaption>Random Forest at <code>max_depth = 30</code> produced the strongest held-out fit.</figcaption>
+  </figure>
+  <figure class="case-result-card">
+    <div class="case-result-heading">
+      <h3>Organicity classification</h3>
+      <span>Mean test Cohen's Kappa · 10-fold CV</span>
+    </div>
+    <div class="case-result-bars">
+      <div class="case-result-row"><span>Neither</span><i style="--score:94.3%"></i><strong>0.943</strong></div>
+      <div class="case-result-row"><span>Year</span><i style="--score:94.2%"></i><strong>0.942</strong></div>
+      <div class="case-result-row"><span>Region</span><i style="--score:95.8%"></i><strong>0.958</strong></div>
+      <div class="case-result-row"><span>Year + region</span><i style="--score:95.5%"></i><strong>0.955</strong></div>
+    </div>
+    <figcaption>Region supplied a small improvement; adding year did not improve the region-only model.</figcaption>
+  </figure>
+</div>
 
 <h2 id="gain-and-learn-discussion">Gain and Learn (Discussion):</h2>
 <p>On task one, for Linear model and Neural Network the R^2 scores are 0.4386 and 0.6354. I guess the reason why Neural Network does not perform well here is that this task here is actually a pretty simple and straightforward one, and the dataset is quite small.
-On task two, much to my surprise, neither of the two variables of ‘year’ and ‘region’ seems to help. I guess this is because I do something wrong in the Feature Engineering step in the beginning of the project because I expected the ‘region’ feature would have a huge impact on an avocado’s organicity. Maybe there are better skills in transforming string region data to numbers.
+On task two, region contributes a modest improvement while year does not. The relatively small gap suggests that the original factorization of region may not fully capture its categorical structure; one-hot or target-aware encoding would be a useful next experiment.
 Another thing that I feet surprised is the sensitivity of Random Forest about overfitting (max_depth). I first set my max_depth = 5, and the R^2 is around 0.6. However, when I try different depth with a step of 5 from 15 to 35, the R^2 score increased effectively to almost 0.9 and decreased, which proves that tree-based algorithms are very susceptible to overfitting.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cover Image Credit: https://www.jellycat.com/us/amuseable-avocado-soother-as4a/
@@ -125,100 +139,16 @@ Another thing that I feet surprised is the sensitivity of Random Forest about ov
 </div>
 
 <div class="right">
-<a class="m-1 btn btn-outline-primary btn-2 " href="https://github.com/mengyuehuang/Python-Projects/blob/main/avocado%20price-ML.ipynb">
+<a class="m-1 btn btn-outline-primary btn-2 " href="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/avocado%20price-ML.ipynb">
   The Analysis
 </a>
 </div>
-
-</div>
+</article>
+    </section>
   </main>
-  <footer class="mt-auto py-3 text-center">
-
-  <small class="text-muted mb-2">
-    <i class="fas fa-code"></i> with <i class="fas fa-heart"></i>
-    by <strong>Mengyue Huang</strong>
-  </small>
-
-  <div class="container-fluid justify-content-center"><a class="social mx-1"  href="mailto:myhuang1000@163.com"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#db4437'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fas fa-envelope fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.facebook.com/lunahuang0218"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#3b5998'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-facebook fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.github.com/mengyuehuang"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#333333'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-github fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.instagram.com/lunahuang66_"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#405de6'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-instagram fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.linkedin.com/in/mengyue-huang-luna"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#007bb5'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-linkedin-in fa-1x"></i>
-    </a><a class="social mx-1"  href="https://open.spotify.com/user/31dsb2x6rmdihpxr5trkcyrwxiyu"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#1db954'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-spotify fa-1x"></i>
-    </a><a class="social mx-1"  href="https://steamcommunity.com/id/lunahuang66"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#171a21'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-steam fa-1x"></i>
-    </a>
-
-</div><small id="attribution">
-    theme <a href="https://github.com/YoussefRaafatNasry/portfolYOU">portfolYOU</a>
-  </small>
-
-</footer>
-
-
-<!-- Custom page specific js files -->
-  
-    <script src='/assets/js/vega.min.js' type="text/javascript"></script>
-  
-    <script src='/assets/js/vega-lite.min.js' type="text/javascript"></script>
-  
-    <script src='/assets/js/vega-embed.min.js' type="text/javascript"></script>
-  
-    <script src='/assets/js/justcharts.js' type="text/javascript"></script>
-  
-
-
-
-  
-  <!-- GitHub Buttons -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-
-<!-- jQuery CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Popper.js CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-
-<!-- Bootstrap JS CDN -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<!-- wow.js CDN & Activation -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-<script> new WOW().init(); </script>
-
-<!-- Initialize all tooltips -->
-<script>
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
+  <section class="case-next"><p class="eyebrow">Continue exploring</p><h2>More projects in the archive.</h2><a href="/projects/">Browse all work <span>↗</span></a></section>
+  <footer class="portfolio-footer"><p>© <span data-year></span> Mengyue Huang</p><div><a href="/blog/">Blog ↗</a><a href="https://github.com/mengyuehuang">GitHub ↗</a></div><a href="/">Home ↑</a></footer>
+  <script src="/assets/js/portfolio.js"></script>
+  <script src="/assets/js/vega.min.js"></script><script src="/assets/js/vega-lite.min.js"></script><script src="/assets/js/vega-embed.min.js"></script><script src="/assets/js/justcharts.js"></script>
 </body>
-
 </html>

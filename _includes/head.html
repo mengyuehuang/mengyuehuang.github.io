@@ -2,7 +2,7 @@
 
   {% assign title = page.title | default: site.title | escape %}
   {% assign description = page.description | default: site.description | strip_html | strip_newlines | truncate: 160 %}
-  {% assign image = page.image | default: site.author.image %}
+  {% assign image = page.image | default: '/assets/pngs/og.png' %}
 
   {% if page.name and page.collection == 'projects' %}
     {% assign title = page.name | escape %}
@@ -15,7 +15,12 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
-  <meta property="og:image" content="{{ image }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ image | absolute_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ description }}">
+  <meta name="twitter:image" content="{{ image | absolute_url }}">
 
   <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">
@@ -35,6 +40,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
 
   <!-- Custom CSS -->
+  {% if page.layout == 'home' or page.layout == 'case-study' or page.layout == 'project-detail' or page.layout == 'portfolio-archive' or page.layout == 'journal' or page.layout == 'journal-post' %}
+  <link rel="stylesheet" href="{{ '/assets/css/portfolio.css' | relative_url }}">
+  {% else %}
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  {% endif %}
 
 </head>

@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-
-<!--
-  portfolYOU Jekyll theme by Youssef Raafat
-  Free for personal and commercial use under the MIT license
-  https://github.com/YoussefRaafatNasry/portfolYOU
--->
-
-<html lang="en" class="h-100">
-
+<!doctype html>
+<html lang="en">
 <head>
 
   
@@ -23,7 +15,12 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Students’ Alcohol Consumption Analysis">
   <meta property="og:description" content="This is a "showcase" of my Students’ Alcohol Consumption analysis!">
-  <meta property="og:image" content="assets/pngs/gummy.jpg">
+  <meta property="og:url" content="https://mengyuehuang.github.io/projects/students-acohol-consumption">
+  <meta property="og:image" content="https://mengyuehuang.github.io/assets/pngs/gummy.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Students’ Alcohol Consumption Analysis">
+  <meta name="twitter:description" content="This is a "showcase" of my Students’ Alcohol Consumption analysis!">
+  <meta name="twitter:image" content="https://mengyuehuang.github.io/assets/pngs/gummy.jpg">
 
   <title>Students’ Alcohol Consumption Analysis</title>
   <meta name="description" content="This is a "showcase" of my Students’ Alcohol Consumption analysis!">
@@ -43,43 +40,32 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
+  
+  <link rel="stylesheet" href="/assets/css/portfolio.css">
+  
 
 </head>
 
-<body class="h-100 d-flex flex-column">
-
-  <main class="flex-shrink-0 container mt-5">
-    <nav class="navbar navbar-expand-lg navbar-themed">
-
-  <a class="navbar-brand" href="/"><h5><b>Mengyue Huang</b></h5></a>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fas fa-1x fa-bars text-themed"></i>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto"><a class="nav-item nav-link active" href="/projects/">Projects</a>
-
-      <a class="nav-item nav-link " href="/blog/">Blog</a>
-
-      <a class="nav-item nav-link " href="/about/">About</a>
-
-      
-
-      <span id="theme-toggler" class="nav-item nav-link" role="button" onclick="toggleTheme()"></span>
-    </div>
-  </div>
-
-</nav>
-    <div class="col-lg-10 mx-auto mt-5 markdown-body">
-  <h1 id="family-factors-and-grades-on-students-alcohol-consumption-and-health-status">Family Factors and Grades on Students’ Alcohol Consumption and Health Status</h1>
+<body class="portfolio-home project-detail-page">
+  <header class="site-header scrolled">
+    <a class="wordmark" href="/" aria-label="Mengyue Huang, home">MH<span>.</span></a>
+    <nav aria-label="Project navigation"><a href="/#work">Selected work</a><a href="/projects/">Archive</a><a href="/blog/">Blog</a></nav>
+    <a class="header-cta" href="mailto:mengyueluna@outlook.com">Open to roles <span>↗</span></a>
+  </header>
+  <main>
+    <section class="project-detail-hero">
+      <div><a class="case-back" href="/projects/">← Back to project archive</a><p class="eyebrow">Data project</p><h1>Students’ Alcohol Consumption Analysis</h1><p>This is a "showcase" of my Students’ Alcohol Consumption analysis!</p></div>
+      <div class="project-detail-cover"><img src="/assets/pngs/gummy.jpg" alt="" fetchpriority="high" style="object-position: center"></div>
+    </section>
+    <section class="case-shell">
+      <aside class="case-sidebar"><p class="eyebrow">Toolkit</p><div class="skill-list"><span>Python</span><span>pandas</span><span>Altair</span><span>Vega-Lite</span><span>Interactive Dashboards</span><span>EDA</span><span>Statistical Analysis</span></div><a href="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/students%E2%80%99-alcohol-consumption-analysis.ipynb">View analysis code ↗</a><br><br><a href="/projects/">All projects ↗</a></aside>
+      <article class="case-content"><h1 id="family-factors-and-grades-on-students-alcohol-consumption-and-health-status">Family Factors and Grades on Students’ Alcohol Consumption and Health Status</h1>
 
 <h2 id="intro">Intro:</h2>
 <p>For our project here with the dataset of Student Alcohol Consumption with their Math (main data-frame) and Portuguese (contextual data-frame) grades shown, our group want to dive into the data to see if there are some relationships or links between some features in the columns and students’ Health Status (1-very bad to 5-very good)) (‘health’) and Weekend Alcohol Consumption (1-very low to 5-very high) (‘Walc’). In the figures below, chosen features include students’ Father’s Job (‘Fjob’), Mother’s Job (‘Mjob’), Portuguese Final Grade (0-20) (‘G3’ from por_df) and Math Final Grade (0-20) (‘G3’ from math_df). The main purpose of this project to show potential trend between these factors and try to derive real-life inspirations for future students’ health status.</p>
 
 <h2 id="main-analysis">Main Analysis:</h2>
-<vegachart schema-url="/assets/json/main_dashboard.json" style="width: 100%"></vegachart>
+<vegachart class="student-main-chart" schema-url="/assets/json/main_dashboard.json" style="width: 100%"></vegachart>
 
 <h3 id="discussion">Discussion:</h3>
 <p>For the heatmap, the darkest part is in the middle - families with father’s job as ‘other’ and mother’s job as ‘other’, which makes sense since the number of jobs that do not fall in the list of ‘at_home’, ‘health’, ‘other’, ‘services’, and ‘teacher’ surely outnumbers the amount of jobs that are in the list, making the fathers’ and mother’s job combination of ‘other’ and ‘other’ the one with the most counts. Other common job combinations include ‘other’ and ‘at_home’, ‘other’ and ‘services’, and ‘services’ and ‘services’.</p>
@@ -129,96 +115,12 @@
   The Analysis
 </a>
 </div>
-
-</div>
+</article>
+    </section>
   </main>
-  <footer class="mt-auto py-3 text-center">
-
-  <small class="text-muted mb-2">
-    <i class="fas fa-code"></i> with <i class="fas fa-heart"></i>
-    by <strong>Mengyue Huang</strong>
-  </small>
-
-  <div class="container-fluid justify-content-center"><a class="social mx-1"  href="mailto:myhuang1000@163.com"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#db4437'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fas fa-envelope fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.facebook.com/lunahuang0218"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#3b5998'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-facebook fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.github.com/mengyuehuang"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#333333'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-github fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.instagram.com/lunahuang66_"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#405de6'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-instagram fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.linkedin.com/in/mengyue-huang-luna"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#007bb5'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-linkedin-in fa-1x"></i>
-    </a><a class="social mx-1"  href="https://open.spotify.com/user/31dsb2x6rmdihpxr5trkcyrwxiyu"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#1db954'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-spotify fa-1x"></i>
-    </a><a class="social mx-1"  href="https://steamcommunity.com/id/lunahuang66"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#171a21'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-steam fa-1x"></i>
-    </a>
-
-</div><small id="attribution">
-    theme <a href="https://github.com/YoussefRaafatNasry/portfolYOU">portfolYOU</a>
-  </small>
-
-</footer>
-
-
-<!-- Custom page specific js files -->
-  
-    <script src='/assets/js/vega.min.js' type="text/javascript"></script>
-  
-    <script src='/assets/js/vega-lite.min.js' type="text/javascript"></script>
-  
-    <script src='/assets/js/vega-embed.min.js' type="text/javascript"></script>
-  
-    <script src='/assets/js/justcharts.js' type="text/javascript"></script>
-  
-
-
-
-  
-  <!-- GitHub Buttons -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-
-<!-- jQuery CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Popper.js CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-
-<!-- Bootstrap JS CDN -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<!-- wow.js CDN & Activation -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-<script> new WOW().init(); </script>
-
-<!-- Initialize all tooltips -->
-<script>
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
+  <section class="case-next"><p class="eyebrow">Continue exploring</p><h2>More projects in the archive.</h2><a href="/projects/">Browse all work <span>↗</span></a></section>
+  <footer class="portfolio-footer"><p>© <span data-year></span> Mengyue Huang</p><div><a href="/blog/">Blog ↗</a><a href="https://github.com/mengyuehuang">GitHub ↗</a></div><a href="/">Home ↑</a></footer>
+  <script src="/assets/js/portfolio.js"></script>
+  <script src="/assets/js/vega.min.js"></script><script src="/assets/js/vega-lite.min.js"></script><script src="/assets/js/vega-embed.min.js"></script><script src="/assets/js/justcharts.js"></script>
 </body>
-
 </html>

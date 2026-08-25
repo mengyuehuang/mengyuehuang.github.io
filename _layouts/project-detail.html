@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+{% include head.html %}
+<body class="portfolio-home project-detail-page">
+  <header class="site-header scrolled">
+    <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="Mengyue Huang, home">MH<span>.</span></a>
+    <nav aria-label="Project navigation"><a href="{{ '/' | relative_url }}#work">Selected work</a><a href="{{ '/projects/' | relative_url }}">Archive</a><a href="{{ '/blog/' | relative_url }}">Blog</a></nav>
+    <a class="header-cta" href="mailto:{{ site.author.email }}">Open to roles <span>↗</span></a>
+  </header>
+  <main>
+    <section class="project-detail-hero">
+      <div><a class="case-back" href="{{ '/projects/' | relative_url }}">← Back to project archive</a><p class="eyebrow">Data project</p><h1>{{ page.name }}</h1><p>{{ page.description }}</p></div>
+      {% if page.image %}<div class="project-detail-cover"><img src="{{ page.image | relative_url }}" alt="" fetchpriority="high" style="object-position: {{ page.image_position | default: 'center' }}"></div>{% endif %}
+    </section>
+    <section class="case-shell">
+      <aside class="case-sidebar"><p class="eyebrow">Toolkit</p><div class="skill-list">{% for tool in page.tools %}<span>{{ tool }}</span>{% endfor %}</div>{% if page.code_url %}<a href="{{ page.code_url }}">View analysis code ↗</a><br><br>{% endif %}<a href="{{ '/projects/' | relative_url }}">All projects ↗</a></aside>
+      <article class="case-content">{{ content }}</article>
+    </section>
+  </main>
+  <section class="case-next"><p class="eyebrow">Continue exploring</p><h2>More projects in the archive.</h2><a href="{{ '/projects/' | relative_url }}">Browse all work <span>↗</span></a></section>
+  <footer class="portfolio-footer"><p>© <span data-year></span> Mengyue Huang</p><div><a href="{{ '/blog/' | relative_url }}">Blog ↗</a><a href="https://github.com/{{ site.author.github }}">GitHub ↗</a></div><a href="{{ '/' | relative_url }}">Home ↑</a></footer>
+  <script src="{{ '/assets/js/portfolio.js' | relative_url }}"></script>
+  {% if page.custom_js %}{% for js_file in page.custom_js %}<script src="{{ '/assets/js/' | append: js_file | append: '.js' | relative_url }}"></script>{% endfor %}{% endif %}
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+{% include head.html %}
+<body class="portfolio-home journal-page">
+  <header class="site-header scrolled">
+    <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="Mengyue Huang, home">MH<span>.</span></a>
+    <nav aria-label="Journal navigation"><a href="{{ '/' | relative_url }}#work">Work</a><a href="{{ '/projects/' | relative_url }}">Projects</a><a href="{{ '/' | relative_url }}#about">About</a></nav>
+    <a class="header-cta" href="mailto:{{ site.author.email }}">Open to roles <span>↗</span></a>
+  </header>
+  <main>
+    <section class="journal-hero">
+      <a class="case-back" href="{{ '/' | relative_url }}">← Back home</a>
+      <p class="eyebrow">Personal journal</p>
+      <h1>Outside the<br><em>dataset.</em></h1>
+      <p>Music on repeat, games worth getting lost in, and occasional notes from the rest of life.</p>
+    </section>
+    <section class="journal-index">
+      {% for post in site.posts %}
+      <a class="journal-row reveal" href="{{ post.url | relative_url }}">
+        <p>{{ forloop.index }}</p>
+        <div><p class="eyebrow">{{ post.tags | slice: 0, 3 | join: ' · ' }}</p><h2>{{ post.title }}</h2><p>{{ post.description }}</p></div>
+        <span>{{ post.date | date: '%B %Y' }} ↗</span>
+      </a>
+      {% endfor %}
+    </section>
+  </main>
+  <footer class="portfolio-footer"><p>© <span data-year></span> Mengyue Huang</p><div><a href="{{ '/projects/' | relative_url }}">Projects ↗</a><a href="https://github.com/{{ site.author.github }}">GitHub ↗</a></div><a href="{{ '/' | relative_url }}">Home ↑</a></footer>
+  <script src="{{ '/assets/js/portfolio.js' | relative_url }}"></script>
+</body>
+</html>

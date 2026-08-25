@@ -1,6 +1,9 @@
 ---
 name: Hotel Bookings Pattern Discovery
-tools: [Python, Machine Learning, Big Data Analytics, Classification, EDA, Business Insights]
+layout: case-study
+tools: [Python, pandas, scikit-learn, Random Forest, XGBoost, Logistic Regression, KNN, ROC-AUC, Feature Importance, ADR Analysis]
+categories: [machine]
+code_url: https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/hotel_booking_final_report_ipynb.ipynb
 image: /assets/pngs/charlie.jpg
 
 description: "Predicted hotel booking cancellations (Random Forest: Acc=0.867, AUC=0.925) and analyzed ADR seasonality patterns to support overbooking and revenue decisions."

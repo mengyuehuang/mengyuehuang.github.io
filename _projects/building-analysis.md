@@ -1,8 +1,10 @@
 ---
 name: Building Analysis
-tools: [Python, Altair, vega-lite, jekyll, HTML]
-image: assets/pngs/cuteotters.jpg
-description: This is a "showcase" of building analysis!
+tools: [Python, Altair, Vega-Lite, Jekyll, Interactive Visualization, JSON]
+categories: [visual]
+code_url: https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/building-analysis.ipynb
+image: /assets/pngs/cuteotters.jpg
+description: An interactive exploration of Illinois public buildings through their scale, age, status, and legislative geography.
 custom_js:
   - vega.min
   - vega-lite.min
@@ -12,6 +14,12 @@ custom_js:
 
 
 # Building Analysis
+
+## Overview
+
+This project turns the Illinois Building Inventory into an interactive view of the state's public infrastructure. Instead of presenting thousands of building records as a static table, the analysis connects physical characteristics—including square footage, construction year, floor count, and operating status—with county and state senate representation.
+
+The two visualizations answer complementary questions. The first examines where building capacity is concentrated by comparing total square footage across senators and building-status groups. The second explores whether construction year and number of floors reveal broader patterns in the age and vertical scale of the building stock. Interactive filters and tooltips let readers move from an overall pattern to the individual counties and buildings behind it.
 
 ## Plot1:
 
@@ -47,7 +55,7 @@ Cover Image Credit: https://wall.alphacoders.com/big.php?i=277023
 <!-- these are written in a combo of html and liquid --> 
 
 <div class="left">
-{% include elements/button.html link="https://raw.githubusercontent.com/UIUC-iSchool-DataViz/is445_bcubcg_fall2022/main/data/building_inventory.csv" text="The Data" %}
+{% include elements/button.html link="/assets/data/building_inventory.csv" text="The Data" %}
 </div>
 
 <div class="right">

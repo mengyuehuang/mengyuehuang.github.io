@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-
-<!--
-  portfolYOU Jekyll theme by Youssef Raafat
-  Free for personal and commercial use under the MIT license
-  https://github.com/YoussefRaafatNasry/portfolYOU
--->
-
-<html lang="en" class="h-100">
-
+<!doctype html>
+<html lang="en">
 <head>
 
   
@@ -23,7 +15,12 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Hotel Bookings Pattern Discovery">
   <meta property="og:description" content="Predicted hotel booking cancellations (Random Forest: Acc=0.867, AUC=0.925) and analyzed ADR seasonality patterns to support overbooking and revenue decisions.">
-  <meta property="og:image" content="/assets/pngs/charlie.jpg">
+  <meta property="og:url" content="https://mengyuehuang.github.io/projects/1-hotel-bookings">
+  <meta property="og:image" content="https://mengyuehuang.github.io/assets/pngs/charlie.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hotel Bookings Pattern Discovery">
+  <meta name="twitter:description" content="Predicted hotel booking cancellations (Random Forest: Acc=0.867, AUC=0.925) and analyzed ADR seasonality patterns to support overbooking and revenue decisions.">
+  <meta name="twitter:image" content="https://mengyuehuang.github.io/assets/pngs/charlie.jpg">
 
   <title>Hotel Bookings Pattern Discovery</title>
   <meta name="description" content="Predicted hotel booking cancellations (Random Forest: Acc=0.867, AUC=0.925) and analyzed ADR seasonality patterns to support overbooking and revenue decisions.">
@@ -43,37 +40,49 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
+  
+  <link rel="stylesheet" href="/assets/css/portfolio.css">
+  
 
 </head>
 
-<body class="h-100 d-flex flex-column">
+<body class="portfolio-home case-study-page">
+  <header class="site-header scrolled">
+    <a class="wordmark" href="/" aria-label="Mengyue Huang, home">MH<span>.</span></a>
+    <nav aria-label="Case study navigation">
+      <a href="/#work">Selected work</a>
+      <a href="/projects/">Archive</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+    <a class="header-cta" href="mailto:mengyueluna@outlook.com">Open to roles <span>↗</span></a>
+  </header>
 
-  <main class="flex-shrink-0 container mt-5">
-    <nav class="navbar navbar-expand-lg navbar-themed">
+  <main>
+    <section class="case-hero">
+      <a class="case-back" href="/#work">← Back to selected work</a>
+      <p class="eyebrow">Machine learning case study · Hotel operations</p>
+      <h1>Hotel Bookings Pattern Discovery</h1>
+      <p class="case-deck">Predicting booking cancellations and uncovering pricing patterns across 119K+ hotel reservations.</p>
+      <div class="case-metrics" aria-label="Project highlights">
+        <div><strong>119K+</strong><span>Bookings analyzed</span></div>
+        <div><strong>0.867</strong><span>Best test accuracy</span></div>
+        <div><strong>0.925</strong><span>Best ROC-AUC</span></div>
+        <div><strong>30+</strong><span>Input features</span></div>
+      </div>
+    </section>
 
-  <a class="navbar-brand" href="/"><h5><b>Mengyue Huang</b></h5></a>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fas fa-1x fa-bars text-themed"></i>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto"><a class="nav-item nav-link active" href="/projects/">Projects</a>
-
-      <a class="nav-item nav-link " href="/blog/">Blog</a>
-
-      <a class="nav-item nav-link " href="/about/">About</a>
-
-      
-
-      <span id="theme-toggler" class="nav-item nav-link" role="button" onclick="toggleTheme()"></span>
-    </div>
-  </div>
-
-</nav>
-    <div class="col-lg-10 mx-auto mt-5 markdown-body">
-  <h2 id="overview">Overview</h2>
+    <section class="case-shell">
+      <aside class="case-sidebar">
+        <p class="eyebrow">At a glance</p>
+        <dl>
+          <dt>Role</dt><dd>Data exploration, feature engineering, modeling</dd>
+          <dt>Models</dt><dd>Logistic Regression, KNN, XGBoost, Random Forest</dd>
+          <dt>Focus</dt><dd>Cancellation risk, ADR patterns, business insights</dd>
+        </dl>
+        <a href="https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand">View dataset ↗</a>
+      </aside>
+      <article class="case-content">
+        <h2 id="overview">Overview</h2>
 <p>This project analyzes hotel booking records to uncover drivers of cancellations and pricing (ADR) patterns, and builds predictive models to support operational decisions (e.g., overbooking and customer targeting).</p>
 
 <hr />
@@ -277,87 +286,21 @@ Deep learning approaches or sequential customer-behavior models may capture rich
 </a>
 </div>
 
-</div>
+      </article>
+    </section>
   </main>
-  <footer class="mt-auto py-3 text-center">
 
-  <small class="text-muted mb-2">
-    <i class="fas fa-code"></i> with <i class="fas fa-heart"></i>
-    by <strong>Mengyue Huang</strong>
-  </small>
+  <section class="case-next">
+    <p class="eyebrow">Continue exploring</p>
+    <h2>More work, fewer walls of text.</h2>
+    <a href="/projects/">Browse the project archive <span>↗</span></a>
+  </section>
 
-  <div class="container-fluid justify-content-center"><a class="social mx-1"  href="mailto:myhuang1000@163.com"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#db4437'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fas fa-envelope fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.facebook.com/lunahuang0218"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#3b5998'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-facebook fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.github.com/mengyuehuang"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#333333'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-github fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.instagram.com/lunahuang66_"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#405de6'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-instagram fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.linkedin.com/in/mengyue-huang-luna"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#007bb5'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-linkedin-in fa-1x"></i>
-    </a><a class="social mx-1"  href="https://open.spotify.com/user/31dsb2x6rmdihpxr5trkcyrwxiyu"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#1db954'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-spotify fa-1x"></i>
-    </a><a class="social mx-1"  href="https://steamcommunity.com/id/lunahuang66"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#171a21'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-steam fa-1x"></i>
-    </a>
-
-</div><small id="attribution">
-    theme <a href="https://github.com/YoussefRaafatNasry/portfolYOU">portfolYOU</a>
-  </small>
-
-</footer>
-
-
-<!-- Custom page specific js files -->
-  
-
-
-
-  
-  <!-- GitHub Buttons -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-
-<!-- jQuery CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Popper.js CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-
-<!-- Bootstrap JS CDN -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<!-- wow.js CDN & Activation -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-<script> new WOW().init(); </script>
-
-<!-- Initialize all tooltips -->
-<script>
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
+  <footer class="portfolio-footer">
+    <p>© <span data-year></span> Mengyue Huang</p>
+    <div><a href="https://www.linkedin.com/in/mengyue-huang-luna">LinkedIn ↗</a><a href="https://github.com/mengyuehuang">GitHub ↗</a></div>
+    <a href="/">Home ↑</a>
+  </footer>
+  <script src="/assets/js/portfolio.js"></script>
 </body>
-
 </html>

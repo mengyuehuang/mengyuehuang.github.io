@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+{% include head.html %}
+<body class="portfolio-home archive-page">
+  <header class="site-header scrolled">
+    <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="Mengyue Huang, home">MH<span>.</span></a>
+    <nav aria-label="Archive navigation">
+      <a href="{{ '/' | relative_url }}#work">Selected work</a>
+      <a href="{{ '/' | relative_url }}#experience">Experience</a>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a href="{{ '/' | relative_url }}#about">About</a>
+    </nav>
+    <a class="header-cta" href="mailto:{{ site.author.email }}">Open to roles <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="archive-hero">
+      <a class="case-back" href="{{ '/' | relative_url }}#work">← Back home</a>
+      <p class="eyebrow">Project archive · 2019—2026</p>
+      <h1>Experiments, models<br>&amp; <em>data stories.</em></h1>
+      <p>This archive includes recent case studies alongside earlier coursework. The featured work on the homepage is the best place to start; this is the full trail.</p>
+    </section>
+
+    <section class="archive-shell">
+      <div class="archive-toolbar">
+        <p><span>{{ site.projects | size }}</span> projects</p>
+        <div class="project-filters" role="group" aria-label="Filter project archive">
+          <button class="active" type="button" data-filter="all">All</button>
+          <button type="button" data-filter="machine">Machine Learning</button>
+          <button type="button" data-filter="visual">Visualization</button>
+          <button type="button" data-filter="analytics">Analytics</button>
+        </div>
+      </div>
+
+      <div class="archive-grid">
+        {% assign sorted_projects = site.projects | reverse %}
+        {% for project in sorted_projects %}
+          {% assign categories = project.categories | join: ' ' | default: 'analytics' %}
+          <a class="archive-card reveal" data-category="{{ categories }}" href="{{ project.url | relative_url }}">
+            <div class="archive-card-image">
+              {% if project.image %}<img src="{{ project.image | relative_url }}" alt="" loading="lazy" style="object-position: {{ project.image_position | default: 'center' }}">{% endif %}
+              <span>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            </div>
+            <div class="archive-card-body">
+              <p class="eyebrow">{% if project.tools %}{{ project.tools | slice: 0, 2 | join: ' · ' }}{% else %}Data project{% endif %}</p>
+              <h2>{{ project.name }}</h2>
+              <p>{{ project.description | default: 'An exploratory data project.' }}</p>
+              <span>Open project ↗</span>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <section class="case-next">
+    <p class="eyebrow">Looking for the strongest work?</p>
+    <h2>Start with the highlights.</h2>
+    <a href="{{ '/' | relative_url }}#work">Return to selected work <span>↗</span></a>
+  </section>
+  <footer class="portfolio-footer">
+    <p>© <span data-year></span> Mengyue Huang</p>
+    <div><a href="https://www.linkedin.com/in/{{ site.author.linkedin }}">LinkedIn ↗</a><a href="https://github.com/{{ site.author.github }}">GitHub ↗</a></div>
+    <a href="{{ '/' | relative_url }}">Home ↑</a>
+  </footer>
+  <script src="{{ '/assets/js/portfolio.js' | relative_url }}"></script>
+</body>
+</html>

@@ -1,7 +1,9 @@
 ---
 name: Body Dimensions
-tools: [Python]
-image: assets/pngs/dim.jpg
+tools: [Python, pandas, Linear Regression, Logistic Regression, Hypothesis Testing, Backward Elimination, Data Visualization]
+categories: [analytics]
+code_url: https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/Body%20Dimensions.ipynb
+image: /assets/pngs/dim.jpg
 description: Explore relationship between Body Features, Age, and Gender for physically active people in California.
 custom_js:
   - vega.min
@@ -24,37 +26,58 @@ See the “Variables” part for the detail of the data.
 ## Variables
 Please note: We modified the variable names of the original dataset, by changing all the dots (".") to underscores ("_"). For example, bia.di is replaced by bia_di. We made the change because some Python functions do not recognize the variable name with a dot in it.
 
-bia_di: A numerical vector, respondent's biacromial diameter in centimeters.
-bii_di: A numerical vector, respondent's biiliac diameter (pelvic breadth) in centimeters.
-bit_di: A numerical vector, respondent's bitrochanteric diameter in centimeters.
-che_de: A numerical vector, respondent's chest depth in centimeters, measured between spine and sternum at nipple level, mid-expiration.
-che_di: A numerical vector, respondent's chest diameter in centimeters, measured at nipple level, mid-expiration.
-elb_di: A numerical vector, respondent's elbow diameter in centimeters, measured as sum of two elbows.
-wri_di: A numerical vector, respondent's wrist diameter in centimeters, measured as sum of two wrists.
-kne_di: A numerical vector, respondent's knee diameter in centimeters, measured as sum of two knees.
-ank_di: A numerical vector, respondent's ankle diameter in centimeters, measured as sum of two ankles.
-sho_gi: A numerical vector, respondent's shoulder girth in centimeters, measured over deltoid muscles.
-che_gi: A numerical vector, respondent's chest girth in centimeters, measured at nipple line in males and just above breast tissue in females, mid-expiration.
-wai_gi: A numerical vector, respondent's waist girth in centimeters, measured at the narrowest part of torso below the rib cage as average of contracted and relaxed position.
-nav_gi: A numerical vector, respondent's navel (abdominal) girth in centimeters, measured at umbilicus and iliac crest using iliac crest as a landmark.
-hip_gi: A numerical vector, respondent's hip girth in centimeters, measured at at level of bitrochanteric diameter.
-thi_gi: A numerical vector, respondent's thigh girth in centimeters, measured below gluteal fold as the average of right and left girths.
-bic_gi: A numerical vector, respondent's bicep girth in centimeters, measured when flexed as the average of right and left girths.
-for_gi: A numerical vector, respondent's forearm girth in centimeters, measured when extended, palm up as the average of right and left girths.
-kne_gi: A numerical vector, respondent's knee diameter in centimeters, measured as sum of two knees.
-cal_gi: A numerical vector, respondent's calf maximum girth in centimeters, measured as average of right and left girths.
-ank_gi: A numerical vector, respondent's ankle minimum girth in centimeters, measured as average of right and left girths.
-wri_gi: A numerical vector, respondent's wrist minimum girth in centimeters, measured as average of right and left girths.
-age: A numerical vector, respondent's age in years.
-wgt: A numerical vector, respondent's weight in kilograms.
-hgt: A numerical vector, respondent's height in centimeters.
-sex: A categorical vector, 1 if the respondent is male, 0 if female.
+### Body diameters and depth
+
+- **`bia_di` — Biacromial diameter:** shoulder breadth in centimeters.
+- **`bii_di` — Biiliac diameter:** pelvic breadth in centimeters.
+- **`bit_di` — Bitrochanteric diameter:** hip breadth in centimeters.
+- **`che_de` — Chest depth:** distance between the spine and sternum at the nipple level, measured at mid-expiration.
+- **`che_di` — Chest diameter:** chest breadth in centimeters, measured at mid-expiration.
+- **`elb_di` — Elbow diameter:** sum of both elbow diameters.
+- **`wri_di` — Wrist diameter:** sum of both wrist diameters.
+- **`kne_di` — Knee diameter:** sum of both knee diameters.
+- **`ank_di` — Ankle diameter:** sum of both ankle diameters.
+
+### Body girths
+
+- **`sho_gi` — Shoulder girth:** circumference measured over the deltoid muscles.
+- **`che_gi` — Chest girth:** circumference at the nipple line in males and just above breast tissue in females, measured at mid-expiration.
+- **`wai_gi` — Waist girth:** circumference at the narrowest part of the torso below the rib cage.
+- **`nav_gi` — Navel girth:** abdominal circumference measured at the umbilicus using the iliac crest as a landmark.
+- **`hip_gi` — Hip girth:** circumference at the level of the bitrochanteric diameter.
+- **`thi_gi` — Thigh girth:** average of the right and left thigh circumferences below the gluteal fold.
+- **`bic_gi` — Bicep girth:** average flexed circumference of the right and left biceps.
+- **`for_gi` — Forearm girth:** average extended circumference of the right and left forearms, palms up.
+- **`kne_gi` — Knee girth:** circumference around the knee.
+- **`cal_gi` — Calf girth:** average maximum circumference of the right and left calves.
+- **`ank_gi` — Ankle girth:** average minimum circumference of the right and left ankles.
+- **`wri_gi` — Wrist girth:** average minimum circumference of the right and left wrists.
+
+### Demographics and overall measurements
+
+- **`age` — Age:** respondent age in years.
+- **`wgt` — Weight:** respondent weight in kilograms.
+- **`hgt` — Height:** respondent height in centimeters.
+- **`sex` — Sex:** categorical indicator, coded 1 for male and 0 for female.
 
 ## Research Questions
 Descriptive Analytics Research Question - What is the tendency between Wrist Diameter and Ankle Diameter under the influence of Gender?
 Inference Research Question - What is the association between the mean wrist diameter for males and females?
 Linear Regression Research Question - Is there a linear relationship between Wrist Diameter and Gender, Age, Thigh Girth, and Chest Diameter in the sample? What about in the population?
 Logistic Regression Research Question - Is there a linear relationship between the log-odds of the of Gender and Wrist Diameter, Age, Thigh Girth, and Chest Diameter in the sample? What about in the population? What explanatory variables should we include in the model to build a parsimonious model?
+
+## Key Visual Results
+
+<div class="case-figure-grid">
+  <figure class="case-figure">
+    <img src="{{ '/assets/pngs/body/wrist-ankle-by-sex.png' | relative_url }}" alt="Scatterplot of wrist diameter against ankle diameter, separated by sex">
+    <figcaption><strong>Body-dimension relationship.</strong> Wrist and ankle diameter rise together, while the two sex groups occupy visibly different regions of the measurement space.</figcaption>
+  </figure>
+  <figure class="case-figure">
+    <img src="{{ '/assets/pngs/body/logistic-roc.png' | relative_url }}" alt="ROC curve for the parsimonious logistic regression model with an area under the curve of 0.991">
+    <figcaption><strong>Classification performance.</strong> After backward elimination removed age, the parsimonious logistic model achieved an ROC AUC of <strong>0.991</strong> on the recorded evaluation.</figcaption>
+  </figure>
+</div>
 
 ## Conclusion - Answer of each Research Question
 Descriptive Analytics Research Question - What is the tendency between Wrist Diameter and Ankle Diameter under the influence of Gender?
@@ -94,5 +117,5 @@ Cover Image Credit: https://propercloth.com/reference/body-measurements-vs-shirt
 </div>
 
 <div class="right">
-{% include elements/button.html link="https://github.com/mengyuehuang/Python-Projects/blob/main/Body%20Dimensions.ipynb" text="The Analysis" %}
+{% include elements/button.html link="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/Body%20Dimensions.ipynb" text="The Analysis" %}
 </div>

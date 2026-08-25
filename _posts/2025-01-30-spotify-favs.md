@@ -6,8 +6,6 @@ color: secondary
 description: My 2025 playlist is basically K-pop nostalgia + rap chaos + diva energy
 ---
 
-Source: [portfolYOU](https://github.com/YoussefRaafatNasry/portfolYOU)
-
 Music is probably the most accurate personality test I’ve ever taken, tho i am using gpt to generate this md blog
 In 2025, my Spotify basically said:
 

@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-
-<!--
-  portfolYOU Jekyll theme by Youssef Raafat
-  Free for personal and commercial use under the MIT license
-  https://github.com/YoussefRaafatNasry/portfolYOU
--->
-
-<html lang="en" class="h-100">
-
+<!doctype html>
+<html lang="en">
 <head>
 
   
@@ -23,7 +15,12 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Body Dimensions">
   <meta property="og:description" content="Explore relationship between Body Features, Age, and Gender for physically active people in California.">
-  <meta property="og:image" content="assets/pngs/dim.jpg">
+  <meta property="og:url" content="https://mengyuehuang.github.io/projects/body-dims">
+  <meta property="og:image" content="https://mengyuehuang.github.io/assets/pngs/dim.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Body Dimensions">
+  <meta name="twitter:description" content="Explore relationship between Body Features, Age, and Gender for physically active people in California.">
+  <meta name="twitter:image" content="https://mengyuehuang.github.io/assets/pngs/dim.jpg">
 
   <title>Body Dimensions</title>
   <meta name="description" content="Explore relationship between Body Features, Age, and Gender for physically active people in California.">
@@ -43,37 +40,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
+  
+  <link rel="stylesheet" href="/assets/css/portfolio.css">
+  
 
 </head>
 
-<body class="h-100 d-flex flex-column">
-
-  <main class="flex-shrink-0 container mt-5">
-    <nav class="navbar navbar-expand-lg navbar-themed">
-
-  <a class="navbar-brand" href="/"><h5><b>Mengyue Huang</b></h5></a>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fas fa-1x fa-bars text-themed"></i>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto"><a class="nav-item nav-link active" href="/projects/">Projects</a>
-
-      <a class="nav-item nav-link " href="/blog/">Blog</a>
-
-      <a class="nav-item nav-link " href="/about/">About</a>
-
-      
-
-      <span id="theme-toggler" class="nav-item nav-link" role="button" onclick="toggleTheme()"></span>
-    </div>
-  </div>
-
-</nav>
-    <div class="col-lg-10 mx-auto mt-5 markdown-body">
-  <h1 id="relationship-between-body-features-age-and-gender">Relationship between Body Features, Age, and Gender</h1>
+<body class="portfolio-home project-detail-page">
+  <header class="site-header scrolled">
+    <a class="wordmark" href="/" aria-label="Mengyue Huang, home">MH<span>.</span></a>
+    <nav aria-label="Project navigation"><a href="/#work">Selected work</a><a href="/projects/">Archive</a><a href="/blog/">Blog</a></nav>
+    <a class="header-cta" href="mailto:mengyueluna@outlook.com">Open to roles <span>↗</span></a>
+  </header>
+  <main>
+    <section class="project-detail-hero">
+      <div><a class="case-back" href="/projects/">← Back to project archive</a><p class="eyebrow">Data project</p><h1>Body Dimensions</h1><p>Explore relationship between Body Features, Age, and Gender for physically active people in California.</p></div>
+      <div class="project-detail-cover"><img src="/assets/pngs/dim.jpg" alt="" fetchpriority="high" style="object-position: center"></div>
+    </section>
+    <section class="case-shell">
+      <aside class="case-sidebar"><p class="eyebrow">Toolkit</p><div class="skill-list"><span>Python</span><span>pandas</span><span>Linear Regression</span><span>Logistic Regression</span><span>Hypothesis Testing</span><span>Backward Elimination</span><span>Data Visualization</span></div><a href="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/Body%20Dimensions.ipynb">View analysis code ↗</a><br><br><a href="/projects/">All projects ↗</a></aside>
+      <article class="case-content"><h1 id="relationship-between-body-features-age-and-gender">Relationship between Body Features, Age, and Gender</h1>
 
 <h2 id="motivation">Motivation</h2>
 <p>Some people are tall, some are short, some are fat, and some are thin. There are a lot of differences between our bodies and investigating these differences sometimes is very interesting. We were thinking if there would be some kind of associations between the figures of girths and diameters of different body parts of males and females. Therefore, we choose this data set that has data on different body parts, which can help us investigate the correspondence between body build and girths in men and women of different ages.</p>
@@ -86,37 +72,64 @@ See the “Variables” part for the detail of the data.</p>
 <h2 id="variables">Variables</h2>
 <p>Please note: We modified the variable names of the original dataset, by changing all the dots (“.”) to underscores (“_”). For example, bia.di is replaced by bia_di. We made the change because some Python functions do not recognize the variable name with a dot in it.</p>
 
-<p>bia_di: A numerical vector, respondent’s biacromial diameter in centimeters.
-bii_di: A numerical vector, respondent’s biiliac diameter (pelvic breadth) in centimeters.
-bit_di: A numerical vector, respondent’s bitrochanteric diameter in centimeters.
-che_de: A numerical vector, respondent’s chest depth in centimeters, measured between spine and sternum at nipple level, mid-expiration.
-che_di: A numerical vector, respondent’s chest diameter in centimeters, measured at nipple level, mid-expiration.
-elb_di: A numerical vector, respondent’s elbow diameter in centimeters, measured as sum of two elbows.
-wri_di: A numerical vector, respondent’s wrist diameter in centimeters, measured as sum of two wrists.
-kne_di: A numerical vector, respondent’s knee diameter in centimeters, measured as sum of two knees.
-ank_di: A numerical vector, respondent’s ankle diameter in centimeters, measured as sum of two ankles.
-sho_gi: A numerical vector, respondent’s shoulder girth in centimeters, measured over deltoid muscles.
-che_gi: A numerical vector, respondent’s chest girth in centimeters, measured at nipple line in males and just above breast tissue in females, mid-expiration.
-wai_gi: A numerical vector, respondent’s waist girth in centimeters, measured at the narrowest part of torso below the rib cage as average of contracted and relaxed position.
-nav_gi: A numerical vector, respondent’s navel (abdominal) girth in centimeters, measured at umbilicus and iliac crest using iliac crest as a landmark.
-hip_gi: A numerical vector, respondent’s hip girth in centimeters, measured at at level of bitrochanteric diameter.
-thi_gi: A numerical vector, respondent’s thigh girth in centimeters, measured below gluteal fold as the average of right and left girths.
-bic_gi: A numerical vector, respondent’s bicep girth in centimeters, measured when flexed as the average of right and left girths.
-for_gi: A numerical vector, respondent’s forearm girth in centimeters, measured when extended, palm up as the average of right and left girths.
-kne_gi: A numerical vector, respondent’s knee diameter in centimeters, measured as sum of two knees.
-cal_gi: A numerical vector, respondent’s calf maximum girth in centimeters, measured as average of right and left girths.
-ank_gi: A numerical vector, respondent’s ankle minimum girth in centimeters, measured as average of right and left girths.
-wri_gi: A numerical vector, respondent’s wrist minimum girth in centimeters, measured as average of right and left girths.
-age: A numerical vector, respondent’s age in years.
-wgt: A numerical vector, respondent’s weight in kilograms.
-hgt: A numerical vector, respondent’s height in centimeters.
-sex: A categorical vector, 1 if the respondent is male, 0 if female.</p>
+<h3 id="body-diameters-and-depth">Body diameters and depth</h3>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">bia_di</code> — Biacromial diameter:</strong> shoulder breadth in centimeters.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">bii_di</code> — Biiliac diameter:</strong> pelvic breadth in centimeters.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">bit_di</code> — Bitrochanteric diameter:</strong> hip breadth in centimeters.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">che_de</code> — Chest depth:</strong> distance between the spine and sternum at the nipple level, measured at mid-expiration.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">che_di</code> — Chest diameter:</strong> chest breadth in centimeters, measured at mid-expiration.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">elb_di</code> — Elbow diameter:</strong> sum of both elbow diameters.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">wri_di</code> — Wrist diameter:</strong> sum of both wrist diameters.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">kne_di</code> — Knee diameter:</strong> sum of both knee diameters.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">ank_di</code> — Ankle diameter:</strong> sum of both ankle diameters.</li>
+</ul>
+
+<h3 id="body-girths">Body girths</h3>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">sho_gi</code> — Shoulder girth:</strong> circumference measured over the deltoid muscles.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">che_gi</code> — Chest girth:</strong> circumference at the nipple line in males and just above breast tissue in females, measured at mid-expiration.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">wai_gi</code> — Waist girth:</strong> circumference at the narrowest part of the torso below the rib cage.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">nav_gi</code> — Navel girth:</strong> abdominal circumference measured at the umbilicus using the iliac crest as a landmark.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">hip_gi</code> — Hip girth:</strong> circumference at the level of the bitrochanteric diameter.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">thi_gi</code> — Thigh girth:</strong> average of the right and left thigh circumferences below the gluteal fold.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">bic_gi</code> — Bicep girth:</strong> average flexed circumference of the right and left biceps.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">for_gi</code> — Forearm girth:</strong> average extended circumference of the right and left forearms, palms up.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">kne_gi</code> — Knee girth:</strong> circumference around the knee.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">cal_gi</code> — Calf girth:</strong> average maximum circumference of the right and left calves.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">ank_gi</code> — Ankle girth:</strong> average minimum circumference of the right and left ankles.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">wri_gi</code> — Wrist girth:</strong> average minimum circumference of the right and left wrists.</li>
+</ul>
+
+<h3 id="demographics-and-overall-measurements">Demographics and overall measurements</h3>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">age</code> — Age:</strong> respondent age in years.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">wgt</code> — Weight:</strong> respondent weight in kilograms.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">hgt</code> — Height:</strong> respondent height in centimeters.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">sex</code> — Sex:</strong> categorical indicator, coded 1 for male and 0 for female.</li>
+</ul>
 
 <h2 id="research-questions">Research Questions</h2>
 <p>Descriptive Analytics Research Question - What is the tendency between Wrist Diameter and Ankle Diameter under the influence of Gender?
 Inference Research Question - What is the association between the mean wrist diameter for males and females?
 Linear Regression Research Question - Is there a linear relationship between Wrist Diameter and Gender, Age, Thigh Girth, and Chest Diameter in the sample? What about in the population?
 Logistic Regression Research Question - Is there a linear relationship between the log-odds of the of Gender and Wrist Diameter, Age, Thigh Girth, and Chest Diameter in the sample? What about in the population? What explanatory variables should we include in the model to build a parsimonious model?</p>
+
+<h2 id="key-visual-results">Key Visual Results</h2>
+
+<div class="case-figure-grid">
+  <figure class="case-figure">
+    <img src="/assets/pngs/body/wrist-ankle-by-sex.png" alt="Scatterplot of wrist diameter against ankle diameter, separated by sex" />
+    <figcaption><strong>Body-dimension relationship.</strong> Wrist and ankle diameter rise together, while the two sex groups occupy visibly different regions of the measurement space.</figcaption>
+  </figure>
+  <figure class="case-figure">
+    <img src="/assets/pngs/body/logistic-roc.png" alt="ROC curve for the parsimonious logistic regression model with an area under the curve of 0.991" />
+    <figcaption><strong>Classification performance.</strong> After backward elimination removed age, the parsimonious logistic model achieved an ROC AUC of <strong>0.991</strong> on the recorded evaluation.</figcaption>
+  </figure>
+</div>
 
 <h2 id="conclusion---answer-of-each-research-question">Conclusion - Answer of each Research Question</h2>
 <p>Descriptive Analytics Research Question - What is the tendency between Wrist Diameter and Ankle Diameter under the influence of Gender?
@@ -156,100 +169,16 @@ According to the summary table, we can see that the p values for Wrist Diameter,
 </div>
 
 <div class="right">
-<a class="m-1 btn btn-outline-primary btn-2 " href="https://github.com/mengyuehuang/Python-Projects/blob/main/Body%20Dimensions.ipynb">
+<a class="m-1 btn btn-outline-primary btn-2 " href="https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/Body%20Dimensions.ipynb">
   The Analysis
 </a>
 </div>
-
-</div>
+</article>
+    </section>
   </main>
-  <footer class="mt-auto py-3 text-center">
-
-  <small class="text-muted mb-2">
-    <i class="fas fa-code"></i> with <i class="fas fa-heart"></i>
-    by <strong>Mengyue Huang</strong>
-  </small>
-
-  <div class="container-fluid justify-content-center"><a class="social mx-1"  href="mailto:myhuang1000@163.com"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#db4437'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fas fa-envelope fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.facebook.com/lunahuang0218"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#3b5998'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-facebook fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.github.com/mengyuehuang"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#333333'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-github fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.instagram.com/lunahuang66_"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#405de6'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-instagram fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.linkedin.com/in/mengyue-huang-luna"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#007bb5'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-linkedin-in fa-1x"></i>
-    </a><a class="social mx-1"  href="https://open.spotify.com/user/31dsb2x6rmdihpxr5trkcyrwxiyu"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#1db954'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-spotify fa-1x"></i>
-    </a><a class="social mx-1"  href="https://steamcommunity.com/id/lunahuang66"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#171a21'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-steam fa-1x"></i>
-    </a>
-
-</div><small id="attribution">
-    theme <a href="https://github.com/YoussefRaafatNasry/portfolYOU">portfolYOU</a>
-  </small>
-
-</footer>
-
-
-<!-- Custom page specific js files -->
-  
-    <script src='/assets/js/vega.min.js' type="text/javascript"></script>
-  
-    <script src='/assets/js/vega-lite.min.js' type="text/javascript"></script>
-  
-    <script src='/assets/js/vega-embed.min.js' type="text/javascript"></script>
-  
-    <script src='/assets/js/justcharts.js' type="text/javascript"></script>
-  
-
-
-
-  
-  <!-- GitHub Buttons -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-
-<!-- jQuery CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Popper.js CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-
-<!-- Bootstrap JS CDN -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<!-- wow.js CDN & Activation -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-<script> new WOW().init(); </script>
-
-<!-- Initialize all tooltips -->
-<script>
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
+  <section class="case-next"><p class="eyebrow">Continue exploring</p><h2>More projects in the archive.</h2><a href="/projects/">Browse all work <span>↗</span></a></section>
+  <footer class="portfolio-footer"><p>© <span data-year></span> Mengyue Huang</p><div><a href="/blog/">Blog ↗</a><a href="https://github.com/mengyuehuang">GitHub ↗</a></div><a href="/">Home ↑</a></footer>
+  <script src="/assets/js/portfolio.js"></script>
+  <script src="/assets/js/vega.min.js"></script><script src="/assets/js/vega-lite.min.js"></script><script src="/assets/js/vega-embed.min.js"></script><script src="/assets/js/justcharts.js"></script>
 </body>
-
 </html>

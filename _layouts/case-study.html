@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+{% include head.html %}
+<body class="portfolio-home case-study-page">
+  <header class="site-header scrolled">
+    <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="Mengyue Huang, home">MH<span>.</span></a>
+    <nav aria-label="Case study navigation">
+      <a href="{{ '/' | relative_url }}#work">Selected work</a>
+      <a href="{{ '/projects/' | relative_url }}">Archive</a>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+    </nav>
+    <a class="header-cta" href="mailto:{{ site.author.email }}">Open to roles <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <a class="case-back" href="{{ '/' | relative_url }}#work">← Back to selected work</a>
+      <p class="eyebrow">Machine learning case study · Hotel operations</p>
+      <h1>{{ page.name | default: page.title }}</h1>
+      <p class="case-deck">Predicting booking cancellations and uncovering pricing patterns across 119K+ hotel reservations.</p>
+      <div class="case-metrics" aria-label="Project highlights">
+        <div><strong>119K+</strong><span>Bookings analyzed</span></div>
+        <div><strong>0.867</strong><span>Best test accuracy</span></div>
+        <div><strong>0.925</strong><span>Best ROC-AUC</span></div>
+        <div><strong>30+</strong><span>Input features</span></div>
+      </div>
+    </section>
+
+    <section class="case-shell">
+      <aside class="case-sidebar">
+        <p class="eyebrow">At a glance</p>
+        <dl>
+          <dt>Role</dt><dd>Data exploration, feature engineering, modeling</dd>
+          <dt>Models</dt><dd>Logistic Regression, KNN, XGBoost, Random Forest</dd>
+          <dt>Focus</dt><dd>Cancellation risk, ADR patterns, business insights</dd>
+        </dl>
+        <a href="https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand">View dataset ↗</a>
+      </aside>
+      <article class="case-content">
+        {{ content }}
+      </article>
+    </section>
+  </main>
+
+  <section class="case-next">
+    <p class="eyebrow">Continue exploring</p>
+    <h2>More work, fewer walls of text.</h2>
+    <a href="{{ '/projects/' | relative_url }}">Browse the project archive <span>↗</span></a>
+  </section>
+
+  <footer class="portfolio-footer">
+    <p>© <span data-year></span> Mengyue Huang</p>
+    <div><a href="https://www.linkedin.com/in/{{ site.author.linkedin }}">LinkedIn ↗</a><a href="https://github.com/{{ site.author.github }}">GitHub ↗</a></div>
+    <a href="{{ '/' | relative_url }}">Home ↑</a>
+  </footer>
+  <script src="{{ '/assets/js/portfolio.js' | relative_url }}"></script>
+</body>
+</html>

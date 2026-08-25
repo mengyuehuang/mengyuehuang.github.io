@@ -1,8 +1,11 @@
 ---
 name: Predicting Housing Price in Taipei
-tools: [R, Regression, Random Forest, Neural Networks]
+tools: [R, Linear Regression, Relaxed LASSO, Neural Networks, Random Forest, Cross-Validation, Feature Importance]
+categories: [machine]
+code_url: https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/TaipeiHousingPrice.Rmd
 
-image: assets/pngs/snow.jpg
+image: /assets/pngs/snow.jpg
+image_position: 78% center
 
 description: "Built predictive models for Taipei housing prices using linear regression, LASSO, neural networks, and random forests, achieving best RMSE ≈ 5.83 and identifying MRT proximity as the dominant driver."
 

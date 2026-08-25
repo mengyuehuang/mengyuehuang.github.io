@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-
-<!--
-  portfolYOU Jekyll theme by Youssef Raafat
-  Free for personal and commercial use under the MIT license
-  https://github.com/YoussefRaafatNasry/portfolYOU
--->
-
-<html lang="en" class="h-100">
-
+<!doctype html>
+<html lang="en">
 <head>
 
   
@@ -21,12 +13,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mengyue Huang">
-  <meta property="og:description" content="Have a lovely day of yours and touch some grass">
-  <meta property="og:image" content="assets/pngs/cover.jpg">
+  <meta property="og:title" content="Mengyue Huang — Data Scientist">
+  <meta property="og:description" content="Data scientist and ML engineer building reliable models, thoughtful analytics, and useful data products.">
+  <meta property="og:url" content="https://mengyuehuang.github.io/">
+  <meta property="og:image" content="https://mengyuehuang.github.io/assets/pngs/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mengyue Huang — Data Scientist">
+  <meta name="twitter:description" content="Data scientist and ML engineer building reliable models, thoughtful analytics, and useful data products.">
+  <meta name="twitter:image" content="https://mengyuehuang.github.io/assets/pngs/og.png">
 
-  <title>Mengyue Huang</title>
-  <meta name="description" content="Have a lovely day of yours and touch some grass">
+  <title>Mengyue Huang — Data Scientist</title>
+  <meta name="description" content="Data scientist and ML engineer building reliable models, thoughtful analytics, and useful data products.">
 
   <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
 
@@ -43,128 +40,147 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
+  
+  <link rel="stylesheet" href="/assets/css/portfolio.css">
+  
 
 </head>
 
-<body class="h-100 d-flex flex-column">
+<body class="portfolio-home">
+  <p><a class="skip-link" href="#work">Skip to selected work</a></p>
 
-  <main class="flex-shrink-0 container mt-5">
-    <nav class="navbar navbar-expand-lg navbar-themed">
+<header class="site-header" data-header="">
+  <a class="wordmark" href="#top" aria-label="Mengyue Huang, home">MH<span>.</span></a>
+  <nav aria-label="Primary navigation">
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="/blog/">Blog</a>
+    <a href="#about">About</a>
+  </nav>
+  <a class="header-cta" href="mailto:mengyueluna@outlook.com">Open to roles <span>↗</span></a>
+</header>
 
-  <a class="navbar-brand" href="/"><h5><b>Mengyue Huang</b></h5></a>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fas fa-1x fa-bars text-themed"></i>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto"><a class="nav-item nav-link " href="/projects/">Projects</a>
-
-      <a class="nav-item nav-link " href="/blog/">Blog</a>
-
-      <a class="nav-item nav-link " href="/about/">About</a>
-
-      
-
-      <span id="theme-toggler" class="nav-item nav-link" role="button" onclick="toggleTheme()"></span>
-    </div>
-  </div>
-
-</nav>
-    <div class="row justify-content-center align-items-center p-4">
-  <div class="col-lg-4 col-md-6 text-center mt-4">
-
-    <!-- Fine Circle Responsive Image -->
-    <div id="container" class="my-2">
-      <div id="dummy"></div>
-      <div id="element">
-        <img src="assets/pngs/cover.jpg" alt="Mengyue Huang" class="circle-image wow animated zoomIn" data-wow-delay=".1s" />
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy reveal">
+      <p class="eyebrow"><span class="status-dot"></span> Open to data science &amp; ML opportunities</p>
+      <h1 id="hero-title">I turn messy data into <em>clear decisions.</em></h1>
+      <p class="hero-intro">I’m Mengyue, a data scientist at Penn working across machine learning, analytics, and data products—especially where rigorous modeling meets a genuinely useful interface.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#work">Explore my work <span>↓</span></a>
+        <a class="text-link" href="mailto:mengyueluna@outlook.com">mengyueluna@outlook.com <span>↗</span></a>
+      </div>
+      <div class="hero-meta" aria-label="Quick facts">
+        <div><strong>MSE</strong><span>Data Science · UPenn ’26</span></div>
+        <div><strong>3.80</strong><span>Graduate GPA</span></div>
+        <div><strong>Philadelphia</strong><span>Based in Pennsylvania</span></div>
       </div>
     </div>
+    <div class="hero-visual reveal" data-delay="1">
+      <div class="image-frame">
+        <img src="/assets/pngs/cover.jpg" alt="Mengyue snowboarding on a winter mountain" fetchpriority="high" />
+        <p class="image-note">Off the clock: usually outside, occasionally upright.</p>
+      </div>
+      <div class="floating-card">
+        <span>Currently exploring</span>
+        <strong>Reliable ML systems</strong>
+        <small>from signal to story</small>
+      </div>
+    </div>
+  </section>
 
-    <p class="text-muted wow animated slideInUp" data-wow-delay=".15s">Have a lovely day of yours and touch some grass</p>
+  <section class="marquee" aria-label="Core capabilities">
+    <div>Python <span>✦</span> Pandas <span>✦</span> scikit-learn <span>✦</span> PyTorch <span>✦</span> SQL <span>✦</span> R <span>✦</span> XGBoost <span>✦</span> LightGBM <span>✦</span> Random Forest <span>✦</span> Regression <span>✦</span> Neural Networks <span>✦</span> SVM <span>✦</span> Gaussian Mixture Models <span>✦</span> Clustering <span>✦</span> PCA <span>✦</span> t-SNE <span>✦</span> Time Series <span>✦</span> A/B Testing <span>✦</span> Causal Inference <span>✦</span> Data Wrangling <span>✦</span> Database Management <span>✦</span> Visualization <span>✦</span> Python <span>✦</span> Pandas <span>✦</span> scikit-learn <span>✦</span> PyTorch <span>✦</span> SQL <span>✦</span> R <span>✦</span> XGBoost <span>✦</span> LightGBM <span>✦</span> Random Forest <span>✦</span> Regression <span>✦</span> Neural Networks <span>✦</span> SVM <span>✦</span> Gaussian Mixture Models <span>✦</span> Clustering <span>✦</span> PCA <span>✦</span> t-SNE <span>✦</span> Time Series <span>✦</span> A/B Testing <span>✦</span> Causal Inference <span>✦</span> Data Wrangling <span>✦</span> Database Management <span>✦</span> Visualization <span>✦</span></div>
+  </section>
 
-  </div>
-</div>
+  <section class="work section" id="work" aria-labelledby="work-title">
+    <div class="section-heading reveal">
+      <div><p class="eyebrow">01 / Selected work</p><h2 id="work-title">Projects with a point of view.</h2></div>
+      <p>My research in wearable and EEG signals shaped how I approach applied ML: start with data quality, validate carefully, and translate results for people.</p>
+    </div>
 
-  </main>
-  <footer class="mt-auto py-3 text-center">
+    <div class="project-filters reveal" role="group" aria-label="Filter projects">
+      <button class="active" type="button" data-filter="all">All</button>
+      <button type="button" data-filter="ml">Machine Learning</button>
+      <button type="button" data-filter="analytics">Analytics</button>
+      <button type="button" data-filter="research">Research</button>
+    </div>
 
-  <small class="text-muted mb-2">
-    <i class="fas fa-code"></i> with <i class="fas fa-heart"></i>
-    by <strong>Mengyue Huang</strong>
-  </small>
+    <div class="project-grid">
+      <a class="project-card project-featured reveal" data-category="ml" href="/projects/1-hotel-bookings">
+        <div class="project-image project-image-hotel"><div class="mini-chart"><i></i><i></i><i></i><i></i><i></i></div><span>IHG</span><small>cancellation prediction</small></div>
+        <div class="project-body"><p class="project-index">01 · Predictive modeling</p><h3>IHG hotel cancellation analysis</h3><p>Led an end-to-end workflow from exploration to model deployment, engineering temporal and behavioral features and benchmarking an ANN against XGBoost and Logistic Regression.</p><ul><li>Python</li><li>ANN</li><li>XGBoost</li><li>Logistic Regression</li></ul><span class="project-link">View case study ↗</span></div>
+      </a>
+      <a class="project-card project-wide reveal" data-category="analytics" href="/projects/students-acohol-consumption">
+        <div class="project-image project-image-photo"><img src="/assets/pngs/gummy.jpg" alt="Colorful gummy bears used as the project cover" loading="lazy" /><span>Analytics</span></div>
+        <div class="project-body"><p class="project-index">02 · Interactive analytics</p><h3>Students’ alcohol consumption</h3><p>Explored how family background, academic performance, and health factors relate to weekend alcohol consumption using interactive Altair dashboards.</p><ul><li>Python</li><li>Altair</li><li>Vega-Lite</li><li>EDA</li></ul><span class="project-link">View project ↗</span></div>
+      </a>
+      <a class="project-card project-wide reveal" data-category="ml analytics" href="/projects/amazon">
+        <div class="project-image project-image-photo"><img src="/assets/pngs/fixing.jpg" alt="ReviewLens Amazon product analytics project cover" loading="lazy" /><span>Full-stack analytics</span></div>
+        <div class="project-body"><p class="project-index">03 · Data product</p><h3>ReviewLens: Amazon product discovery</h3><p>Led the end-to-end implementation of a full-stack platform over 13M+ review records, owning the React interface and PostgreSQL query optimization for interactive product and reviewer analytics.</p><ul><li>React</li><li>PostgreSQL</li><li>Express</li><li>SQL Optimization</li></ul><span class="project-link">View project ↗</span></div>
+      </a>
+      <a class="project-card project-wide reveal" data-category="ml research" href="https://doi.org/10.3390/s24154955">
+        <div class="project-image project-image-taipei"><div class="map-grid"></div><span>2024</span><small>peer-reviewed publication</small></div>
+        <div class="project-body"><p class="project-index">04 · Publication</p><h3>Tai Chi expertise classification</h3><p>Co-authored research on the classification of Tai Chi expertise, published in Sensors, volume 24, issue 15.</p><ul><li>Classification</li><li>Biomechanics</li><li>Health analytics</li></ul><span class="project-link">Read publication ↗</span></div>
+      </a>
+    </div>
+    <a class="all-work reveal" href="/projects/">See the full project archive <span>↗</span></a>
+  </section>
 
-  <div class="container-fluid justify-content-center"><a class="social mx-1"  href="mailto:myhuang1000@163.com"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#db4437'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fas fa-envelope fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.facebook.com/lunahuang0218"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#3b5998'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-facebook fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.github.com/mengyuehuang"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#333333'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-github fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.instagram.com/lunahuang66_"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#405de6'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-instagram fa-1x"></i>
-    </a><a class="social mx-1"  href="https://www.linkedin.com/in/mengyue-huang-luna"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#007bb5'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-linkedin-in fa-1x"></i>
-    </a><a class="social mx-1"  href="https://open.spotify.com/user/31dsb2x6rmdihpxr5trkcyrwxiyu"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#1db954'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-spotify fa-1x"></i>
-    </a><a class="social mx-1"  href="https://steamcommunity.com/id/lunahuang66"
-       style="color: #6c757d"
-       onMouseOver="this.style.color='#171a21'"
-       onMouseOut="this.style.color='#6c757d'">
-      <i class="fab fa-steam fa-1x"></i>
-    </a>
+  <section class="experience section" id="experience" aria-labelledby="experience-title">
+    <div class="section-heading reveal"><div><p class="eyebrow">02 / Experience</p><h2 id="experience-title">Where I’ve learned &amp; built.</h2></div></div>
+    <div class="timeline">
+      <article class="timeline-row reveal"><p>2024—2026</p><div><h3>University of Pennsylvania</h3><span>MSE, Data Science · GPA 3.80/4.00</span></div><p>Graduate study in modern machine learning, scalable systems, and applied statistics.</p></article>
+      <article class="timeline-row reveal"><p>Apr 2023—Aug 2024</p><div><h3>Mobility &amp; Fall Prevention Research Laboratory</h3><span>Data Science Researcher · Champaign, IL</span></div><p>Built a reproducible Python/MNE EEG connectivity pipeline and wearable-signal feature framework, improving research turnaround by 5× and reaching ~90% classification accuracy.</p></article>
+      <article class="timeline-row reveal"><p>Jun—Jul 2023</p><div><h3>Feisuan Software Technology</h3><span>Data Scientist Intern · Shenzhen, CN</span></div><p>Built gradient-boosted models for personal-loan risk and tracked precision, recall, AUC (0.84), Gini coefficient, and false approval rate against underwriting thresholds.</p></article>
+      <article class="timeline-row reveal"><p>Sep 2022—Feb 2023</p><div><h3>Center for Health Informatics Mobilizing Experts in Illinois</h3><span>Data Science Researcher · Champaign, IL</span></div><p>Used analytical SQL and Census-linked ICD-10 data to study mortality disparities across 10+ years and 15 geographic segments.</p></article>
+      <article class="timeline-row reveal"><p>2020—2024</p><div><h3>University of Illinois Urbana-Champaign</h3><span>BS, Information Sciences + Data Science · GPA 3.90/4.00</span></div><p>Dean’s List; course assistant for Data Science Exploration and vice president of the Data Science Club.</p></article>
+    </div>
+  </section>
 
-</div><small id="attribution">
-    theme <a href="https://github.com/YoussefRaafatNasry/portfolYOU">portfolYOU</a>
-  </small>
+  <section class="about section" id="about" aria-labelledby="about-title">
+    <div class="about-main reveal"><p class="eyebrow">03 / About</p><h2 id="about-title">I like figuring out why things happen—<br />and what to do next.</h2><p>I work across the full data-science lifecycle: wrangling complex data, engineering meaningful features, building and evaluating models, and translating results into decisions. My experience spans physiological signals, health outcomes, financial risk, and customer behavior.</p></div>
+    <div class="toolkit reveal"><p class="eyebrow">Toolkit</p><div class="skill-list"><span>Python</span><span>Pandas</span><span>scikit-learn</span><span>PyTorch</span><span>SQL</span><span>R</span><span>XGBoost</span><span>LightGBM</span><span>Random Forest</span><span>SVM</span><span>Clustering</span><span>PCA</span><span>t-SNE</span><span>Time Series</span><span>A/B Testing</span><span>Causal Inference</span><span>Data Wrangling</span><span>Database Management</span><span>Visualization</span></div></div>
+  </section>
 
+  <section class="journal-preview section" aria-labelledby="journal-title">
+    <div class="section-heading reveal">
+      <div><p class="eyebrow">04 / Off the clock</p><h2 id="journal-title">Notes on things I like.</h2></div>
+      <p>Not everything has to be a model. Sometimes it’s music, games, and the personality hiding between the playlists.</p>
+    </div>
+    <div class="journal-grid">
+      
+      <a class="journal-card reveal" href="/blog/steam-favs">
+        <p class="eyebrow">Gaming · Steam</p>
+        <h3>My Steam Favorites (Ranked by Playtime)</h3>
+        <p>Elden Ring took my soul, Death Stranding took my emotions, and the rest took my sleep schedule.</p>
+        <span>Jan 2025 · Read note ↗</span>
+      </a>
+      
+      <a class="journal-card reveal" href="/blog/spotify-favs">
+        <p class="eyebrow">Music · Spotify</p>
+        <h3>My 2025 Spotify Favorites 🎧</h3>
+        <p>My 2025 playlist is basically K-pop nostalgia + rap chaos + diva energy</p>
+        <span>Jan 2025 · Read note ↗</span>
+      </a>
+      
+    </div>
+    <a class="all-work reveal" href="/blog/">Visit the full blog <span>↗</span></a>
+  </section>
+
+  <section class="contact section reveal">
+    <p class="eyebrow">Currently looking for what’s next</p>
+    <h2>Open to internship &amp;<br />full-time opportunities.</h2>
+    <a href="mailto:mengyueluna@outlook.com">mengyueluna@outlook.com <span>↗</span></a>
+  </section>
+</main>
+
+<footer class="portfolio-footer">
+  <p>© <span data-year=""></span> Mengyue Huang</p>
+  <div><a href="https://www.linkedin.com/in/mengyue-huang-luna">LinkedIn ↗</a><a href="https://github.com/mengyuehuang">GitHub ↗</a></div>
+  <button type="button" data-to-top="">Back to top ↑</button>
 </footer>
 
-
-
-
-  
-  <!-- GitHub Buttons -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-
-<!-- jQuery CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Popper.js CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-
-<!-- Bootstrap JS CDN -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<!-- wow.js CDN & Activation -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-<script> new WOW().init(); </script>
-
-<!-- Initialize all tooltips -->
-<script>
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
+  <script src="/assets/js/portfolio.js"></script>
 </body>
-
 </html>

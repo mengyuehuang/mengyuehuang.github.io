@@ -1,7 +1,9 @@
 ---
 name: Students’ Alcohol Consumption Analysis
-tools: [Python, Altair, vega-lite, jekyll, HTML]
-image: assets/pngs/gummy.jpg
+tools: [Python, pandas, Altair, Vega-Lite, Interactive Dashboards, EDA, Statistical Analysis]
+categories: [analytics, visual]
+code_url: https://github.com/mengyuehuang/mengyuehuang.github.io/blob/main/python_notebooks/students%E2%80%99-alcohol-consumption-analysis.ipynb
+image: /assets/pngs/gummy.jpg
 description: This is a "showcase" of my Students’ Alcohol Consumption analysis!
 custom_js:
   - vega.min
@@ -18,7 +20,7 @@ For our project here with the dataset of Student Alcohol Consumption with their 
 
 
 ## Main Analysis:
-<vegachart schema-url="{{ site.baseurl }}/assets/json/main_dashboard.json" style="width: 100%"></vegachart>
+<vegachart class="student-main-chart" schema-url="{{ site.baseurl }}/assets/json/main_dashboard.json" style="width: 100%"></vegachart>
 
 ### Discussion:
 For the heatmap, the darkest part is in the middle - families with father's job as 'other' and mother's job as 'other', which makes sense since the number of jobs that do not fall in the list of 'at_home', 'health', 'other', 'services', and 'teacher' surely outnumbers the amount of jobs that are in the list, making the fathers' and mother's job combination of 'other' and 'other' the one with the most counts. Other common job combinations include 'other' and 'at_home', 'other' and 'services', and 'services' and 'services'.

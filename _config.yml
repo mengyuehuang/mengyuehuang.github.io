@@ -7,29 +7,29 @@
 ### Site Settings ###
 title               : Mengyue Huang 
 description         : >-
-                      Have a lovely day of yours and touch some grass
+                      Data scientist and ML engineer building reliable models, thoughtful analytics, and useful data products.
 baseurl             : ""   # Change to empty quotes if you are hosting your site at <your-username>.github.io directly,
+url                 : "https://mengyuehuang.github.io"
 #                                             otherwise will be hosted at <your-username>.github.io/{{base_url}}
-repository          : mengyuehuang               # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
+repository          : mengyuehuang/mengyuehuang.github.io
 open_new_tab        : false                             # Opens external URLs in new tab (works for posts, projects and navbar only)
 
 
 ### Plugins ###
 plugins:
-  - jekyll-archives
   - jekyll-sitemap
-  - jekyll-paginate-v2
-  - mini_magick
 
 ### To specify which port to host locally on -- use if you have multiple sites you want to host 
 port: 4008
+
+sass:
+  sass_dir: _sass
 
 ### Navbar Settings ###
 nav_exclude:                                            # The following paths are excluded from navbar
   - pages/tags.html
   - pages/404.html
   - pages/index.md
-  - documentation/partials/**                           # For Documentation Only
 
 
 ### Author Info ###
@@ -38,7 +38,7 @@ author:
   image             : assets/pngs/cover.jpg
 #  behance           : your_username
 # dribbble          : your_username
-  email             : myhuang1000@163.com
+  email             : mengyueluna@outlook.com
   facebook          : lunahuang0218
   github            : mengyuehuang # JPN
 # gitlab            : your_username
@@ -67,8 +67,6 @@ collections:
   projects:
     output: true
     permalink: /projects/:name
-  elements:                                             # For Documentation Only
-    output: true                                        # For Documentation Only
 
 
 ### Disqus ###
@@ -99,16 +97,12 @@ defaults:
       path: ""
       type: "projects"
     values:
-      layout: "page"
-  - scope:                                              # For Documentation Only
-      path: ""                                          # For Documentation Only
-      type: "elements"                                  # For Documentation Only
-    values:                                             # For Documentation Only
-      layout: "element"                                 # For Documentation Only
+      layout: "project-detail"
   - scope:
       path: ""
       type: "posts"
     values:
+      layout: "journal-post"
       comments: false                                   # Set to true to enable disqus comments
 
 
@@ -124,3 +118,4 @@ exclude:
   - "*.log"
   - "*.ipynb"
   - "python_notebooks/*"
+  - "assets/css/style.scss"

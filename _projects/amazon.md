@@ -1,9 +1,10 @@
 ---
 name: ReviewLens – Trustworthy Product Discovery with Reviewer Analytics
-tools: [React, Material UI, PostgreSQL, SQL Optimization, Data Engineering, REST API, Data Visualization]
+tools: [React, Material UI, Node.js, Express, PostgreSQL, SQL, ETL, Query Optimization, REST API, Chart.js, Recharts, Jest, Supertest]
+categories: [machine]
 image: /assets/pngs/fixing.jpg
 
-description: "Built a full-stack analytics platform over 13M+ Amazon reviews enabling product discovery, reviewer credibility analysis, and graph-based recommendation with sub-second query performance."
+description: "Led the end-to-end implementation of a full-stack analytics platform over 13M+ Amazon review records, owning the React interface and SQL performance engineering that enabled interactive product discovery."
 
 custom_js: []
 ---
@@ -21,6 +22,21 @@ Modern e-commerce platforms contain millions of products and reviews, yet users 
 ReviewLens integrates product metadata, review history, and reviewer behavioral analytics into a unified exploration interface that supports both search-driven and discovery-driven workflows.
 
 The system supports interactive product analytics, reviewer credibility modeling, and graph-based recommendation over millions of records while maintaining real-time query performance.
+
+---
+
+## My Role & Ownership
+
+ReviewLens was developed in a four-person academic team. I led the project’s end-to-end implementation and was responsible for bringing the data, database logic, backend services, and user experience together as a working product.
+
+My primary ownership included:
+
+- Designing and building the **React and Material UI frontend**, including product search, reviewer analytics, recommendation views, interactive tables, charts, and detail modals
+- Writing and optimizing the project’s most computationally intensive **PostgreSQL queries**, reducing multi-minute analytical workflows to interactive response times
+- Contributing across the **data cleaning, ETL, relational schema, Express API, ranking logic, testing, and full-stack integration**
+- Translating analytical ideas such as reviewer behavior, hidden-gem discovery, and co-purchase recommendations into usable product features
+
+Although the project was completed in a team setting, I owned the core technical implementation and the majority of the final product experience.
 
 ---
 
@@ -51,6 +67,11 @@ ReviewLens integrates two public Amazon 2018 datasets:
   - also-bought / also-viewed relationships
 
 Together, the system processes **13M+ structured and semi-structured rows** across multiple relational entities.
+
+<figure class="case-figure case-figure-compact">
+  <img src="{{ '/assets/pngs/amazon-rating-distribution.png' | relative_url }}" alt="Histogram comparing overall Amazon ratings in the Electronics and Home and Kitchen datasets">
+  <figcaption><strong>Initial data profile.</strong> Both categories are strongly concentrated at five-star ratings, revealing the popularity and positivity bias that motivated reviewer-aware ranking rather than relying on average rating alone.</figcaption>
+</figure>
 
 ---
 
@@ -89,6 +110,11 @@ Amazon metadata contains multiple nested arrays that were exploded into relation
 ## Database & Schema Design
 
 The relational schema models the Amazon review ecosystem as a hybrid graph-relational system.
+
+<figure class="case-figure case-figure-wide">
+  <img src="{{ '/assets/pngs/amazon/relational-schema.png' | relative_url }}" alt="Entity relationship diagram connecting products, reviewers, reviews, categories, also-bought, also-viewed, and sales-rank data">
+  <figcaption><strong>Relational schema.</strong> Product and Reviewer entities are joined through the review relationship, while category, sales-rank, also-bought, and also-viewed tables preserve the graph structure needed for discovery and recommendation queries.</figcaption>
+</figure>
 
 ### Core Tables
 
@@ -307,7 +333,7 @@ These optimizations enabled interactive dashboard latency.
 ### Backend
 
 - PostgreSQL analytical database
-- REST API service layer
+- Node.js and Express REST API service layer
 - SQL-driven ranking and aggregation pipelines
 - Pagination-based lazy loading for scalability
 
@@ -319,6 +345,7 @@ Built using:
 
 - React
 - Material UI component library
+- Chart.js and Recharts
 - Lazy-loaded data tables
 - Chart-based rating trend visualization
 - Modal-based deep-dive analytics

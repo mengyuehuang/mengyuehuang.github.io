@@ -1,6 +1,5 @@
----
----
-@import "portfolYOU";
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import "variables", "404", "base", "blog", "footer", "landing", "navbar", "markdown", "projects", "timeline", "autumn", "theme", "theme-dark", "portfolio";
 
 body {
   background: url("/assets/pngs/bg.jpg") no-repeat center center fixed;

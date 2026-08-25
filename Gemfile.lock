@@ -117,8 +117,6 @@ GEM
       pathutil (~> 0.9)
       rouge (>= 1.7, < 4)
       safe_yaml (~> 1.0)
-    jekyll-archives (2.3.0)
-      jekyll (>= 3.6, < 5.0)
     jekyll-avatar (0.8.0)
       jekyll (>= 3.0, < 5.0)
     jekyll-coffeescript (1.2.2)
@@ -148,8 +146,6 @@ GEM
     jekyll-optional-front-matter (0.3.2)
       jekyll (>= 3.0, < 5.0)
     jekyll-paginate (1.1.0)
-    jekyll-paginate-v2 (3.0.0)
-      jekyll (>= 3.0, < 5.0)
     jekyll-readme-index (0.3.0)
       jekyll (>= 3.0, < 5.0)
     jekyll-redirect-from (0.16.0)
@@ -228,8 +224,6 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
     mercenary (0.3.6)
-    mini_magick (5.3.1)
-      logger
     minima (2.5.1)
       jekyll (>= 3.5, < 5.0)
       jekyll-feed (~> 0.9)
@@ -283,11 +277,8 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll (~> 3.9.0)
-  jekyll-archives
-  jekyll-paginate-v2
   jekyll-sitemap
   kramdown-parser-gfm
-  mini_magick
   tzinfo-data
   webrick
 
@@ -319,7 +310,6 @@ CHECKSUMS
   http_parser.rb (0.8.1) sha256=9ae8df145b39aa5398b2f90090d651c67bd8e2ebfe4507c966579f641e11097a
   i18n (1.14.8) sha256=285778639134865c5e0f6269e0b818256017e8cde89993fdfcbfb64d088824a5
   jekyll (3.9.5) sha256=c22a95f18036c49f6549afdc28787c4d99fc6f26a1af3e867578c918ec9a66f0
-  jekyll-archives (2.3.0) sha256=2dbd8ce22212fbace81fe2c9aa4152a6e21c748bcc626f135af5acfd813375f6
   jekyll-avatar (0.8.0) sha256=ea736277c2de54a21300122096700517972a722d5c68ca83f8723b4999abfd4b
   jekyll-coffeescript (1.2.2) sha256=894e71c2071a834e76eb7e8044944440a0c81c2c7092532fed1503b13d331110
   jekyll-commonmark (1.4.0) sha256=1731e658fe09ce040271e6878f83ad45bbf8d17b10ad03bf343546cca30f4844
@@ -332,7 +322,6 @@ CHECKSUMS
   jekyll-mentions (1.6.0) sha256=39e801024cb6f2319b3f78a29999d0068ef5f68bc5202b8757d5354fef311ed9
   jekyll-optional-front-matter (0.3.2) sha256=ecdc061d711472469fcf04da617653b553e914c038a17df3b6a5f6f92aeb761b
   jekyll-paginate (1.1.0) sha256=880aadf4b02529a93541d508c5cbb744f014cbfc071d0263a31f25ec9066eb64
-  jekyll-paginate-v2 (3.0.0) sha256=001be6c1963caa41fed9c2f43b0d47201defa0395381eb8830487c1c2fc4f4e3
   jekyll-readme-index (0.3.0) sha256=d74cc4de46b2d350229be7409495149e656a31fb5a5fe3fe6135dbf7435e1e32
   jekyll-redirect-from (0.16.0) sha256=6635cae569ef9b0f90ffb71ec014ba977177fafb44d32a2b0526288d4d9be6db
   jekyll-relative-links (0.6.1) sha256=d11301f57b39e94b6c04fff2a3b145fe2f6a27be631a403e2542fa2e1548dd6d
@@ -364,7 +353,6 @@ CHECKSUMS
   listen (3.10.0) sha256=c6e182db62143aeccc2e1960033bebe7445309c7272061979bb098d03760c9d2
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
   mercenary (0.3.6) sha256=2a084b18f5692c86a633e185d5311ba6d11fc46c802eb414ae05368178078a82
-  mini_magick (5.3.1) sha256=29395dfd76badcabb6403ee5aff6f681e867074f8f28ce08d78661e9e4a351c4
   minima (2.5.1) sha256=520e52bc631fb16cbb8100660f6caa44f97859e2fa7e397d508deb18739567be
   minitest (6.0.1) sha256=7854c74f48e2e975969062833adc4013f249a4b212f5e7b9d5c040bf838d54bb
   net-http (0.9.1) sha256=25ba0b67c63e89df626ed8fac771d0ad24ad151a858af2cc8e6a716ca4336996

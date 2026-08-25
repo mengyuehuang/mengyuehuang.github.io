@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+{% include head.html %}
+<body class="portfolio-home journal-post-page">
+  <header class="site-header scrolled">
+    <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="Mengyue Huang, home">MH<span>.</span></a>
+    <nav aria-label="Post navigation"><a href="{{ '/blog/' | relative_url }}">Journal</a><a href="{{ '/projects/' | relative_url }}">Projects</a><a href="{{ '/' | relative_url }}#about">About</a></nav>
+    <a class="header-cta" href="mailto:{{ site.author.email }}">Open to roles <span>↗</span></a>
+  </header>
+  <main>
+    <header class="post-hero">
+      <a class="case-back" href="{{ '/blog/' | relative_url }}">← Back to journal</a>
+      <p class="eyebrow">{{ page.tags | slice: 0, 3 | join: ' · ' }}</p>
+      <h1>{{ page.title }}</h1>
+      <p>{{ page.description }}</p>
+      <div><span>{{ page.date | date: '%B %d, %Y' }}</span><span>{% assign words = content | number_of_words %}{% if words < 360 %}&lt; 2 min read{% else %}{{ words | divided_by: 180 }} min read{% endif %}</span></div>
+    </header>
+    <article class="post-content">{{ content }}</article>
+  </main>
+  <section class="case-next"><p class="eyebrow">More from the journal</p><h2>Back to the notes.</h2><a href="{{ '/blog/' | relative_url }}">Browse all posts <span>↗</span></a></section>
+  <footer class="portfolio-footer"><p>© <span data-year></span> Mengyue Huang</p><div><a href="{{ '/projects/' | relative_url }}">Projects ↗</a><a href="https://github.com/{{ site.author.github }}">GitHub ↗</a></div><a href="{{ '/' | relative_url }}">Home ↑</a></footer>
+  <script src="{{ '/assets/js/portfolio.js' | relative_url }}"></script>
+</body>
+</html>
