@@ -119,3 +119,6 @@ exclude:
   - "*.ipynb"
   - "python_notebooks/*"
   - "assets/css/style.scss"
+  - "5300"
+  - "desktop-cat"
+  - "tmp"

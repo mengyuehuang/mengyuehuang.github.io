@@ -10,3 +10,8 @@ __pycache__/
 
 .ipynb_checkpoints
 .sass-cache/
+
+# Large standalone projects kept beside the portfolio source
+5300/
+desktop-cat/
+tmp/

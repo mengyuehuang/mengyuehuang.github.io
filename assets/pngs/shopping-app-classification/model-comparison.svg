@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Transformer model comparison by test Macro-F1</title>
+  <desc id="desc">DeBERTa-v3-base leads seven Transformer models with 77.25 percent test Macro-F1.</desc>
+  <rect width="1400" height="900" fill="#f7f4ea"/>
+  <text x="80" y="92" fill="#12231b" font-family="Arial, sans-serif" font-size="44" font-weight="700">Transformer benchmark</text>
+  <text x="80" y="138" fill="#647269" font-family="Arial, sans-serif" font-size="22">Held-out test Macro-F1 · 63,000 reviews · 11 classes</text>
+  <g font-family="Arial, sans-serif" font-size="22" fill="#12231b">
+    <text x="80" y="232">DeBERTa-v3</text>
+    <text x="80" y="317">RoBERTa</text>
+    <text x="80" y="402">BERT-large</text>
+    <text x="80" y="487">ELECTRA</text>
+    <text x="80" y="572">BERT-base</text>
+    <text x="80" y="657">DistilBERT</text>
+    <text x="80" y="742">ALBERT</text>
+  </g>
+  <g transform="translate(360 195)">
+    <g stroke="#d8ddd7" stroke-width="2">
+      <path d="M0 0V590M180 0V590M360 0V590M540 0V590M720 0V590"/>
+    </g>
+    <g>
+      <rect x="0" y="0" width="585" height="54" rx="8" fill="#bdf34a"/>
+      <rect x="0" y="85" width="518" height="54" rx="8" fill="#315846"/>
+      <rect x="0" y="170" width="448" height="54" rx="8" fill="#315846"/>
+      <rect x="0" y="255" width="423" height="54" rx="8" fill="#315846"/>
+      <rect x="0" y="340" width="378" height="54" rx="8" fill="#315846"/>
+      <rect x="0" y="425" width="281" height="54" rx="8" fill="#315846"/>
+      <rect x="0" y="510" width="220" height="54" rx="8" fill="#315846"/>
+    </g>
+    <g font-family="Arial, sans-serif" font-size="22" font-weight="700">
+      <text x="605" y="36" fill="#12231b">77.25%</text>
+      <text x="538" y="121" fill="#12231b">76.88%</text>
+      <text x="468" y="206" fill="#12231b">76.49%</text>
+      <text x="443" y="291" fill="#12231b">76.35%</text>
+      <text x="398" y="376" fill="#12231b">76.10%</text>
+      <text x="301" y="461" fill="#12231b">75.56%</text>
+      <text x="240" y="546" fill="#12231b">75.22%</text>
+    </g>
+    <g font-family="Arial, sans-serif" font-size="18" fill="#647269">
+      <text x="-8" y="626">74%</text><text x="170" y="626">75%</text><text x="350" y="626">76%</text><text x="530" y="626">77%</text><text x="710" y="626">78%</text>
+    </g>
+  </g>
+  <rect x="80" y="815" width="22" height="22" rx="3" fill="#bdf34a"/>
+  <text x="118" y="833" fill="#647269" font-family="Arial, sans-serif" font-size="18">Best model</text>
+  <text x="1090" y="833" fill="#647269" font-family="Arial, sans-serif" font-size="17">Axis begins at 74%</text>
+</svg>

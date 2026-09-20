@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  
+  
+  
+
+  
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Shopping App Classification from User Reviews">
+  <meta property="og:description" content="Classified the originating shopping app from review text across 630K examples and 11 platforms, progressing from interpretable baselines to a seven-model Tra...">
+  <meta property="og:url" content="https://mengyuehuang.github.io/projects/shopping-app-review-classification">
+  <meta property="og:image" content="https://mengyuehuang.github.io/assets/pngs/shopping-app-classification/cover.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shopping App Classification from User Reviews">
+  <meta name="twitter:description" content="Classified the originating shopping app from review text across 630K examples and 11 platforms, progressing from interpretable baselines to a seven-model Tra...">
+  <meta name="twitter:image" content="https://mengyuehuang.github.io/assets/pngs/shopping-app-classification/cover.svg">
+
+  <title>Shopping App Classification from User Reviews</title>
+  <meta name="description" content="Classified the originating shopping app from review text across 630K examples and 11 platforms, progressing from interpretable baselines to a seven-model Tra...">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Theme style -->
+  <script src="/assets/js/theme.js"></script>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
+  <!-- Animate CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/assets/css/portfolio.css">
+  
+
+</head>
+
+<body class="portfolio-home project-detail-page">
+  <header class="site-header scrolled">
+    <a class="wordmark" href="/" aria-label="Mengyue Huang, home">MH<span>.</span></a>
+    <nav aria-label="Project navigation"><a href="/#work">Selected work</a><a href="/projects/">Archive</a><a href="/blog/">Blog</a></nav>
+    <a class="header-cta" href="mailto:mengyueluna@outlook.com">Open to roles <span>↗</span></a>
+  </header>
+  <main>
+    <section class="project-detail-hero">
+      <div><a class="case-back" href="/projects/">← Back to project archive</a><p class="eyebrow">Data project</p><h1>Shopping App Classification from User Reviews</h1><p>Classified the originating shopping app from review text across 630K examples and 11 platforms, progressing from interpretable baselines to a seven-model Transformer benchmark led by DeBERTa-v3.</p></div>
+      <div class="project-detail-cover"><img src="/assets/pngs/shopping-app-classification/cover.svg" alt="" fetchpriority="high" style="object-position: center"></div>
+    </section>
+    <section class="case-shell">
+      <aside class="case-sidebar"><p class="eyebrow">Toolkit</p><div class="skill-list"><span>Python</span><span>pandas</span><span>scikit-learn</span><span>PyTorch</span><span>Hugging Face Transformers</span><span>BERT</span><span>RoBERTa</span><span>DeBERTa-v3</span><span>ELECTRA</span><span>DistilBERT</span><span>ALBERT</span><span>TF-IDF</span><span>Logistic Regression</span><span>LinearSVC</span><span>SMOTE</span><span>Class Weights</span><span>Macro F1</span><span>Evaluation Pipelines</span></div><a href="https://github.com/mengyuehuang/5300shoppingappclassification">View analysis code ↗</a><br><br><a href="/projects/">All projects ↗</a></aside>
+      <article class="case-content"><h2 id="overview">Overview</h2>
+
+<p>Can the source of a shopping review be identified from its language alone? This project frames that question as an <strong>11-class text-classification task</strong> spanning global shopping platforms. Beyond maximizing accuracy, the work focuses on two risks that make the problem deceptively difficult: unequal class sizes and direct brand mentions that can leak the answer into the review text.</p>
+
+<p>The final workflow combines reproducible data splits, leakage analysis, classical NLP baselines, class-imbalance experiments, and a shared Transformer evaluation pipeline. Across seven pretrained architectures, <strong>DeBERTa-v3-base achieved the strongest test result: 0.7725 Macro-F1, 0.7716 accuracy, and 0.8893 Top-2 accuracy.</strong></p>
+
+<h2 id="my-contribution">My Contribution</h2>
+
+<ul>
+  <li>Implemented the shared scoring workflow and reported accuracy, Macro Precision, Macro Recall, and Macro-F1.</li>
+  <li>Built the word-frequency baseline and TF-IDF models using Logistic Regression and Linear SVM.</li>
+  <li>Integrated brand-name masking and class-imbalance experiments into the evaluation workflow.</li>
+  <li>Debugged the batch Transformer training and evaluation pipeline, standardized result collection, and preserved model-level outputs for comparison.</li>
+  <li>Synthesized the findings into milestone reports and the final project presentation.</li>
+</ul>
+
+<h2 id="data-and-task-design">Data and Task Design</h2>
+
+<p>The dataset contains <strong>630,000 public shopping-app reviews</strong> from 11 platforms. A stratified 80/10/10 split produced:</p>
+
+<ul>
+  <li><strong>504,000</strong> training examples</li>
+  <li><strong>63,000</strong> development examples</li>
+  <li><strong>63,000</strong> held-out test examples</li>
+</ul>
+
+<p>Each record includes the review text, star score, helpful-vote count, timestamps, optional platform reply, and the source app label. Modeling intentionally centers on <code class="language-plaintext highlighter-rouge">content</code>; the goal is to learn platform-specific language rather than metadata shortcuts.</p>
+
+<h2 id="leakage-aware-baselines">Leakage-Aware Baselines</h2>
+
+<p>An audit found that roughly <strong>29% of reviews explicitly mention an app or brand name</strong>. That signal is useful in production but can make an academic benchmark artificially easy, so the baseline workflow evaluated both raw and masked review text.</p>
+
+<p>The initial word-frequency method reached <strong>0.3484 Macro-F1</strong>. TF-IDF with Logistic Regression raised raw-text performance to <strong>0.7021 Macro-F1</strong>. Under brand masking, the baseline reached <strong>0.5514 Macro-F1</strong>, providing a more conservative reference point for imbalance experiments.</p>
+
+<h2 id="handling-class-imbalance">Handling Class Imbalance</h2>
+
+<p>The largest label contained about seven times as many observations as the smallest. Two data-level SMOTE variants were compared with an algorithm-level class-weighting strategy over sparse TF-IDF features.</p>
+
+<ul>
+  <li>Standard SMOTE: <strong>0.5482 Macro-F1</strong></li>
+  <li>Borderline-SMOTE: <strong>0.5555 Macro-F1</strong></li>
+  <li>Class-weighted Logistic Regression: <strong>0.5802 Macro-F1</strong></li>
+</ul>
+
+<p>Class weighting worked best because it changed the optimization objective without fabricating interpolated points in a sparse, high-dimensional text space.</p>
+
+<h2 id="transformer-benchmark">Transformer Benchmark</h2>
+
+<p>Seven pretrained encoders were fine-tuned under a shared configuration and evaluated by the same pipeline. This made model comparison reproducible across validation accuracy, Macro-F1, weighted F1, Top-2 accuracy, per-class metrics, and confusion matrices.</p>
+
+<p><img src="/assets/pngs/shopping-app-classification/model-comparison.svg" alt="Test Macro-F1 comparison across seven Transformer models" /></p>
+
+<p>All seven models landed within a relatively narrow performance band. DeBERTa-v3-base led the benchmark, followed by RoBERTa-base and BERT-large. The compact DistilBERT model remained competitive, finishing only 1.69 percentage points behind DeBERTa in Macro-F1.</p>
+
+<h2 id="what-the-results-mean">What the Results Mean</h2>
+
+<p>The project produced three practical lessons:</p>
+
+<ol>
+  <li><strong>Evaluation design matters as much as architecture.</strong> Direct brand mentions can inflate apparent performance, so masked and raw-text results should not be treated as interchangeable.</li>
+  <li><strong>Class weights fit sparse NLP features better than synthetic oversampling.</strong> SMOTE’s geometric interpolation was less effective in TF-IDF space.</li>
+  <li><strong>Larger models did not automatically win.</strong> DeBERTa-v3-base outperformed BERT-large, while the seven Transformer results differed by only about two Macro-F1 points.</li>
+</ol>
+
+<p>The final Transformer benchmark used the original review text, so it measures end-to-end platform recognition rather than a fully de-lexicalized test. A stronger next iteration would repeat the Transformer comparison on masked text, remove near-duplicate reviews across splits, and report repeated-seed confidence intervals.</p>
+
+<h2 id="engineering-deliverables">Engineering Deliverables</h2>
+
+<ul>
+  <li>One-command batch training and evaluation across seven Transformer architectures</li>
+  <li>Shared label mapping and tokenization rules</li>
+  <li>Automatic checkpoint discovery and standardized metric collection</li>
+  <li>Validation and held-out test reporting with confusion matrices</li>
+  <li>Separate baseline, leakage, and class-imbalance experiments</li>
+</ul>
+
+<h2 id="resources">Resources</h2>
+
+<p><a class="m-1 btn btn-outline-primary btn-2 " href="https://www.kaggle.com/datasets/jocelyndumlao/shoppingappreviews-dataset/data">
+  The Data
+</a></p>
+
+<p><a class="m-1 btn btn-outline-primary btn-2 " href="https://github.com/mengyuehuang/5300shoppingappclassification">
+  The Analysis
+</a></p>
+</article>
+    </section>
+  </main>
+  <section class="case-next"><p class="eyebrow">Continue exploring</p><h2>More projects in the archive.</h2><a href="/projects/">Browse all work <span>↗</span></a></section>
+  <footer class="portfolio-footer"><p>© <span data-year></span> Mengyue Huang</p><div><a href="/blog/">Blog ↗</a><a href="https://github.com/mengyuehuang">GitHub ↗</a></div><a href="/">Home ↑</a></footer>
+  <script src="/assets/js/portfolio.js"></script>
+  
+</body>
+</html>

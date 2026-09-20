@@ -81,6 +81,10 @@ description: Data scientist and ML engineer building reliable models, thoughtful
         <div class="project-image project-image-taipei"><div class="map-grid"></div><span>2024</span><small>peer-reviewed publication</small></div>
         <div class="project-body"><p class="project-index">04 · Publication</p><h3>Tai Chi expertise classification</h3><p>Co-authored research on the classification of Tai Chi expertise, published in Sensors, volume 24, issue 15.</p><ul><li>Classification</li><li>Biomechanics</li><li>Health analytics</li></ul><span class="project-link">Read publication ↗</span></div>
       </a>
+      <a class="project-card project-wide reveal" data-category="ml research" href="{{ '/projects/shopping-app-review-classification' | relative_url }}">
+        <div class="project-image project-image-photo"><img src="{{ '/assets/pngs/shopping-app-classification/cover.svg' | relative_url }}" alt="Shopping app review classification pipeline" loading="lazy"><span>NLP · 11 classes</span></div>
+        <div class="project-body"><p class="project-index">05 · Natural language processing</p><h3>Shopping app classification from reviews</h3><p>Built and evaluated text-classification baselines and a seven-model Transformer benchmark over 630K reviews, with DeBERTa-v3 reaching 0.7725 test Macro-F1.</p><ul><li>PyTorch</li><li>Transformers</li><li>DeBERTa</li><li>Macro-F1</li></ul><span class="project-link">View project ↗</span></div>
+      </a>
     </div>
     <a class="all-work reveal" href="{{ '/projects/' | relative_url }}">See the full project archive <span>↗</span></a>
   </section>
