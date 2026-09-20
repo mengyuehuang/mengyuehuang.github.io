@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+data/raw/
+new_data/*
+!new_data/.gitkeep
+models/
+eval/
+tmp_eval/
+*.pkl
+*.log
+predictions*.csv
+training_results.json
+evaluation_results.json

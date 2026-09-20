@@ -2,8 +2,10 @@
 name: Shopping App Classification from User Reviews
 tools: [Python, pandas, scikit-learn, PyTorch, Hugging Face Transformers, BERT, RoBERTa, DeBERTa-v3, ELECTRA, DistilBERT, ALBERT, TF-IDF, Logistic Regression, LinearSVC, SMOTE, Class Weights, Macro F1, Evaluation Pipelines]
 categories: [machine, analytics]
-code_url: https://github.com/mengyuehuang/5300shoppingappclassification
+code_url: https://github.com/mengyuehuang/mengyuehuang.github.io/tree/main/python_notebooks/shopping-app-review-classification
 image: /assets/pngs/shopping-app-classification/cover.svg
+image_fit: contain
+image_background: "#102018"
 description: "Classified the originating shopping app from review text across 630K examples and 11 platforms, progressing from interpretable baselines to a seven-model Transformer benchmark led by DeBERTa-v3."
 custom_js: []
 ---
@@ -78,4 +80,4 @@ The final Transformer benchmark used the original review text, so it measures en
 
 {% include elements/button.html link="https://www.kaggle.com/datasets/jocelyndumlao/shoppingappreviews-dataset/data" text="The Data" %}
 
-{% include elements/button.html link="https://github.com/mengyuehuang/5300shoppingappclassification" text="The Analysis" %}
+{% include elements/button.html link="https://github.com/mengyuehuang/mengyuehuang.github.io/tree/main/python_notebooks/shopping-app-review-classification" text="The Analysis" %}

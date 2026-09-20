@@ -10,7 +10,7 @@
   <main>
     <section class="project-detail-hero">
       <div><a class="case-back" href="{{ '/projects/' | relative_url }}">← Back to project archive</a><p class="eyebrow">Data project</p><h1>{{ page.name }}</h1><p>{{ page.description }}</p></div>
-      {% if page.image %}<div class="project-detail-cover"><img src="{{ page.image | relative_url }}" alt="" fetchpriority="high" style="object-position: {{ page.image_position | default: 'center' }}"></div>{% endif %}
+      {% if page.image %}<div class="project-detail-cover"><img src="{{ page.image | relative_url }}" alt="" fetchpriority="high" style="object-position: {{ page.image_position | default: 'center' }}; object-fit: {{ page.image_fit | default: 'cover' }}; background: {{ page.image_background | default: 'transparent' }}"></div>{% endif %}
     </section>
     <section class="case-shell">
       <aside class="case-sidebar"><p class="eyebrow">Toolkit</p><div class="skill-list">{% for tool in page.tools %}<span>{{ tool }}</span>{% endfor %}</div>{% if page.code_url %}<a href="{{ page.code_url }}">View analysis code ↗</a><br><br>{% endif %}<a href="{{ '/projects/' | relative_url }}">All projects ↗</a></aside>
