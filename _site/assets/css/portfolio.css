@@ -1397,3 +1397,34 @@ body.portfolio-home {
   .case-content .reviewlens-data-table th,
   .case-content .reviewlens-data-table td { padding: .6rem .45rem; }
 }
+
+
+/* Shared bordered tables for the ReviewLens case study. */
+.case-content .reviewlens-grid {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0 2rem;
+  font-size: .9em;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.case-content .reviewlens-grid th,
+.case-content .reviewlens-grid td {
+  border: 1px solid #93a28e;
+  padding: .8rem .9rem;
+  vertical-align: top;
+  text-align: left;
+}
+.case-content .reviewlens-grid th {
+  background: var(--sage);
+  color: var(--ink);
+  font-weight: 700;
+}
+.case-content .reviewlens-grid tbody tr:nth-child(even) {
+  background: rgba(223, 232, 215, .3);
+}
+@media (max-width: 600px) {
+  .case-content .reviewlens-grid { font-size: .8em; }
+  .case-content .reviewlens-grid th,
+  .case-content .reviewlens-grid td { padding: .55rem .4rem; }
+}

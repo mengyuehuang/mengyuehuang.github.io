@@ -15,12 +15,12 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="ReviewLens – Trustworthy Product Discovery with Reviewer Analytics">
   <meta property="og:description" content="Led the end-to-end implementation of a full-stack analytics platform over 13M+ Amazon review records, combining a React interface, Python ETL, and PostgreSQL...">
-  <meta property="og:url" content="https://mengyuehuang.github.io/projects/amazon">
-  <meta property="og:image" content="https://mengyuehuang.github.io/assets/pngs/fixing.jpg">
+  <meta property="og:url" content="http://localhost:4008/projects/amazon">
+  <meta property="og:image" content="http://localhost:4008/assets/pngs/fixing.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ReviewLens – Trustworthy Product Discovery with Reviewer Analytics">
   <meta name="twitter:description" content="Led the end-to-end implementation of a full-stack analytics platform over 13M+ Amazon review records, combining a React interface, Python ETL, and PostgreSQL...">
-  <meta name="twitter:image" content="https://mengyuehuang.github.io/assets/pngs/fixing.jpg">
+  <meta name="twitter:image" content="http://localhost:4008/assets/pngs/fixing.jpg">
 
   <title>ReviewLens – Trustworthy Product Discovery with Reviewer Analytics</title>
   <meta name="description" content="Led the end-to-end implementation of a full-stack analytics platform over 13M+ Amazon review records, combining a React interface, Python ETL, and PostgreSQL...">
@@ -58,7 +58,7 @@
       <div class="project-detail-cover"><img src="/assets/pngs/fixing.jpg" alt="" fetchpriority="high" style="object-position: center; object-fit: cover; background: transparent"></div>
     </section>
     <section class="case-shell">
-      <aside class="case-sidebar"><p class="eyebrow">Toolkit</p><div class="skill-list"><span>React</span><span>Material UI</span><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>SQL</span><span>Python</span><span>Pandas</span><span>PyArrow</span><span>ETL</span><span>Query Optimization</span><span>REST API</span><span>Chart.js</span><span>Recharts</span><span>Jest</span><span>Supertest</span></div><a href="/projects/">All projects ↗</a></aside>
+      <aside class="case-sidebar"><p class="eyebrow">Toolkit</p><div class="skill-list"><span>React</span><span>Material UI</span><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>SQL</span><span>Python</span><span>Pandas</span><span>PyArrow</span><span>ETL</span><span>Query Optimization</span><span>REST API</span><span>Chart.js</span></div><a href="/projects/">All projects ↗</a></aside>
       <article class="case-content"><h2 id="overview">Overview</h2>
 
 <p>ReviewLens is a full-stack analytics and discovery platform designed to transform large-scale Amazon review data into trustworthy, interpretable product intelligence.</p>
@@ -73,7 +73,7 @@
 
 <p>ReviewLens integrates product metadata, review history, and reviewer behavioral analytics into a unified exploration interface that supports both search-driven and discovery-driven workflows.</p>
 
-<p>The system supports interactive product analytics, reviewer credibility modeling, and graph-based recommendation over millions of records while maintaining real-time query performance.</p>
+<p>The implemented application connects four exploration views—product search, category overview, recommendations, and reviewer analytics—to ten analytical API endpoints. PostgreSQL performs the ranking and aggregation, while the React client presents paginated tables, linked detail views, and monthly trend charts.</p>
 
 <hr />
 
@@ -86,11 +86,11 @@
 <ul>
   <li>Designing and building the <strong>React and Material UI frontend</strong>, including product search, reviewer analytics, recommendation views, interactive tables, charts, and detail modals</li>
   <li>Writing and optimizing the project’s most computationally intensive <strong>PostgreSQL queries</strong>, reducing multi-minute analytical workflows to interactive response times</li>
-  <li>Contributing across the <strong>data cleaning, ETL, relational schema, Express API, ranking logic, testing, and full-stack integration</strong></li>
+  <li>Contributing across the <strong>data cleaning, ETL, relational schema, Express API, ranking logic and full-stack integration</strong></li>
   <li>Translating analytical ideas such as reviewer behavior, hidden-gem discovery, and co-purchase recommendations into usable product features</li>
 </ul>
 
-<p>Although the project was completed in a team setting, I owned the core technical implementation and the majority of the final product experience.</p>
+<p>The case study below describes the integrated team deliverable, with particular emphasis on my frontend implementation and SQL performance work.</p>
 
 <hr />
 
@@ -173,212 +173,147 @@
 
 <p>The extraction creates separate product and reviewer exports, deduplicating products by ASIN and reviewers by reviewer ID. Reviewer-name selection sorts available names before deduplication, placing missing names last so an available display name is preferred.</p>
 
-<p>Category extraction parses flat and nested list representations, decodes markup, splits noisy text into nodes, and retains labels occurring at least <strong>10 times</strong>. The resulting category samples still include descriptive phrases, which exposes an important limitation: frequency filtering reduces rare noise but does not establish a clean taxonomy.</p>
+<p>An earlier category-cleaning experiment parses flat and nested lists, decodes markup, and keeps labels occurring at least <strong>10 times</strong>. Its samples still contain descriptive phrases, showing why frequency alone does not establish a clean taxonomy. The later <code class="language-plaintext highlighter-rouge">Extraction2</code> notebook takes a simpler export path: parse category lists, explode them into individual labels, trim and deduplicate labels, assign integer IDs, and join them back to ASINs for <code class="language-plaintext highlighter-rouge">belongs_to</code>. It also explodes and deduplicates <code class="language-plaintext highlighter-rouge">also_buy</code> and <code class="language-plaintext highlighter-rouge">also_view</code> lists into edge exports; the SQL loading stage then enforces endpoint integrity.</p>
 
-<p>Cleaned tables are exported as <strong>gzip-compressed CSV files</strong> with explicit column order for relational loading. The notebooks also define bridge and edge-table schemas for category membership, sales rank, also-bought, and also-viewed relationships.</p>
+<p>Cleaned tables are exported as <strong>gzip-compressed CSV files</strong> with explicit column order for relational loading. The final relational export includes category membership and also-bought/also-viewed edges. Sales rank remains part of the earlier schema exploration.</p>
 
 <hr />
 
 <h2 id="database--schema-design">Database &amp; Schema Design</h2>
 
-<p>The relational schema models the Amazon review ecosystem as a hybrid graph-relational system.</p>
+<p>The final PostgreSQL loading script defines <strong>seven core tables</strong>. Products and reviewers are connected through review events; category membership and related-product edges are stored separately so the same catalog can support search, aggregation, and graph-based discovery.</p>
 
 <figure class="case-figure case-figure-wide">
-  <img src="/assets/pngs/amazon/relational-schema.png" alt="Entity relationship diagram connecting products, reviewers, reviews, categories, also-bought, also-viewed, and sales-rank data" />
-  <figcaption><strong>Relational schema.</strong> Product and Reviewer entities are joined through the review relationship, while category, sales-rank, also-bought, and also-viewed tables preserve the graph structure needed for discovery and recommendation queries.</figcaption>
+  <img src="/assets/pngs/amazon/relational-schema.png" alt="Project entity relationship diagram for products, reviewers, reviews, categories, and product relationships" />
+  <figcaption><strong>Project data model.</strong> The diagram captures the broader schema design, including sales rank. The final loading script implements seven core tables; sales rank appears in the earlier design rather than the final application schema.</figcaption>
 </figure>
 
-<h3 id="core-tables">Core Tables</h3>
+<table class="reviewlens-grid">
+  <thead>
+    <tr>
+      <th>Table</th>
+      <th>Key and relationships</th>
+      <th>Role in the application</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">product</code></td>
+      <td>Primary key: <code class="language-plaintext highlighter-rouge">asin</code></td>
+      <td>Title, description, features, brand, price, and representative image URL</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">reviewer</code></td>
+      <td>Primary key: <code class="language-plaintext highlighter-rouge">reviewer_id</code></td>
+      <td>Shared reviewer identity and display name across categories</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">reviewed_by</code></td>
+      <td>Composite key: <code class="language-plaintext highlighter-rouge">(asin, reviewer_id, time)</code></td>
+      <td>Timestamped rating, helpful votes, summary, and review text; references product and reviewer</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">category</code></td>
+      <td>Primary key: <code class="language-plaintext highlighter-rouge">category_id</code>; unique category label</td>
+      <td>Named categories used by the category and discovery queries</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">belongs_to</code></td>
+      <td>Composite key: <code class="language-plaintext highlighter-rouge">(asin, category_id)</code></td>
+      <td>Many-to-many mapping between products and categories</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">also_buy</code></td>
+      <td>Composite key: <code class="language-plaintext highlighter-rouge">(asin, also_buy_asin)</code></td>
+      <td>Directed metadata edges for related-product recommendations</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">also_view</code></td>
+      <td>Composite key: <code class="language-plaintext highlighter-rouge">(asin, also_view_asin)</code></td>
+      <td>Directed browsing relationships retained in the database</td>
+    </tr>
+  </tbody>
+</table>
 
-<h4 id="product">Product</h4>
-<p>Stores static metadata including:</p>
-<ul>
-  <li>ASIN</li>
-  <li>title</li>
-  <li>brand</li>
-  <li>description</li>
-  <li>feature keywords</li>
-  <li>price</li>
-  <li>representative image</li>
-</ul>
+<h3 id="from-notebook-exports-to-constrained-tables">From Notebook Exports to Constrained Tables</h3>
 
-<h4 id="reviewer">Reviewer</h4>
-<p>Stores reviewer identity and behavior tracking.</p>
+<p>The SQL ingestion stage loads CSVs with <code class="language-plaintext highlighter-rouge">\COPY</code> into a separate <strong>staging schema</strong> before inserting into the application tables. Staging keeps potentially messy prices, dates, ratings, and votes as text, allowing normalization before the final types and constraints apply.</p>
 
-<h4 id="review">Review</h4>
-<p>Composite primary key:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(asin, reviewer_id, unix_time)
-</code></pre></div></div>
+<p>The transformation trims identifiers, converts empty strings to SQL <code class="language-plaintext highlighter-rouge">NULL</code>, casts timestamps to <code class="language-plaintext highlighter-rouge">TIMESTAMPTZ</code>, and validates rating and vote formats. Review ratings must fall between one and five, prices must be nonnegative when present, and helpful votes must be nonnegative integers. The final review key uses the timestamp field <code class="language-plaintext highlighter-rouge">time</code>, replacing the Unix-time key used in the earlier notebook export.</p>
 
-<p>Stores:</p>
-<ul>
-  <li>rating</li>
-  <li>review text</li>
-  <li>helpful votes</li>
-  <li>timestamp</li>
-</ul>
+<p>Relationship loading joins both endpoints to existing products, excludes self-links, and deduplicates edges. Category membership likewise requires valid product and category rows. Foreign keys enforce these relationships, and <code class="language-plaintext highlighter-rouge">ON CONFLICT</code> clauses update entity and review records or skip existing bridge and edge records.</p>
 
-<p>This key identifies a review by product, reviewer, and recorded time, and matches the deduplication rule used in the export. It preserves reviews by the same person at different timestamps while treating repeated instances of the same key as duplicates.</p>
-
-<h4 id="category-dimension">Category Dimension</h4>
-<p>Allows multi-category mapping for products through a bridge table.</p>
-
-<h4 id="relationship-graph-tables">Relationship Graph Tables</h4>
-<ul>
-  <li>also_buy</li>
-  <li>also_view</li>
-</ul>
-
-<p>These tables support graph traversal queries used for recommendation ranking.</p>
-
-<hr />
-
-<h3 id="design-advantages">Design Advantages</h3>
-
-<p>The schema supports:</p>
-
-<ul>
-  <li>Multi-dimensional analytical aggregation</li>
-  <li>Graph-based product discovery</li>
-  <li>Reviewer behavior statistical modeling</li>
-  <li>Efficient join-based ranking pipelines</li>
-</ul>
-
-<hr />
-
-<h2 id="platform-features">Platform Features</h2>
-
-<h3 id="1-product-search--exploration">1. Product Search &amp; Exploration</h3>
-
-<p>The Home interface serves as the global discovery entry.</p>
-
-<p>Users can:</p>
-
-<ul>
-  <li>Search by product name or ASIN</li>
-  <li>Filter results by category or rating threshold</li>
-  <li>Sort products by review volume or average rating</li>
-</ul>
-
-<p>Each product result exposes key summary metrics:</p>
-
-<ul>
-  <li>Average rating</li>
-  <li>Total number of reviews</li>
-  <li>Brand and pricing metadata</li>
-</ul>
+<p>This separation makes data-quality decisions explicit: missing optional text remains missing, relationships to absent products are excluded, and duplicate review events cannot create multiple rows with the same final key. The final database population can therefore differ from the notebook export counts shown above.</p>
 
 <hr />
 
-<h3 id="2-product-detail-analytics">2. Product Detail Analytics</h3>
+<h2 id="product-experience--analytical-workflows">Product Experience &amp; Analytical Workflows</h2>
 
-<p>The product detail modal integrates multiple analytical modules:</p>
+<h3 id="product-search-and-detail-exploration">Product Search and Detail Exploration</h3>
 
-<h4 id="rating-stability-visualization">Rating Stability Visualization</h4>
-<p>Displays monthly rating trends allowing users to detect:</p>
+<p>The home page accepts a <strong>product-title substring</strong> and displays ASIN, title, brand, price, average rating, and review count. The backend uses case-insensitive <code class="language-plaintext highlighter-rouge">ILIKE</code> matching, requires at least <strong>five reviews</strong>, and orders matches by mean rating descending, then review volume descending.</p>
 
-<ul>
-  <li>Sudden quality shifts</li>
-  <li>Long-term reliability patterns</li>
-  <li>Seasonal rating behavior</li>
-</ul>
+<p>Search is paginated on the server. The API accepts <code class="language-plaintext highlighter-rouge">page</code> and <code class="language-plaintext highlighter-rouge">page_size</code>, clamps page size to <strong>1–200</strong>, and returns <code class="language-plaintext highlighter-rouge">{ rows, total }</code>. A <code class="language-plaintext highlighter-rouge">COUNT(*) OVER()</code> supplies the total match count, allowing the client to display page controls without loading the complete result set into the browser.</p>
 
-<h4 id="helpful-review-ranking">Helpful Review Ranking</h4>
-<p>Ranks reviews based on helpful vote count, highlighting high-signal user feedback.</p>
+<p>Clicking a product opens the shared <strong>ProductCard</strong> modal. It independently requests five helpful-review results, eight also-bought recommendations, and the monthly review history. The Chart.js line chart displays both average rating and review volume by month, connecting the overall score to its historical context. The review and recommendation lists expose the supporting text, vote counts, prices, and rating summaries.</p>
 
-<h4 id="graph-based-recommendation">Graph-Based Recommendation</h4>
-<p>Surfaces “customers also bought” relationships that allow navigation through product co-purchase networks.</p>
+<p>The home page also requests a single surprise pick from the <code class="language-plaintext highlighter-rouge">Cases</code> category with a minimum of 20 reviews, providing an entry into discovery alongside title search.</p>
 
-<hr />
+<h3 id="category-overview-and-recommendations">Category Overview and Recommendations</h3>
 
-<h3 id="3-category-level-product-intelligence">3. Category-Level Product Intelligence</h3>
+<p>The category view brings together a category-name input, result limit, product rankings, and consistently positive products. A separate recommendations view adds a hidden-gem table. Clicking linked ASINs or recommendation rows opens the same product-detail component, keeping the analytical context accessible across views.</p>
 
-<p>Category dashboards implement multiple ranking algorithms.</p>
+<table class="reviewlens-grid">
+  <thead>
+    <tr>
+      <th>Discovery view</th>
+      <th>Implemented rule</th>
+      <th>How to interpret it</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Top products</td>
+      <td>At least five reviews; <code class="language-plaintext highlighter-rouge">RANK()</code> by average rating, then review count, both descending</td>
+      <td>A rating-first comparison within the selected category</td>
+    </tr>
+    <tr>
+      <td>Review-volume quartile</td>
+      <td><code class="language-plaintext highlighter-rouge">NTILE(4)</code> over review count descending in the top-products query</td>
+      <td>Quartile 1 contains the highest-volume eligible products</td>
+    </tr>
+    <tr>
+      <td>Surprise picks</td>
+      <td>Lowest review-volume quartile among reviewed products, above the category baseline, and at least the requested review minimum</td>
+      <td>A way to surface less-reviewed products with relatively strong ratings</td>
+    </tr>
+    <tr>
+      <td>Always-positive products</td>
+      <td><code class="language-plaintext highlighter-rouge">NOT EXISTS</code> any rating below four stars, plus a configurable minimum review count</td>
+      <td>A historical consistency filter; the API defaults to 20 reviews</td>
+    </tr>
+  </tbody>
+</table>
 
-<h4 id="top-products-ranking">Top Products Ranking</h4>
-<p>Ranks products using a composite score combining:</p>
+<p>The hidden-gem query assigns quartiles in <strong>ascending</strong> review-count order, so its quartile 1 means low volume—the opposite direction from the top-products table. It excludes zero-review products before assigning quartiles. Its category baseline is calculated earlier as a mean of product-level averages, with missing summaries filled with zero; it is not a review-weighted mean.</p>
 
-<ul>
-  <li>Average rating</li>
-  <li>Review volume</li>
-  <li>Category ranking metrics</li>
-</ul>
+<p>The frontend passes the chosen minimum-review threshold to surprise and always-positive queries. The top-products endpoint independently retains its fixed five-review threshold. These are distinct discovery rules, giving users different ways to explore the same category.</p>
 
-<h4 id="hidden-gem-discovery-surprise-me">Hidden-Gem Discovery (“Surprise Me”)</h4>
-<p>Identifies long-tail products defined as:</p>
+<h3 id="reviewer-analytics">Reviewer Analytics</h3>
 
-<ul>
-  <li>Above-category-average rating</li>
-  <li>Low review volume quartile</li>
-</ul>
+<p>The reviewer page uses three panels: <strong>top reviewers</strong>, <strong>rating styles</strong>, and <strong>recent reviews for a selected reviewer</strong>. The leaderboard displays review count, total helpful votes, and average rating. Its backend returns both volume and helpfulness ranks, with the result list ordered by review-volume rank.</p>
 
-<p>The SQL uses <code class="language-plaintext highlighter-rouge">NTILE(4)</code> to divide products by review count, selects the <strong>lowest-volume quartile</strong>, requires <strong>at least five reviews</strong>, and keeps products whose average rating exceeds the category baseline. Results are ordered by average rating descending, then review count ascending.</p>
+<p>Selecting a leaderboard row populates the recent-review panel; users can also enter a reviewer name directly. Recent results join review events to product titles and show time, ASIN, rating, helpful votes, and summary in descending date order. The current API matches display names rather than reviewer IDs, so identical names can combine results from multiple identities.</p>
 
-<p>The two query variants make a useful design distinction: the discovery variant excludes zero-review products before assigning quartiles, while the earlier category-ranking variant includes them. Both compute the category baseline as the mean of product-level averages, with missing averages filled with zero; it is not a review-weighted category mean. Those choices matter when a category contains many products without reviews.</p>
-
-<h4 id="always-positive-products">Always-Positive Products</h4>
-<p>Identifies products with:</p>
-<ul>
-  <li>No review rating below 4 stars</li>
-  <li>Minimum review count threshold</li>
-</ul>
-
-<p>The SQL requires <strong>at least 20 reviews</strong> and uses <code class="language-plaintext highlighter-rouge">NOT EXISTS</code> to exclude any product with a rating below four stars. This exposes a consistent historical rating pattern; it does not guarantee future quality.</p>
-
-<hr />
-
-<h3 id="4-reviewer-behavior-analytics">4. Reviewer Behavior Analytics</h3>
-
-<p>ReviewLens introduces reviewer-centric trust modeling.</p>
-
-<h4 id="top-reviewer-leaderboards">Top Reviewer Leaderboards</h4>
-<p>Two ranking dimensions:</p>
-
-<ul>
-  <li>Total review count</li>
-  <li>Total helpful votes received</li>
-</ul>
-
-<p>These metrics identify influential and active reviewers.</p>
-
-<hr />
-
-<h4 id="reviewer-rating-style-classification">Reviewer Rating Style Classification</h4>
-
-<p>Reviewers are classified based on statistical deviation from global rating distributions:</p>
-
-<ul>
-  <li>Lenient reviewers → systematically high ratings</li>
-  <li>Neutral reviewers → distribution near global mean</li>
-  <li>Strict reviewers → systematically lower ratings</li>
-</ul>
-
-<p>The query computes a transparent rating-style score:</p>
+<p>Reviewer-style classification compares each reviewer’s average with the global review distribution:</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>leniency_zscore = (reviewer_mean_rating - global_mean_rating)
                   / global_rating_standard_deviation
 </code></pre></div></div>
 
-<p>A score of <strong>at least 0.7</strong> is labeled lenient, <strong>at most -0.7</strong> is labeled strict, and the remaining scores are neutral. Only reviewers with <strong>at least 30 reviews</strong> are returned. Each result includes the reviewer’s own rating standard deviation, and results are ordered by that variability ascending, then review count descending.</p>
+<p>Scores <strong>≥ 0.7</strong> are labeled lenient, scores <strong>≤ −0.7</strong> strict, and the rest neutral. The API defaults to <strong>at least 30 reviews</strong> and returns each reviewer’s own rating standard deviation. Results are ordered by that variability ascending, then activity descending, making both rating tendency and consistency inspectable.</p>
 
-<p>This is a descriptive comparison with the pooled review distribution, rather than a trained fraud detector. The denominator is the standard deviation of individual ratings, not a standard error, so the score is not a statistical significance test. Category preferences and the products a person chooses to review can also affect the label.</p>
-
-<hr />
-
-<h4 id="reviewer-profile-exploration">Reviewer Profile Exploration</h4>
-<p>For each reviewer, the platform provides:</p>
-
-<ul>
-  <li>Most recent reviews</li>
-  <li>Highest-impact reviews (by helpful votes)</li>
-  <li>Aggregated metrics:
-    <ul>
-      <li>average rating</li>
-      <li>rating standard deviation</li>
-      <li>review volume</li>
-    </ul>
-  </li>
-</ul>
+<p>This classification describes observed rating behavior. It does not detect fraud or verify a reviewer’s expertise, and it is not a significance test: the denominator is the standard deviation of individual ratings rather than a standard error.</p>
 
 <hr />
 
@@ -403,123 +338,188 @@
 
 <h2 id="query-optimization--performance-engineering">Query Optimization &amp; Performance Engineering</h2>
 
-<p>Handling multi-million row datasets required extensive SQL optimization.</p>
+<p>The initial SQL repeatedly aggregated millions of review records during interactive requests. The optimization work addressed the expensive operations directly: restricting recommendation aggregates to relevant candidate ASINs, indexing join and filter columns, and persisting reusable rating and reviewer summaries.</p>
 
-<h3 id="optimization-techniques">Optimization Techniques</h3>
+<h3 id="restrict-recommendation-work-to-the-candidate-set">Restrict Recommendation Work to the Candidate Set</h3>
 
-<h4 id="indexing">Indexing</h4>
-<ul>
-  <li>ASIN indexing for product joins</li>
-  <li>Reviewer indexing for behavioral aggregation</li>
-</ul>
+<p>The original recommendation query computed incoming-edge counts for every target product and review summaries for the full review table. The optimized query first selects the source product’s <code class="language-plaintext highlighter-rouge">also_buy</code> neighbors, then joins that candidate set into both aggregate pipelines. Incoming links are still counted from the relationship table, but only for candidate targets; review aggregation likewise considers only candidate ASINs.</p>
 
-<h4 id="materialized-aggregates">Materialized Aggregates</h4>
-<p>Precomputed:</p>
-<ul>
-  <li>product rating summaries</li>
-  <li>reviewer statistics</li>
-  <li>category ranking tables</li>
-</ul>
+<p>Indexes on <code class="language-plaintext highlighter-rouge">also_buy(asin)</code>, <code class="language-plaintext highlighter-rouge">also_buy(also_buy_asin)</code>, and <code class="language-plaintext highlighter-rouge">reviewed_by(asin)</code> support those lookups. Because the final edge table enforces unique source–target pairs, the optimized <code class="language-plaintext highlighter-rouge">COUNT(*)</code> counts unique stored incoming edges without the original <code class="language-plaintext highlighter-rouge">COUNT(DISTINCT ...)</code> operation.</p>
 
-<h4 id="query-rewriting">Query Rewriting</h4>
-<ul>
-  <li>Reduced join depth</li>
-  <li>Replaced nested subqueries with CTE pipelines</li>
-  <li>Eliminated redundant aggregations</li>
-</ul>
+<h3 id="reuse-product-and-reviewer-summaries">Reuse Product and Reviewer Summaries</h3>
 
-<hr />
+<p>The SQL creates <strong>persisted summary tables</strong>, rather than PostgreSQL materialized views:</p>
 
-<h3 id="performance-improvements">Performance Improvements</h3>
-
-<table>
+<table class="reviewlens-grid">
   <thead>
     <tr>
-      <th>Query Task</th>
-      <th>Original Runtime</th>
-      <th>Optimized Runtime</th>
+      <th>Summary table</th>
+      <th>Stored calculation</th>
+      <th>Requests that reuse it</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Graph-based recommendation</td>
-      <td>&gt;10 min</td>
-      <td>412 ms</td>
+      <td><code class="language-plaintext highlighter-rouge">product_ratings</code></td>
+      <td>Average rating and review count per ASIN</td>
+      <td>Title search, category ranking, and surprise picks</td>
     </tr>
     <tr>
-      <td>Category ranking by rating quantiles</td>
-      <td>4m 16s</td>
-      <td>1.26 s</td>
+      <td><code class="language-plaintext highlighter-rouge">reviewer_stability_stats</code></td>
+      <td>Review count, mean, and sample rating standard deviation per reviewer</td>
+      <td>Reviewer-style classification</td>
     </tr>
     <tr>
-      <td>Reviewer classification</td>
-      <td>1m 35s</td>
-      <td>1.58 s</td>
+      <td><code class="language-plaintext highlighter-rouge">global_rating_stats</code></td>
+      <td>Global rating mean and sample standard deviation</td>
+      <td>Shared reference distribution for reviewer styles</td>
     </tr>
     <tr>
-      <td>Hidden gem discovery</td>
-      <td>39 s</td>
-      <td>528 ms</td>
+      <td><code class="language-plaintext highlighter-rouge">reviewer_stats</code></td>
+      <td>Review count, total helpful votes, and mean rating per reviewer</td>
+      <td>Input to leaderboard preparation</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">reviewer_stats_ranked</code></td>
+      <td>Persisted volume and helpfulness ranks</td>
+      <td>Top-reviewer requests</td>
     </tr>
   </tbody>
 </table>
 
-<p>These previously recorded project timings describe individual query workloads, rather than an end-to-end browser benchmark. They illustrate the latency target for interactive exploration; runtime also depends on database configuration, cache state, indexes, and the selected product or category.</p>
+<p>Category lookup uses indexes on <code class="language-plaintext highlighter-rouge">belongs_to(category_id, asin)</code> and category names. Product-title substring search uses a <strong>GIN trigram index</strong> on <code class="language-plaintext highlighter-rouge">product.title</code>, alongside the ASIN summary-table index. Reviewer summary indexes support activity thresholds and variability ordering.</p>
 
-<p>The supplied SQL makes the bottlenecks concrete: recommendation ranking aggregates incoming edges across the relationship table and ratings across the review table before joining a small candidate set. Reviewer classification similarly computes both per-reviewer and global statistics. Reusing those aggregates avoids repeating large scans for every interaction; filtering by a selected product or category as early as possible reduces the work passed into later joins and window functions.</p>
+<p>These summaries suit a historical, relatively static dataset: request handlers read compact statistics rather than recomputing them. A changing dataset would need an explicit refresh process, because ordinary <code class="language-plaintext highlighter-rouge">CREATE TABLE AS SELECT</code> results do not update automatically.</p>
+
+<h3 id="recorded-query-timings">Recorded Query Timings</h3>
+
+<p>The optimization SQL documents the following timings:</p>
+
+<table class="reviewlens-grid">
+  <thead>
+    <tr>
+      <th>Workload</th>
+      <th style="text-align: right">Original</th>
+      <th style="text-align: right">Optimized</th>
+      <th>Main implementation change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Also-bought recommendations</td>
+      <td style="text-align: right">&gt;10 min</td>
+      <td style="text-align: right">412 ms</td>
+      <td>Candidate-restricted aggregation and ASIN indexes</td>
+    </tr>
+    <tr>
+      <td>Category top products</td>
+      <td style="text-align: right">4 min 16 s</td>
+      <td style="text-align: right">1.264 s</td>
+      <td>Product summaries, category indexes, and revised ranking query</td>
+    </tr>
+    <tr>
+      <td>Reviewer styles</td>
+      <td style="text-align: right">1 min 35 s</td>
+      <td style="text-align: right">1.581 s</td>
+      <td>Persisted reviewer and global statistics</td>
+    </tr>
+    <tr>
+      <td>Surprise picks</td>
+      <td style="text-align: right">39 s</td>
+      <td style="text-align: right">528 ms</td>
+      <td>Product summaries reused before category and quartile calculations</td>
+    </tr>
+    <tr>
+      <td>Top reviewers</td>
+      <td style="text-align: right">4 min 53 s</td>
+      <td style="text-align: right">1.114 s</td>
+      <td>Precomputed reviewer statistics and ranks</td>
+    </tr>
+    <tr>
+      <td>Product-title search</td>
+      <td style="text-align: right">14 min 44 s</td>
+      <td style="text-align: right">2.463 s</td>
+      <td>Trigram title index and precomputed product ratings</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These are historical measurements recorded in the project SQL, not a fresh benchmark or a browser-latency guarantee. Some query revisions also change the requested result: the earlier category query selected low-volume, above-baseline products, while the final top-products endpoint ranks all eligible products by rating and volume. The recommendation examples use different source ASINs, and the revised search excludes products with fewer than five reviews. The timings show the documented development outcomes, with these differences limiting direct comparisons.</p>
 
 <hr />
 
-<h2 id="system-architecture">System Architecture</h2>
+<h2 id="application-architecture">Application Architecture</h2>
 
-<h3 id="backend">Backend</h3>
+<p>The request path is <strong>React view → Express endpoint → PostgreSQL query → JSON response → table or chart</strong>. The browser receives selected results and aggregates rather than the underlying review corpus.</p>
 
-<ul>
-  <li>PostgreSQL analytical database</li>
-  <li>Node.js and Express REST API service layer</li>
-  <li>SQL-driven ranking and aggregation pipelines</li>
-  <li>Pagination-based lazy loading for scalability</li>
-</ul>
+<h3 id="react-client">React Client</h3>
 
-<hr />
+<p>The client uses React Router for product search, category, recommendation, reviewer, and API-demo routes. Material UI supplies the shared theme, cards, forms, tables, modals, and responsive layouts; Chart.js renders the product trend chart.</p>
 
-<h3 id="frontend">Frontend</h3>
+<p>A reusable <strong>LazyTable</strong> component centralizes column formatting, loading callbacks, page controls, row actions, and synchronized horizontal scrollbars above and below wide tables. It accepts both paginated <code class="language-plaintext highlighter-rouge">{ rows, total }</code> responses and array responses. Search uses true server pagination; the other analytical endpoints return limited arrays that the component slices on the client. Resetting the page when the query route changes keeps a new search or category selection from remaining on an old page number.</p>
 
-<p>Built using:</p>
+<p>Category and recommendation forms separate editable inputs from applied query parameters, and disable Apply while the corresponding requests are loading. The reviewer panels instead derive their routes directly from current input state. This creates a common visual language across views while retaining the specific interaction each analysis needs.</p>
 
-<ul>
-  <li>React</li>
-  <li>Material UI component library</li>
-  <li>Chart.js and Recharts</li>
-  <li>Lazy-loaded data tables</li>
-  <li>Chart-based rating trend visualization</li>
-  <li>Modal-based deep-dive analytics</li>
-</ul>
+<h3 id="express-api-and-postgresql-access">Express API and PostgreSQL Access</h3>
 
-<p>The UI supports cross-navigation between products, reviewers, and categories.</p>
+<p>The backend uses a <code class="language-plaintext highlighter-rouge">pg</code> connection pool and parameterized SQL values. It returns HTTP 400 for missing required category or reviewer-name parameters and HTTP 500 for database failures. Health and database-sanity routes sit alongside ten analytical endpoints:</p>
 
-<hr />
+<table class="reviewlens-grid">
+  <thead>
+    <tr>
+      <th>Endpoint</th>
+      <th>Analytical output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/search_products</code></td>
+      <td>Paginated title matches with ratings and review counts</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/product_monthly_trend/:asin</code></td>
+      <td>Monthly average rating and review volume</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/category_top_products</code></td>
+      <td>Rating rank and volume quartile within a category</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/also_buy_recs/:asin</code></td>
+      <td>Weighted ranking of related products</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/top_reviewers</code></td>
+      <td>Activity and helpful-vote statistics with persisted ranks</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/reviewer_recent_reviews</code></td>
+      <td>Recent reviews matching a reviewer display name</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/product_helpful_reviews/:asin</code></td>
+      <td>Review text and summaries ordered by helpful votes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/reviewer_styles</code></td>
+      <td>Rating-style labels and variability metrics</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/surprise_picks</code></td>
+      <td>Low-volume products above the category baseline</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/category_all_positive_products</code></td>
+      <td>Products without a recorded rating below four stars</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2 id="technical-challenges">Technical Challenges</h2>
+<h3 id="implementation-scope-and-validation">Implementation Scope and Validation</h3>
 
-<h3 id="large-scale-relational-joins">Large-Scale Relational Joins</h3>
-<p>Multi-table joins across reviews, metadata, and graph relationships required careful indexing and query decomposition.</p>
+<p>The final application implements title search, category discovery, reviewer exploration, and metadata-based recommendations. Earlier proposal ideas such as shared-customer personalized recommendations and review-year filters are broader than the final route implementation. The <code class="language-plaintext highlighter-rouge">also_view</code> table is populated, but the recommendation endpoint uses <code class="language-plaintext highlighter-rouge">also_buy</code>.</p>
 
-<hr />
-
-<h3 id="semi-structured-data-normalization">Semi-Structured Data Normalization</h3>
-<p>Amazon metadata contained nested arrays and inconsistent formatting requiring:</p>
-
-<ul>
-  <li>schema normalization</li>
-  <li>entity explosion</li>
-  <li>text cleaning pipelines</li>
-</ul>
-
-<hr />
-
-<h3 id="balancing-discovery-vs-popularity-bias">Balancing Discovery vs Popularity Bias</h3>
-<p>Designing ranking metrics required blending statistical reliability and exploration heuristics.</p>
+<p>The repository includes Jest and Supertest configuration, but the supplied test file still targets the starter music-application endpoints. It therefore does not establish automated coverage for the Amazon routes. A useful next validation step is a dedicated API suite covering thresholds, empty results, pagination, reviewer identity, and ranking correctness.</p>
 
 <hr />
 
@@ -529,7 +529,7 @@
 
 <p>The source review files are the <code class="language-plaintext highlighter-rouge">_5</code> subsets, so findings describe that selected review population. Product metadata coverage also differs from review coverage: a product can exist in the catalog without a corresponding review summary. These distinctions affect category baselines, sparse-product ranking, and what a user should infer from a missing metric.</p>
 
-<p>The next engineering improvements would be stricter price validation, a curated category vocabulary, normalized recommendation-score components, and reproducible performance measurements with query plans and database settings. These follow directly from the data-quality issues and aggregation patterns visible in the implementation.</p>
+<p>The next engineering improvements would be stricter price validation, a curated category vocabulary, normalized recommendation-score components, summary-table refreshes, and reproducible performance measurements with query plans and database settings. Helpful-review ordering also needs an explicit missing-value policy: the current descending SQL order does not specify <code class="language-plaintext highlighter-rouge">NULLS LAST</code>. These follow directly from the data-quality issues and aggregation patterns visible in the implementation.</p>
 
 <hr />
 
@@ -557,7 +557,7 @@
   <li>full-stack visualization dashboards</li>
 </ul>
 
-<p>The system delivers real-time exploration over millions of records while preserving analytical interpretability.</p>
+<p>The project connects large-scale data preparation to an explorable product, with explicit ranking rules and documented query optimizations that make the analytical workflow practical.</p>
 
 <hr />
 

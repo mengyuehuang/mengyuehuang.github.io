@@ -1,1 +1,1 @@
-Sitemap: https://mengyuehuang.github.io/sitemap.xml
+Sitemap: http://localhost:4008/sitemap.xml
