@@ -230,3 +230,39 @@ body.portfolio-home { margin:0; background:var(--paper); color:var(--ink); font-
 .project-detail-cover img { width:100%; height:100%; object-fit:cover; filter:saturate(.72); }
 .project-detail-page .case-sidebar .skill-list { margin-bottom:2rem; }
 @media(max-width:800px){.project-detail-hero{grid-template-columns:1fr;padding-top:8rem}.project-detail-cover{min-height:340px}.project-detail-hero h1{font-size:clamp(3rem,12vw,5rem)}}
+
+
+/* ReviewLens dataset summary: visible grid and readable column spacing. */
+.case-content .reviewlens-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0 2rem;
+  font-size: .95em;
+  line-height: 1.55;
+}
+.case-content .reviewlens-data-table th,
+.case-content .reviewlens-data-table td {
+  border: 1px solid #93a28e;
+  padding: .85rem 1rem;
+  vertical-align: top;
+}
+.case-content .reviewlens-data-table th {
+  background: var(--sage);
+  color: var(--ink);
+  font-weight: 700;
+  text-align: left;
+}
+.case-content .reviewlens-data-table th:nth-child(2),
+.case-content .reviewlens-data-table td:nth-child(2) {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.case-content .reviewlens-data-table tbody tr:nth-child(even) {
+  background: rgba(223, 232, 215, .3);
+}
+@media (max-width: 600px) {
+  .case-content .reviewlens-data-table { font-size: .8em; }
+  .case-content .reviewlens-data-table th,
+  .case-content .reviewlens-data-table td { padding: .6rem .45rem; }
+}

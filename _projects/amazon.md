@@ -1,10 +1,10 @@
 ---
 name: ReviewLens – Trustworthy Product Discovery with Reviewer Analytics
-tools: [React, Material UI, Node.js, Express, PostgreSQL, SQL, ETL, Query Optimization, REST API, Chart.js, Recharts, Jest, Supertest]
+tools: [React, Material UI, Node.js, Express, PostgreSQL, SQL, Python, Pandas, PyArrow, ETL, Query Optimization, REST API, Chart.js, Recharts, Jest, Supertest]
 categories: [machine]
 image: /assets/pngs/fixing.jpg
 
-description: "Led the end-to-end implementation of a full-stack analytics platform over 13M+ Amazon review records, owning the React interface and SQL performance engineering that enabled interactive product discovery."
+description: "Led the end-to-end implementation of a full-stack analytics platform over 13M+ Amazon review records, combining a React interface, Python ETL, and PostgreSQL analytics to explore 13.18M cleaned reviews and 2.04M products."
 
 custom_js: []
 ---
@@ -44,29 +44,23 @@ Although the project was completed in a team setting, I owned the core technical
 
 ### Dataset Scale
 
-ReviewLens integrates two public Amazon 2018 datasets:
+The pipeline combines the **Electronics** and **Home & Kitchen** portions of the Amazon 2018 review collection with their corresponding product metadata. The notebooks record separate counts for raw input and database-ready exports:
 
-#### Review Dataset
-- 6,739,590 records  
-- 12 attributes:
-  - ASIN
-  - reviewerID
-  - review text
-  - star rating
-  - timestamp
-  - helpful vote count
+| Data asset | Recorded count | What it represents |
+| --- | ---: | --- |
+| Electronics reviews, raw | 6,739,590 | Review records before composite-key deduplication |
+| Home & Kitchen reviews, raw | 6,898,955 | Review records before composite-key deduplication |
+| Combined review export | **13,182,719** | Eight-column review table after per-category deduplication |
+| Combined product export | **2,041,469** | Seven-column product table, deduplicated by ASIN |
+{: .reviewlens-data-table }
 
-#### Product Metadata Dataset
-- ~2 million records
-- 19 attributes:
-  - title
-  - brand
-  - category hierarchy
-  - price
-  - product features
-  - also-bought / also-viewed relationships
+The review inputs share 12 attributes, including ratings, reviewer identifiers, text, timestamps, purchase verification, helpful votes, and images. The metadata inputs contain 19 fields, including product descriptions, category paths, prices, sales ranks, and related-product lists. Keeping the raw and exported counts separate makes the scale of the actual analytical tables explicit.
 
-Together, the system processes **13M+ structured and semi-structured rows** across multiple relational entities.
+### What the Initial Exploration Revealed
+
+I first checked whether the two datasets could support a shared analytical model. Both review files expose the same field set. The reviewer-ID analysis found **728,719 distinct Electronics reviewers**, **777,242 Home & Kitchen reviewers**, and **187,723 reviewers appearing in both**. This overlap motivates a unified reviewer entity: the same person's activity can be explored across the two source categories.
+
+The missing-value profile also shaped the pipeline. Helpful-vote counts are absent in **5,790,916 Electronics reviews** and **5,945,961 Home & Kitchen reviews**, while review images are missing from most records. I preserved missing vote values as nullable integers and moved image lists out of the main review table, keeping core rating analysis usable even when optional evidence is unavailable.
 
 <figure class="case-figure case-figure-compact">
   <img src="{{ '/assets/pngs/amazon-rating-distribution.png' | relative_url }}" alt="Histogram comparing overall Amazon ratings in the Electronics and Home and Kitchen datasets">
@@ -77,33 +71,33 @@ Together, the system processes **13M+ structured and semi-structured rows** acro
 
 ### Data Preparation Pipeline
 
-Raw Amazon data is distributed as nested JSON.GZ files requiring substantial transformation before relational ingestion.
+The Python notebooks separate ingestion, cleaning, and relational extraction so the raw nested files can become reusable database inputs.
 
-#### 1. Incremental Data Loading
-- Stream-loaded compressed JSON files in chunks to avoid memory bottlenecks
-- Retained only analytical attributes relevant to ranking, recommendation, and reviewer modeling
+#### 1. Stabilize the Schema Before Writing Parquet
 
-#### 2. Type Casting and Validation
-- Converted rating fields into numeric types with domain constraints (1–5 scale)
-- Normalized helpful vote counts into integer format
-- Converted Unix timestamps into standardized temporal fields for time-series aggregation
+The compressed JSONL files contain object columns whose values can alternate between strings, lists, and dictionaries. A direct conversion risks incompatible Arrow types between chunks. My conversion function first scans for the union of column names, serializes nested objects into JSON strings with sorted keys, and reindexes every chunk into the same column order.
 
-#### 3. Text Cleaning and Normalization
-- Removed HTML tags and malformed encoding artifacts
-- Standardized whitespace and entity formatting
-- Cleaned product feature fields for consistent indexing
+The writer then processes **250,000 rows per chunk**, fixes the Arrow schema from the first chunk, casts subsequent tables to that schema, and writes **Zstandard-compressed Parquet**. This bounds memory use during conversion and provides a reusable intermediate format; later extraction stages can read Parquet rather than repeatedly decompressing the original JSON.
 
-#### 4. Nested Structure Flattening
-Amazon metadata contains multiple nested arrays that were exploded into relational tables:
+#### 2. Preserve Types and Missingness
 
-- also_buy relationships → recommendation graph table
-- also_view relationships → browsing similarity graph
-- category hierarchy → dimension table
-- image URL lists → reduced to canonical representative image
+Helpful votes arrive as strings, sometimes with commas or surrounding whitespace. The cleaning function removes that formatting, coerces invalid values to missing, and uses Pandas' nullable `Int64` dtype. Dates are derived from Unix epoch seconds in UTC, with the original date string available as a fallback during cleaning. The final review export retains both the epoch and a timezone-aware timestamp.
 
-#### 5. Storage Optimization
-- Exported cleaned data into Parquet and compressed CSV formats
-- Enabled fast PostgreSQL ingestion and analytical scan efficiency
+The relational extraction selects eight fields, renames them to match the SQL schema, and removes duplicate `(asin, reviewer_id, unix_time)` keys within each category before concatenating the exports. The proposed review DDL adds rating-range and nonnegative-vote checks alongside product and reviewer foreign keys.
+
+#### 3. Clean Product Text, Prices, and Images
+
+Product descriptions include HTML tags, encoded entities, and serialized list fragments. I strip markup, decode HTML entities, join description fragments, and normalize whitespace. Price fields also contain malformed content—including an example containing embedded CSS—so the extraction removes nonnumeric formatting, coerces unparseable values to missing, and discards negative prices. This is a practical parsing step; ambiguous price strings still require additional validation.
+
+For review images, a separate parser handles list-like strings, removes duplicate URLs, and generates a stable SHA-1 identifier from the ASIN and URL. The intermediate image table contains **650,356 rows**. A later export keeps the first image per ASIN, while the product-metadata extraction independently selects the first metadata image URL for the product table.
+
+#### 4. Extract Database-Ready Entities
+
+The extraction creates separate product and reviewer exports, deduplicating products by ASIN and reviewers by reviewer ID. Reviewer-name selection sorts available names before deduplication, placing missing names last so an available display name is preferred.
+
+Category extraction parses flat and nested list representations, decodes markup, splits noisy text into nodes, and retains labels occurring at least **10 times**. The resulting category samples still include descriptive phrases, which exposes an important limitation: frequency filtering reduces rare noise but does not establish a clean taxonomy.
+
+Cleaned tables are exported as **gzip-compressed CSV files** with explicit column order for relational loading. The notebooks also define bridge and edge-table schemas for category membership, sales rank, also-bought, and also-viewed relationships.
 
 ---
 
@@ -143,7 +137,7 @@ Stores:
 - helpful votes
 - timestamp
 
-This structure ensures each review instance is uniquely traceable.
+This key identifies a review by product, reviewer, and recorded time, and matches the deduplication rule used in the export. It preserves reviews by the same person at different timestamps while treating repeated instances of the same key as duplicates.
 
 #### Category Dimension
 Allows multi-category mapping for products through a bridge table.
@@ -223,14 +217,16 @@ Identifies long-tail products defined as:
 - Above-category-average rating
 - Low review volume quartile
 
-This feature intentionally balances popularity bias and promotes product diversity.
+The SQL uses `NTILE(4)` to divide products by review count, selects the **lowest-volume quartile**, requires **at least five reviews**, and keeps products whose average rating exceeds the category baseline. Results are ordered by average rating descending, then review count ascending.
+
+The two query variants make a useful design distinction: the discovery variant excludes zero-review products before assigning quartiles, while the earlier category-ranking variant includes them. Both compute the category baseline as the mean of product-level averages, with missing averages filled with zero; it is not a review-weighted category mean. Those choices matter when a category contains many products without reviews.
 
 #### Always-Positive Products
 Identifies products with:
 - No review rating below 4 stars
 - Minimum review count threshold
 
-This provides high-confidence reliability signals.
+The SQL requires **at least 20 reviews** and uses `NOT EXISTS` to exclude any product with a rating below four stars. This exposes a consistent historical rating pattern; it does not guarantee future quality.
 
 ---
 
@@ -256,7 +252,16 @@ Reviewers are classified based on statistical deviation from global rating distr
 - Neutral reviewers → distribution near global mean
 - Strict reviewers → systematically lower ratings
 
-This allows users to contextualize subjective reviewer bias.
+The query computes a transparent rating-style score:
+
+```text
+leniency_zscore = (reviewer_mean_rating - global_mean_rating)
+                  / global_rating_standard_deviation
+```
+
+A score of **at least 0.7** is labeled lenient, **at most -0.7** is labeled strict, and the remaining scores are neutral. Only reviewers with **at least 30 reviews** are returned. Each result includes the reviewer's own rating standard deviation, and results are ordered by that variability ascending, then review count descending.
+
+This is a descriptive comparison with the pooled review distribution, rather than a trained fraud detector. The denominator is the standard deviation of individual ratings, not a standard error, so the score is not a statistical significance test. Category preferences and the products a person chooses to review can also affect the label.
 
 ---
 
@@ -278,17 +283,17 @@ The recommendation module leverages Amazon co-purchase graphs.
 
 ### Weighted Scoring Model
 
-Each candidate recommendation receives a composite score:
+The query begins with a selected product's outgoing `also_buy` edges. It then joins those candidates to product metadata, incoming-edge counts, and review aggregates:
 
-- In-degree popularity within also_buy network
-- Product average rating
-- Total review volume
-
-```
-Score = w₁(popularity) + w₂(avg_rating) + w₃(review_count)
+```text
+score = 0.4 × incoming_also_buy_connections
+      + 0.4 × average_rating
+      + 0.2 × ln(max(review_count, 1))
 ```
 
-This hybrid scoring balances reliability and popularity while reducing noise from sparse products.
+Candidates need **at least five reviews**, and the query returns the **top 30** by score, including title, price, incoming connections, average rating, and review count. The logarithm compresses the review-volume contribution, while the minimum-count threshold filters out the sparsest candidates.
+
+The result is explainable: users can inspect the components behind each recommendation. The weights are hand-set, and the inputs have different scales, so incoming-edge counts can dominate despite having the same coefficient as ratings. The method ranks metadata relationships; it does not learn an individual's preferences or establish that a recommendation is objectively better.
 
 ---
 
@@ -324,7 +329,9 @@ Precomputed:
 | Reviewer classification | 1m 35s | 1.58 s |
 | Hidden gem discovery | 39 s | 528 ms |
 
-These optimizations enabled interactive dashboard latency.
+These previously recorded project timings describe individual query workloads, rather than an end-to-end browser benchmark. They illustrate the latency target for interactive exploration; runtime also depends on database configuration, cache state, indexes, and the selected product or category.
+
+The supplied SQL makes the bottlenecks concrete: recommendation ranking aggregates incoming edges across the relationship table and ratings across the review table before joining a small candidate set. Reviewer classification similarly computes both per-reviewer and global statistics. Reusing those aggregates avoids repeating large scans for every interaction; filtering by a selected product or category as early as possible reduces the work passed into later joins and window functions.
 
 ---
 
@@ -372,6 +379,16 @@ Amazon metadata contained nested arrays and inconsistent formatting requiring:
 
 ### Balancing Discovery vs Popularity Bias
 Designing ranking metrics required blending statistical reliability and exploration heuristics.
+
+---
+
+## Analytical Boundaries & Next Steps
+
+ReviewLens makes review history easier to inspect, but its signals need context. Helpful votes measure recorded community feedback, rating-style labels describe relative generosity, and graph edges reflect relationships in the source metadata. None independently verifies review authenticity.
+
+The source review files are the `_5` subsets, so findings describe that selected review population. Product metadata coverage also differs from review coverage: a product can exist in the catalog without a corresponding review summary. These distinctions affect category baselines, sparse-product ranking, and what a user should infer from a missing metric.
+
+The next engineering improvements would be stricter price validation, a curated category vocabulary, normalized recommendation-score components, and reproducible performance measurements with query plans and database settings. These follow directly from the data-quality issues and aggregation patterns visible in the implementation.
 
 ---
 
